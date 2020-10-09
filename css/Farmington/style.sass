@@ -1,0 +1,3792 @@
+$fontFamily:  Varela Round, Arial, sans-serif;  // *AA:Font|Family|fontFamily|The font family to use.
+$foreColor:  #000;  // *AA:Color|Foreground|color|The foreground color to use.
+$backColor:  #fff;  // *AA:Color|Background|color|The background color to use.
+$iconColor:  #333;  // *AA:Color|Icon|color|The base icon color to use.
+$headerForeColor:  #fff;  // *AA:Color|Header Foreground|color|The header foreground color to use.
+$headerBackColor:  #000;  // *AA:Color|Header Background|color|The header background color to use.
+$panelLineColor:  rgba(128,128,128,.2);  // *AA:Color|Panel Line|color|The color to use for panel lines. If using a contrasting header color to the base background, a "rgba" color might want to be used so that the panel lines have an additive effect in stead of an overwrting effect - a light gray line will contrast harshly with a black background.
+$accentColor:  #4c7c50;  // *AA:Color|Accent|color|The accent color to use.
+$accentForeColor:  #fff;  // *AA:Color|Accent Foreground|color|The accent foreground color to use.
+$altAccentColor:  #4c7c50;  // *AA:Color|Alternate Accent|color|The alternate accent color to use.
+$altAccentForeColor:  #fff;  // *AA:Color|Alternate Accent Foreground|color|The accent alternate foreground color to use.
+$errorColor:  #ff351c;  // *AA:Color|Error|color|The error color to use.
+$confirmColor:  #3c9;  // *AA:Color|Confirm|color|The confirm color to use.
+$confirmForeColor:  #fff;  // *AA:Color|Confirm Foreground|color|The confirm foreground color to use.
+$denyColor:  #f33;  // *AA:Color|Deny|color|The deny color to use.
+$denyForeColor:  #fff;  // *AA:Color|Deny Foreground|color|The deny color to use.
+$lockColor:  rgba(0,0,0,.1);  // *AA:Color|Lock|color|The color to use for UI lock overlays.
+@function adjustColorIn($color,$amount) {
+	@if lightness($color) > 50% {
+		@return darken($color,$amount)
+	} @else {
+		@return lighten($color,$amount)
+	}
+}
+@function adjustColorOut($color,$amount) {
+	@if lightness($color) > 50% {
+		@return lighten($color,$amount)
+	} @else {
+		@return darken($color,$amount)
+	}
+}
+@function makeColorSafe($foreColor,$backColor) {
+	$f-h: hue($foreColor);
+	$f-s: saturation($foreColor);
+	$f-l: lightness($foreColor);
+	$b-h: hue($backColor);
+	$b-s: saturation($backColor);
+	$b-l: lightness($backColor);
+	$d-h: abs( $f-h - $b-h );
+	$d-s: abs( $f-s - $b-s );
+	$d-l: abs( $f-l - $b-l );
+	@if $d-h < 15deg {
+		@if $d-l < 40% {
+			$n-l: if( $b-l > 50%, $b-l - 40%, $b-l + 40% );
+			$n-s: if( $d-s > 20%, $f-s, if( $b-s > 75% , $f-s - 20%, $f-s + 20% ));
+			@return change-color( $foreColor , $lightness: $n-l , $saturation: $n-s )
+		}
+	} @else {
+		@if $d-l < 30% and $d-s < 30% {
+			$n-l: if( $b-l > 55%, $b-l - 30%, $b-l + 30% );
+			@return change-color( $foreColor , $lightness: $n-l )
+		}
+	}
+	@return $foreColor
+}
+
+$foreSubtleColor:  adjustColorIn($foreColor,15%);
+$foreLightColor:  adjustColorIn($foreColor,50%);
+$foreVeryLightColor:  adjustColorIn($foreColor,65%);
+$headerAltBackColor:  adjustColorIn($headerBackColor,5%);
+$headerForeLightColor:  mix($headerForeColor,$headerBackColor,50%);
+$lineColor:  adjustColorIn($backColor,15%);
+$lineLightColor:  adjustColorIn($backColor,8%);
+$lineFocusColor:  mix($accentColor,$lineColor,40%);
+$backShadeColor:  adjustColorIn($backColor,5%);
+$backLShadeColor:  adjustColorIn($backColor,3%);
+$backVLShadeColor:  adjustColorIn($backColor,2%);
+$backTransColor:  rgba($backColor,.96);
+$backVeryTransColor:  rgba($backColor,.75);
+$borderColor:  adjustColorIn($backColor,10%);
+$errorBackColor:  adjustColorOut($errorColor,40%);
+$accentLightColor:  adjustColorOut($accentColor,10%);
+$accentForeTransColor:  rgba($accentForeColor,.75);
+$altAccentLightColor:  adjustColorIn($altAccentColor,20%);
+$confirmLightColor:  adjustColorIn($confirmColor,10%);
+$denyLightColor:  adjustColorOut($denyColor,10%);
+$altAccentColorHeader:  makeColorSafe($altAccentColor,$headerBackColor);
+$altAccentLightColorHeader:  makeColorSafe($altAccentLightColor,$headerBackColor);
+$confirmColorHeader:  makeColorSafe($confirmColor,$headerBackColor);
+$denyColorHeader:  makeColorSafe($denyColor,$headerBackColor);
+$fontSize:  16px;
+$fontSizeSm:  16px;
+$size:  44px;
+$iconSize:  26px;
+$fontPad:  ($size - $fontSize) / 2;
+$fontPadSm:  ($size - $fontSizeSm) / 2;
+$iconPad:  ($size - $iconSize) / 2;
+$cFontSize:  12px;
+$cFontSizeSm:  10px;
+$cSize:  24px;
+$cIconSize:  18px;
+$cFontPad:  ($cSize - $cFontSize) / 2;
+$cFontPadSm:  ($cSize - $cFontSizeSm) / 2;
+$cIconPad:  ($cSize - $cIconSize) / 2;
+$transTween:  cubic-bezier(0, 0.8, 1, 0.86);
+$pulseShdOn:  inset 0px 2px 24px 0px rgba(0,0,0,.3);
+$pulseShdOff:  inset 0px 0px 5px -5px rgba(0,0,0,.5);
+$pulseShdOn:  inset 0px 0px 0px $size rgba(255,255,255,.15);
+$pulseShdOff:  inset 0px 0px 0px 0px rgba(0,0,0,.15);
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Varela+Round&display=swap');
+
+@keyframes press-pulse{
+from {
+display: block;
+box-shadow: inset 0px 0px 10px 20px rgba(255,255,255,.3);
+}
+to {
+display: none;
+box-shadow: inset 0px 0px 0px 0px  transparent;
+}
+}
+@image-generate {
+type: mask;
+mode: replace;
+input: $backColor 1px 256px;
+input-mask: url('spinListBackMask.png');
+output: url('spinListBack.png');
+}
+@image-generate {
+color: $accentColor;
+width: 200px;
+height: 2px;
+type: generated;
+output: url('accentEditBorder.png');
+}
+@image-generate {
+color: $accentForeColor;
+width: 200px;
+height: 2px;
+type: generated;
+output: url('accentForeEditBorder.png');
+}
+@image-generate {
+color: $headerForeColor;
+width: 200px;
+height: 2px;
+type: generated;
+output: url('headerEditBorder.png');
+}
+@image-generate {
+color: $foreColor;
+width: 200px;
+height: 2px;
+type: generated;
+output: url('contrastEditBorder.png');
+}
+html {
+-webkit-tap-highlight-color: rgba(0,0,0,0);
+-webkit-user-select: none;
+}
+button::-moz-focus-inner {
+border-width: 0;
+padding: 0;
+}
+/* icons */
+.icon {
+vertical-align: middle;
+width: $iconSize;
+height: $iconSize;
+fill: $iconColor;
+stroke: $iconColor;
+}
+.iconButton {
+padding: $iconPad;
+}
+.iconDisabled {
+opacity: .25;
+}
+.iconConfirm {
+fill: $confirmColor;
+stroke: $confirmColor;
+}
+.iconDeny {
+fill: $denyColor;
+stroke: $denyColor;
+}
+.compact .icon {
+margin: -2px;
+width: $cIconSize + 4px;
+height: $cIconSize + 4px;
+}
+.compact .iconButton {
+padding: $cIconPad;
+}
+/* main */
+.page {
+color: $foreColor;
+background: $backColor;
+font: $fontSize $fontFamily;
+}
+.page.compact, .page .compact {
+font-size: $cFontSize;
+}
+.heading {
+color: $foreLightColor;
+font-size: 125%;
+}
+.highlight {
+color: $accentColor;
+}
+.link {
+text-decoration: none;
+color: $altAccentColor;
+.icon {
+		fill: $altAccentColor;
+		stroke: $altAccentColor;
+	}
+}
+.link:hover {
+text-decoration: underline;
+}
+.group {
+border: 1px solid $lineColor;
+padding: 6px;
+border-radius: 4px;
+}
+.groupLabel {
+color: $foreLightColor;
+font-size: $fontSizeSm;
+}
+.lock {
+background: $lockColor;
+}
+.compact {
+.groupLabel{
+		font-size: $cFontSizeSm;
+	}
+}
+/* panels */
+.panelHeader {
+color: $headerForeColor;
+background: $headerBackColor;
+line-height: $size;
+}
+.panelHeaderAlt {
+color: $headerForeColor;
+background: $headerAltBackColor;
+line-height: $size;
+}
+.panelHeaderContrast {
+background: $backColor;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: $lineColor;
+line-height: $size;
+}
+.panelBody {
+background: $backColor;
+}
+.panelBodyShadow:before, .panelBodyShadow:after {
+background: rgba(0,0,0,.05);
+display: block;
+position: absolute;
+top: 0px;
+left: 0px;
+right: 0px;
+height: 4px;
+content: "";
+}
+.panelBodyShadow:after {
+height: 2px;
+}
+.panelFooter {
+color: $headerForeColor;
+background: $headerBackColor;
+line-height: $size;
+}
+.panelFooterAlt {
+color: $headerForeColor;
+background: $headerAltBackColor;
+line-height: $size;
+}
+.panelFooterContrast {
+background: $backColor;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: $lineColor;
+line-height: $size;
+}
+.panelHeader, .panelHeaderAlt, .panelFooter, .panelFooterAlt {
+.icon {
+		fill: $headerForeColor;
+		stroke: $headerForeColor;
+	}
+}
+.panelNav > .panel:before {
+border: 1px solid $panelLineColor;
+display: block;
+position: absolute;
+top: -1px;
+left: -1px;
+right: -1px;
+bottom: -1px;
+content: '';
+pointer-events: none;
+}
+.panelDockBefore, .panelDockAfter {
+background: $backLShadeColor;
+}
+.panelLTR > .panel:after {
+background: $panelLineColor;
+display: block;
+position: absolute;
+top: 0px;
+left: -1px;
+bottom: 0px;
+width: 1px;
+content: '';
+}
+.panelRTL > .panel:after {
+background: $panelLineColor;
+display: block;
+position: absolute;
+top: 0px;
+right: -1px;
+bottom: 0px;
+width: 1px;
+content: '';
+}
+.panelLTR > .panelDockAfter:after, .panelRTL > .panelDockBefore:after {
+left: 0px !important;
+right: auto !important;
+}
+.panelLTR > .panelDockBefore:after, .panelRTL > .panelDockAfter:after {
+left: auto !important;
+right: 0px !important;
+}
+.panelTTB > .panel:after {
+background: $panelLineColor;
+display: block;
+position: absolute;
+top: -1px;
+left: 0px;
+right: 0px;
+height: 1px;
+content: '';
+}
+.panelBTT > .panel:after {
+background: $panelLineColor;
+display: block;
+position: absolute;
+left: 0px;
+right: 0px;
+bottom: -1px;
+height: 1px;
+content: '';
+}
+.panelTTB > .panelDockAfter:after, .panelBTT > .panelDockBefore:after {
+top: 0px !important;
+bottom: auto !important;
+}
+.panelBTT > .panelDockAfter:after, .panelTTB > .panelDockBefore:after {
+top: auto !important;
+bottom: 0px !important;
+}
+.panelDockOverlay {
+box-shadow: 0px 2px 10px rgba(0,0,0,.25);
+}
+.panelDockBefore, .panelDockAfter {
+box-shadow: 0px 0px 10px rgba(0,0,0,.25);
+.panelBody {
+		background: $backLShadeColor;
+	}
+}
+.panelNavInd {
+background: $lineLightColor;
+font-size: 0px;
+border: 1px solid $lineColor;
+margin: 3px;
+display: inline-block;
+width: 6px;
+height: 6px;
+border-radius: 4px;
+}
+.panelNavIndSel {
+background: $accentLightColor;
+border-color: $accentColor;
+}
+.compact {
+.panelHeader, .panelHeaderAlt, .panelHeaderContrast, .panelFooter, .panelFooterAlt, .panelFooterContrast {
+		line-height: $cSize;
+	}
+}
+/*	control bar */
+.ctrlBarHorz > div > div {
+line-height: $size;
+}
+.ctrlBarVert > div > div {
+min-width: $size;
+}
+.ctrlBarSepHorz {
+border-left-style: solid;
+border-left-width: 1px;
+border-left-color: $panelLineColor;
+margin: 2px;
+width: 0px;
+}
+.ctrlBarSepVert {
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: $panelLineColor;
+margin: 2px;
+height: 0px;
+}
+.ctrlBarDis {
+color: $headerForeColor;
+background: rgba($headerAltBackColor,.95);
+}
+.ctrlBarDisContrast {
+background: rgba($backColor,.95);
+}
+.ctrlBarDisExpandT, .ctrlBarDisExpandB .ctrlBarDis, .ctrlBarDisExpandB .ctrlBarDisContrast, .ctrlBarDisExtendB .ctrlBarDisContrast {
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: $panelLineColor;
+}
+.ctrlBarDisExpandT .ctrlBarDis, .ctrlBarDisExpandT .ctrlBarDisContrast, .ctrlBarDisExpandB, .ctrlBarDisExtendT .ctrlBarDisContrast {
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: $panelLineColor;
+}
+.ctrlBarDisExpandL, .ctrlBarDisExpandR .ctrlBarDis, .ctrlBarDisExpandR .ctrlBarDisContrast, .ctrlBarDisExtendR .ctrlBarDisContrast {
+border-left-style: solid;
+border-left-width: 1px;
+border-left-color: $panelLineColor;
+}
+.ctrlBarDisExpandL .ctrlBarDis, .ctrlBarDisExpandL .ctrlBarDisContrast, .ctrlBarDisExpandR, .ctrlBarDisExtendL .ctrlBarDisContrast {
+border-right-style: solid;
+border-right-width: 1px;
+border-right-color: $panelLineColor;
+}
+.compact {
+.ctrlBarHorz > div > div {
+		line-height: $cSize;
+	}
+	.ctrlBarVert > div > div{
+		min-width: $cSize;
+	}
+}
+/* accordion */
+.accordion {
+border: 1px solid $lineLightColor;
+padding: 0px;
+border-radius: 2px;
+}
+.accordionTitle, .accordionTitleSelected, .accordionTitleDisabled {
+text-decoration: none;
+color: $foreLightColor;
+background: $backVLShadeColor;
+font-weight: bold;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: $lineLightColor;
+padding: $iconPad $fontPad;
+margin-top: -1px;
+display: block;
+position: relative;
+line-height: $iconSize;
+}
+.accordionTitle, .accordionTitleSelected, .accordionTitleDisabled {
+.iconButton {
+		padding: 0px;
+	}
+}
+.accordionTitleSelected, .accordionTitle:hover {
+color: $accentColor;
+}
+.accordionTitleDisabled {
+color: $foreVeryLightColor;
+}
+.accordionPane {
+color: $foreColor;
+background: $backVLShadeColor;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: $lineLightColor;
+padding: 2px;
+margin-top: -1px;
+}
+.accordionInd {
+.accordionTitle, .accordionTitleSelected, .accordionTitleDisabled {
+		padding-left: $fontPad + $iconSize;
+	}
+	.accordionTitle:before, .accordionTitleDisabled:before {
+		content: '';
+		display: inline-block;
+		position: absolute;
+		top: 50%;
+		left: round($iconSize/3);
+		margin-top: 0 - round($iconSize/4.5);
+		width: round($iconSize/3);
+		height: round($iconSize/3);
+		border-right: 2px solid $foreLightColor;
+		border-top: 2px solid $foreLightColor;
+		border-radius: 2px;
+		-webkit-transform: rotate(45deg);
+		transform: rotate(45deg);
+		margin-left: round($iconSize/6);
+	}
+	.accordionTitle:hover:before	{
+		border-color: $accentColor;
+	}
+	.accordionTitleDisabled:before {
+		border-color: $foreVeryLightColor;
+	}
+	.accordionTitleSelected:before {
+		content: '';
+		display: inline-block;
+		position: absolute;
+		top: 50%;
+		left: round($iconSize/3);
+		margin-top: 0 - round($iconSize/4.5);
+		width: round($iconSize/3);
+		height: round($iconSize/3);
+		border-right: 2px solid $accentColor;
+		border-top: 2px solid $accentColor;
+		border-radius: 2px;
+		-webkit-transform: rotate(135deg);
+		transform: rotate(135deg);
+		margin-left: round($iconSize/6);
+	}
+}
+.compact {
+.accordionTitle, .accordionTitleSelected, .accordionTitleDisabled {
+		padding: $cIconPad $cFontPad;
+	}
+	.accordionInd {
+		.accordionTitle, .accordionTitleSelected, .accordionTitleDisabled {
+			padding-left: $cFontPad + $cIconSize;
+		}
+	}
+	.accordionTitle:before, .accordionTitleSelected:before, .accordionTitleDisabled:before {
+		width: round($cIconSize/3);
+		height: round($cIconSize/3);
+		left: round($cIconSize/3);
+		margin-top: 0 - round($cIconSize/4.5);
+	}
+}
+/* tabs */
+.tabTop, .tabBottom, .tabLeft, .tabRight {
+background: $backShadeColor;
+border: 1px solid $lineLightColor;
+padding: 0px;
+border-radius: 2px;
+}
+.tabItemBand {
+text-align: center;
+}
+.tabItem, .tabItemSelected, .tabItemDisabled {
+text-decoration: none;
+color: $foreLightColor;
+font-weight: bold;
+padding: $iconPad $fontPad;
+display: inline-block;
+line-height: $iconSize;
+}
+.tabItemSelected, .tabItem:hover {
+color: $accentColor;
+}
+.tabItemDisabled {
+color: $foreVeryLightColor;
+}
+.tabPane {
+background: $backColor;
+padding: 2px;
+}
+.tabTop .tabPane {
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: $lineLightColor;
+}
+.tabBottom .tabPane {
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: $lineLightColor;
+}
+.tabLeft .tabPane {
+border-left-style: solid;
+border-left-width: 1px;
+border-left-color: $lineLightColor;
+}
+.tabRight .tabPane {
+border-right-style: solid;
+border-right-width: 1px;
+border-right-color: $lineLightColor;
+}
+.tabLeft {
+.tabItem, .tabItemSelected, .tabItemDisabled {
+		display: block;
+		text-align: right;
+	}
+}
+.tabRight {
+.tabItem, .tabItemSelected, .tabItemDisabled {
+		display: block;
+		text-align: left;
+	}
+}
+.compact {
+.tabItem, .tabItemSelected, .tabItemDisabled {
+		padding: $cIconPad $cFontPad;
+	}
+}
+/* tabband */
+.tabband {
+background: $backShadeColor;
+border: 1px solid $lineLightColor;
+}
+.tabbandTab, .tabbandTabSelected {
+text-decoration: none;
+white-space: nowrap;
+color: $foreLightColor;
+font-weight: bold;
+padding: 0px $fontPad;
+display: inline-block;
+line-height: $size;
+}
+.tabbandTabSelected, .tabbandTab:hover {
+color: $accentColor;
+}
+.tabbandTabDisabled, .tabbandTabDisabled:hover {
+color: $foreVeryLightColor;
+}
+.tabbandButton, .tabbandButtonDisabled {
+background: $backShadeColor;
+padding: $iconPad;
+display: block;
+}
+.tabbandButton:hover .icon {
+fill: $altAccentColor;
+stroke: $altAccentColor;
+}
+.tabbandButtonDisabled .icon {
+fill: $foreVeryLightColor;
+stroke: $foreVeryLightColor;
+}
+.compact {
+.tabbandTab, .tabbandTabSelected {
+		padding: 0px $cFontPad;
+		line-height: $cSize;
+	}
+	.tabbandButton, .tabbandButtonDisabled {
+		padding: $cIconPad;
+	}
+}
+/* window */
+.window {
+background: $backColor;
+border: 1px solid $lineColor;
+border-radius: 2px;
+box-shadow: 0px 2px 10px rgba(0,0,0,.25);
+}
+.windowTitle {
+color: $foreLightColor;
+font-size: $fontSizeSm;
+font-weight: bold;
+padding: 0px $fontPad;
+cursor: default;
+line-height: $size;
+}
+.windowHeader, .windowFooter, .windowTBar, .windowBBar, .windowBody {
+padding: $fontPad;
+}
+.windowButtons {
+text-align: center;
+font-size: 0px;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: $lineLightColor;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: $lineLightColor;
+margin-bottom: -1px;
+}
+.windowResize {
+background: $backLShadeColor;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: $lineLightColor;
+position: relative;
+height: 22px;
+}
+.windowResizeThumb {
+display: block;
+position: relative;
+width: 22px;
+height: 100%;
+}
+.windowResizeThumb:before {
+border: 8px solid $lineLightColor;
+border-top-color: transparent;
+border-left-color: transparent;
+display: block;
+position: absolute;
+right: 3px;
+bottom: 3px;
+width: 16px;
+height: 16px;
+border-radius: 2px;
+box-sizing: border-box;
+content: "";
+}
+.compact {
+.windowTitle {
+		font-size: $cFontSizeSm;
+		padding: 0px $cFontPad;
+		line-height: $cSize;
+	}
+	.windowHeader, .windowFooter, .windowTBar, .windowBBar, .windowBody {
+		padding: $cFontPad;
+	}
+	.windowResize {
+		height: 8px;
+	}
+	.windowResizeThumb {
+		width: 8px;
+	}
+	.windowResizeThumb:before {
+		height: 6px;
+		width: 6px;
+		border-width: 3px;
+		border-right-color: $lineColor;
+		border-bottom-color: $lineColor;
+		border-radius: 1px;
+		bottom: 1px;
+		right: 1px;
+	}
+}
+/* menu bar */
+.menubarItem {
+text-decoration: none;
+color: $altAccentColor;
+font-weight: bold;
+padding: $iconPad $fontPad;
+display: inline-block;
+line-height: $iconSize;
+}
+.pulse {
+.menubarItem {
+		transition: background-color 300ms $transTween, box-shadow 600ms;
+		box-shadow: $pulseShdOff;
+	}
+	.menubarItem:not(.menubarItemDisabled):active {
+		box-shadow: $pulseShdOn;
+		transition: none;
+	}
+}
+.menubarItemHover {
+color: $altAccentForeColor;
+background: $altAccentLightColor;
+border-radius: 2px;
+}
+.menubarItemPressed {
+color: $altAccentForeColor;
+background: $altAccentColor;
+border-radius: 2px;
+}
+.menubarItemDisabled {
+color: $foreVeryLightColor;
+}
+.menubarItemCas:after {
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: $altAccentColor;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: $altAccentColor;
+margin-left: $fontPad;
+display: inline-block;
+position: relative;
+top: 0 - round($iconSize/8);
+width: round($iconSize/3);
+height: round($iconSize/3);
+border-radius: 2px;
+content: "";
+-webkit-transform: rotate(45deg);
+transform: rotate(45deg);
+}
+.menubarItemSep {
+border-left-style: dotted;
+border-left-width: 1px;
+border-left-color: $foreVeryLightColor;
+vertical-align: bottom;
+height: $size;
+}
+.compact {
+.menubarItem {
+		padding: $cIconPad $cFontPad;
+		line-height: $cIconSize;
+	}
+	.menubarItemCas:after {
+		width: round($cIconSize/3);
+		height: round($cIconSize/3);
+		margin-left: $cFontPad;
+		top: 0 - round($cIconSize/8);
+	}
+	.menubarItemSep {
+		height: $cSize;
+	}
+}
+.menubarVertical {
+.menubarItem {
+		display: block;
+	}
+	.menubarItemSep {
+		height: 0px;
+		border-left: none;
+		border-top: 1px dotted $foreVeryLightColor;
+	}
+	.menubarItemCas:after {
+		float: right;
+		border: none;
+		border-right: 2px solid $altAccentColor;
+		border-top: 2px solid $altAccentColor;
+		border-radius: 2px;
+		-webkit-transform: rotate(45deg);
+		transform: rotate(45deg);
+		margin-top: round($iconSize / 2.5);
+	}
+	.menubarItemHover .menubarItemCas:after, .menubarItemPressed .menubarItemCas:after {
+		border-left-color: $altAccentForeColor;
+	}
+	.menubarItemDisabled .menubarItemCas:after {
+		border-left-color: $foreVeryLightColor;
+	}
+}
+.compact .menubarVertical .menubarItemCas:after {
+margin-top: round($cIconSize / 2.5);
+}
+.menubarItemHover .menubarItemCas:after, .menubarItemPressed .menubarItemCas:after {
+border-color: $altAccentForeColor;
+}
+.menubarItemDisabled .menubarItemCas:after {
+border-color: $foreVeryLightColor;
+}
+/* menu */
+.menu {
+background: $backColor;
+border: 1px solid $lineColor;
+border-radius: 2px;
+box-shadow: 0px 2px 10px rgba(0,0,0,.25);
+}
+.menuItem {
+padding: 0px $fontPad;
+cursor: default;
+position: relative;
+line-height: $size;
+}
+.pulse {
+.menuItem {
+		transition: background-color 300ms $transTween, box-shadow 600ms;
+		box-shadow: $pulseShdOff;
+	}
+	.menuItem:not(.menuItemDisabled):active {
+		box-shadow: $pulseShdOn;
+		transition: none;
+	}
+}
+.menuItemLabel {
+display: inline-block;
+}
+.menuItemHover, .menuItemSelected {
+color: $accentForeColor;
+background: $accentColor;
+}
+.menuItemDisabled {
+color: $foreLightColor;
+background: $backColor;
+}
+.menuItemCascade {
+padding-right: $fontPad*2;
+position: relative;
+}
+.menuItemCascade:after {
+font-size: 0px;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: $foreLightColor;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: $foreLightColor;
+margin-top: 0 - round($iconSize/4.5);
+display: block;
+position: absolute;
+top: 50%;
+right: 0px;
+width: round($iconSize/3);
+height: round($iconSize/3);
+border-radius: 2px;
+content: '';
+-webkit-transform: rotate(45deg);
+transform: rotate(45deg);
+}
+.menuItemHover .menuItemCascade:after, .menuItemSelected .menuItemCascade:after {
+border-color: $accentForeColor;
+}
+.menuSeparator {
+background: $lineLightColor;
+margin: 0px !important;
+position: absolute;
+left: 0px;
+right: 0px;
+height: 1px;
+}
+.menuTitle {
+color: $foreLightColor;
+background: $backLShadeColor;
+font-size: $fontSizeSm;
+font-weight: bold;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: $lineLightColor;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: $lineLightColor;
+padding: 4px;
+cursor: default;
+}
+.menuIcon {
+padding-right: $iconPad;
+width: $iconSize;
+}
+.compact {
+.menuItem {
+		padding: 0px $cIconPad;
+		line-height: $cSize;
+	}
+	.menuIcon {
+		width: $cIconSize;
+		padding-right: $cIconPad;
+	}
+	.menuItemCascade {
+		padding-right: $cFontPad*2;
+	}
+	.menuItemCascade:after {
+		margin-top: 0 - round($cIconSize/4.5);
+		width: round($cIconSize/3);
+		height: round($cIconSize/3);
+	}
+	.menuTitle {
+		font-size: $cFontSizeSm;
+	}
+}
+.menuItemHover .icon, .menuItemSelected .icon {
+fill: $accentForeColor;
+stroke: $accentForeColor;
+}
+/* pointer - window / menu */
+.pointerDown {
+border-top-style: solid;
+border-top-width: 10px;
+border-top-color: $lineColor;
+border-left-style: solid;
+border-left-width: 10px;
+border-left-color: transparent;
+border-right-style: solid;
+border-right-width: 10px;
+border-right-color: transparent;
+margin-left: -10px;
+left: 50%;
+bottom: -11px;
+width: 0;
+height: 0;
+}
+.pointerDown:after {
+border-top-style: solid;
+border-top-width: 10px;
+border-top-color: $backColor;
+border-left-style: solid;
+border-left-width: 10px;
+border-left-color: transparent;
+border-right-style: solid;
+border-right-width: 10px;
+border-right-color: transparent;
+margin-left: -10px;
+display: block;
+position: absolute;
+left: 50%;
+bottom: 1px;
+width: 0;
+height: 0;
+content: "";
+}
+.pointerUp {
+border-left-style: solid;
+border-left-width: 10px;
+border-left-color: transparent;
+border-right-style: solid;
+border-right-width: 10px;
+border-right-color: transparent;
+border-bottom-style: solid;
+border-bottom-width: 10px;
+border-bottom-color: $lineColor;
+margin-left: -10px;
+top: -11px;
+left: 50%;
+width: 0;
+height: 0;
+}
+.pointerUp:after {
+border-left-style: solid;
+border-left-width: 10px;
+border-left-color: transparent;
+border-right-style: solid;
+border-right-width: 10px;
+border-right-color: transparent;
+border-bottom-style: solid;
+border-bottom-width: 10px;
+border-bottom-color: $backColor;
+margin-left: -10px;
+display: block;
+position: absolute;
+top: 1px;
+left: 50%;
+width: 0;
+height: 0;
+content: "";
+}
+.pointerLeft {
+border-top-style: solid;
+border-top-width: 10px;
+border-top-color: transparent;
+border-right-style: solid;
+border-right-width: 10px;
+border-right-color: $lineColor;
+border-bottom-style: solid;
+border-bottom-width: 10px;
+border-bottom-color: transparent;
+margin-top: -10px;
+top: 50%;
+left: -11px;
+width: 0;
+height: 0;
+}
+.pointerLeft:after {
+border-top-style: solid;
+border-top-width: 10px;
+border-top-color: transparent;
+border-right-style: solid;
+border-right-width: 10px;
+border-right-color: $backColor;
+border-bottom-style: solid;
+border-bottom-width: 10px;
+border-bottom-color: transparent;
+margin-top: -10px;
+display: block;
+position: absolute;
+top: 50%;
+left: 1px;
+width: 0;
+height: 0;
+content: "";
+}
+.pointerRight {
+border-top-style: solid;
+border-top-width: 10px;
+border-top-color: transparent;
+border-left-style: solid;
+border-left-width: 10px;
+border-left-color: $lineColor;
+border-bottom-style: solid;
+border-bottom-width: 10px;
+border-bottom-color: transparent;
+margin-top: -10px;
+top: 50%;
+right: -11px;
+width: 0;
+height: 0;
+}
+.pointerRight:after {
+border-top-style: solid;
+border-top-width: 10px;
+border-top-color: transparent;
+border-left-style: solid;
+border-left-width: 10px;
+border-left-color: $backColor;
+border-bottom-style: solid;
+border-bottom-width: 10px;
+border-bottom-color: transparent;
+margin-top: -10px;
+display: block;
+position: absolute;
+top: 50%;
+right: 1px;
+width: 0;
+height: 0;
+content: "";
+}
+/* edit */
+.edit, .editPrimary {
+color: $foreColor;
+font: $fontSize $fontFamily;
+border: none;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: $lineColor;
+padding: $fontPad;
+padding-bottom: $fontPad - 1px;
+vertical-align: middle;
+border-radius: 0px;
+outline: none;
+}
+.edit {
+background: url('accentEditBorder.png') no-repeat bottom transparent;
+background-size: 0px 2px;
+}
+.pulse {
+.edit, .editBG {
+		transition: background-size 200ms $transTween;
+	}
+	.editPrimary, .editBGPrimary {
+		transition: box-shadow 200ms $transTween;
+	}
+}
+select.edit option, select.editPrimary option {
+color: $foreColor;
+background: $backColor;
+}
+.editPrimary, .grid .edit {
+color: $foreColor;
+background: $backColor;
+border: 1px solid $lineColor;
+padding: $fontPad - 1px;
+}
+.edit:hover, .editPrimary:hover {
+border-color: $accentLightColor;
+}
+.edit:focus {
+background-color: $backColor;
+background-size: 100% 2px;
+border-color: $accentColor;
+}
+.editPrimary:focus, .grid .edit:focus {
+color: $foreColor;
+background: $backColor;
+border-color: $accentColor;
+box-shadow: inset 0px 0px 0px 2px $accentColor;
+}
+.editError {
+color: $errorColor;
+background: $errorBackColor;
+border-color: $errorColor;
+}
+.editWatermark {
+color: $foreLightColor;
+}
+.edit[disabled] {
+color: $foreLightColor;
+background: $backColor;
+border-color: $lineLightColor;
+}
+.compact {
+.edit {
+		font-size: $cFontSize;
+		padding: $cFontPad;
+		padding-bottom: $cFontPad - 1px;
+		background-size: 0% 1px;
+	}
+	.edit:focus {
+		background-size: 100% 1px;
+	}
+	.editPrimary, .grid .edit {
+		font-size: $cFontSize;
+		padding: $cFontPad - 1px;
+	}
+	.editPrimary:focus, .grid .edit:focus {
+		box-shadow: inset 0px 0px 0px 1px $accentColor;
+	}
+}
+/* edit overrides */
+.panelHeader, .panelHeaderAlt, .panelFooter, .panelFooterAlt, .ctrlBarDis {
+.edit {
+		border-color: rgba($lineColor,.25);
+		color: $headerForeColor;
+		background: transparent url('headerEditBorder.png') no-repeat bottom;
+		background-size: 0% 2px;
+	}
+	.editPrimary {
+		color: $headerForeColor;
+		background: rgba($backColor,.25);
+		border-color: rgba($lineColor,.25);
+	}
+	.edit:hover, .editPrimary:hover, .edit:focus, .editPrimary:focus {
+		border-color: $headerForeColor;
+	}
+ 	.edit:focus {
+		background-size: 100% 2px;
+	}
+	.editError {
+		color: $errorColor;
+		background: transparent;
+	}
+	.editPrimary.editError {
+		background: $errorBackColor;
+	}
+	.editWatermark {
+		color: $foreLightColor;
+	}
+	.edit[disabled] {
+		color: $foreLightColor;
+		border-color: $lineLightColor;
+		background: transparent;
+	}
+	.editPrimary:focus, .grid .edit:focus {
+		box-shadow: inset 0px 0px 0px 2px $headerForeColor;
+	}
+}
+.panelHeaderContrast, .panelFooterContrast, .ctrlBarDisContrast {
+.editPrimary:focus, .grid .edit:focus {
+		box-shadow: inset 0px 0px 0px 2px $accentColor;
+	}
+}
+.panelHeader, .panelHeaderAlt, .panelHeaderContrast, .panelFooter, .panelFooterAlt, .panelFooterContrast, .ctrlBarDis, .ctrlBarDisContrast {
+.edit, .editPrimary {
+		vertical-align: top;
+		margin-top:	3px;
+		padding-top: $fontPad - 4px;
+		padding-bottom: $fontPad - 5px;
+	}
+	.editPrimary, .grid .edit {
+		padding-top: $fontPad - 5px;
+		padding-bottom: $fontPad - 5px;
+	}
+	
+}
+.listItemSelected:not(.listItemSubtle), .listItemHover:not(.listItemSubtle), .gridRowSelected, .gridRowHover {
+.edit {
+		color: $accentForeColor;
+		border-color: $accentForeColor;
+		background: transparent url('accentForeEditBorder.png') no-repeat bottom;
+		background-size: 0% 2px;
+	}
+	.edit:focus {
+		background-size: 100% 2px;
+	}
+	.editError {
+		color: $errorColor;
+		border-color: $errorColor;
+		background: transparentize($errorColor,.85);
+	}
+	.edit[disabled] {
+		color: $accentForeTransColor;
+		border-color: $accentForeTransColor;
+	}
+	.editPrimary, .grid & .edit {
+		background: transparent;
+		color: $accentForeColor;
+		border-color: $accentForeColor;
+	}
+	.editPrimary:focus, .grid & .edit:focus {
+		color: $accentForeColor;
+		border-color: $accentForeColor;
+		background: transparent;
+		box-shadow: inset 0px 0px 0px 2px $accentForeColor;
+	}
+}
+.compact {
+.panelHeader, .panelHeaderAlt, .panelHeaderContrast, .panelFooter, .panelFooterAlt, .panelFooterContrast, .ctrlBarDis, .ctrlBarDisContrast {
+		.edit {
+			margin-top:	2px;
+			padding: $cFontPad - 3px;
+			background-size: 0% 1px;
+		}
+		.edit:focus {
+			background-size: 100% 1px;
+		}
+		.editPrimary, .grid .edit {
+			margin-top:	2px;
+			padding: $cFontPad - 3px;
+		}
+		.editPrimary:focus, .grid .edit:focus {
+			box-shadow: inset 0px 0px 0px 1px $headerForeColor;
+		}
+	}
+	.panelHeaderContrast, .panelFooterContrast, .ctrlBarDisContrast {
+		.editPrimary:focus, .grid .edit:focus {
+			box-shadow: inset 0px 0px 0px 1px $accentColor;
+		}
+	}
+	.listItemSelected:not(.listItemSubtle), .listItemHover:not(.listItemSubtle), .gridRowSelected, .gridRowHover {
+		.editPrimary:focus, .grid .edit:focus {
+			box-shadow: inset 0px 0px 0px 1px $accentForeColor;
+		}
+	}
+}
+/* edit button group */
+.editBG, .editBGPrimary {
+color: $foreColor;
+background: transparent;
+font: $fontSize $fontFamily;
+border: 0px none;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: $lineColor;
+padding: 0px;
+vertical-align: middle;
+outline: none;
+}
+.editBG {
+background: url('accentEditBorder.png') no-repeat bottom transparent;
+background-size: 0% 2px;
+}
+.editBGPrimary, .grid .editBG {
+color: $foreColor;
+background: $backColor;
+border: 1px solid $lineColor;
+}
+.editBGHover {
+border-color: $accentLightColor;
+}
+.editBGFocus {
+background-size: 100% 2px;
+border-color: $accentColor;
+}
+.editBGPrimary.editBGFocus, .grid .editBG.editBGFocus {
+box-shadow: inset 0px 0px 0px 2px $accentColor;
+}
+.editBGError {
+color: $errorColor;
+background: $errorBackColor;
+border-color: $errorColor;
+}
+.editBGSeparator {
+font-size: 0px;
+padding: 0px;
+width: 0px;
+}
+.editBGEdit {
+color: $foreColor;
+background: transparent;
+font: $fontSize $fontFamily;
+border: none;
+padding: $fontPad;
+padding-bottom: $fontPad - 1px;
+outline: none;
+}
+.editBGPrimary .editBGEdit, .grid .editBG .editBGEdit {
+padding: $fontPad - 1px;
+}
+.editBGButton {
+padding: $iconPad $fontPad;
+padding-bottom: $iconPad - 1px;
+border-radius: 2px 2px 0px 0px;
+}
+.editBGPrimary .editBGButton, .grid .editBG .editBGButton {
+padding-top: $iconPad - 1px;
+border-radius: 0px;
+}
+.editBGButtonHover {
+color: $accentForeColor;
+background: $accentLightColor;
+}
+.editBGButtonPressed {
+color: $accentForeColor;
+background: $accentColor;
+}
+.editBGWatermark {
+color: $foreLightColor;
+}
+.editBGButtonHover, .editBGButtonPressed {
+.icon {
+		stroke: $accentForeColor;
+		fill: $accentForeColor;
+	}
+}
+.editBGError {
+.icon {
+		stroke: $errorColor;
+		fill: $errorColor;
+	}
+}
+.compact {
+.editBG { background-size: 0% 1px;}
+	.editBGFocus { background-size: 100% 1px;}
+	.editBGPrimary.editBGFocus, .grid .editBG.editBGFocus { box-shadow: inset 0px 0px 0px 1px $accentColor;}
+	.editBGEdit, .grid .editBG .editBGEdit {
+		font: $cFontSize $fontFamily;
+		padding: $cFontPad;
+		padding-bottom: $cFontPad - 1px;
+	}
+	.editBGPrimary .editBGEdit, .grid .editBG .editBGEdit {
+		padding: $cFontPad - 1px;
+	}
+	.editBGButton, .grid .editBG .editBGButton  {
+		font: $cFontSize $fontFamily;
+		padding: $cIconPad $cFontPad - 1px;
+	}
+}
+/* edit button group overrides */
+.panelHeader, .panelHeaderAlt, .panelFooter, .panelFooterAlt, .ctrlBarDis {
+.editBG {
+		border-color: rgba($lineColor,.25);
+		color: $headerForeColor;
+	}
+	.editBGPrimary {
+		color: $headerForeColor;
+		background: rgba($backColor,.25);
+		border-color: rgba($lineColor,.25);
+	}
+	.editBGButton {
+		background: rgba($backColor,.25);
+		.icon {
+			fill: $headerForeColor;
+			stroke: $headerForeColor;
+		}
+	}
+	.editBG .editBGEdit, .editBGPrimary .editBGEdit {
+		color: $headerForeColor;
+	}
+	.editBG:hover, .editBGPrimary:hover, .editBGFocus, .editBGPrimary.editBGFocus {
+		border-color: $headerForeColor;
+		.editBGButton {
+			color: $headerBackColor;
+			background: $headerForeColor;
+			.icon {
+				fill: $headerBackColor;
+				stroke: $headerBackColor;
+			}
+		}
+	}
+	.editBGError {
+		color: $errorColor;
+		background: transparent;
+	}
+	.editBGPrimary.editBGError {
+		background: $errorBackColor;
+	}
+	.editBGWatermark {
+		color: $foreLightColor;
+	}
+	.editBGEdit[disabled] {
+		color: $foreLightColor;
+		border-color: $lineLightColor;
+	}
+}
+.panelHeader, .panelHeaderAlt, .panelHeaderContrast, .panelFooter, .panelFooterAlt, .panelFooterContrast, .ctrlBarDis, .ctrlBarDisContrast {
+.editBG, .editBGPrimary {
+		vertical-align: top;
+		margin-top:	3px;
+		.editBGEdit {
+			padding-top: $fontPad - 4px;
+			padding-bottom: $fontPad - 5px;
+		}
+		.editBGButton {
+			padding-top: $iconPad - 4px;
+			padding-bottom: $iconPad - 5px;
+		}
+	}
+	.editBGPrimary, .grid .editBG {
+		.editBGEdit {
+			padding-top: $fontPad - 5px;
+			padding-bottom: $fontPad - 5px;
+		}		
+		.editBGButton {
+			padding-top: $iconPad - 5px;
+			padding-bottom: $iconPad - 5px;
+		}
+	}
+}
+.panelHeader, .panelHeaderAlt, .panelFooter, .panelFooterAlt, .ctrlBarDis {
+.editBG {
+		background-image: url('headerEditBorder.png');
+	}
+	.editBGPrimary.editBGFocus, .grid .editBGFocus {
+		box-shadow: inset 0px 0px 0px 2px $headerForeColor;
+	}
+}
+.listItemSelected:not(.listItemSubtle), .listItemHover:not(.listItemSubtle), .gridRowSelected, .gridRowHover {
+.editBG {
+		border-color: $accentForeColor;
+		color: $accentForeColor;
+	}
+	.editBGPrimary {
+		color: $accentForeColor;
+		background: transparent;
+		border-color: $accentForeColor;
+	}
+	.editBG .editBGEdit, .editBGPrimary .editBGEdit {
+		color: $accentForeColor;
+	}
+
+	.editBG:hover, .editBGPrimary:hover, .editBGFocus, .editBGPrimary.editBGFocus {
+		border-color: $accentForeColor;
+		.editBGButton {
+			color: $accentColor;
+			background: $accentForeColor;
+			.icon {
+				fill: $accentColor;
+				stroke: $accentColor;
+			}
+		}
+	}
+	.editBGError, .editBGError .editBGEdit {
+		color: $errorColor;
+		border-color: $errorColor;
+		background: transparent;
+		.icon {
+			fill: $errorColor;
+			stroke: $errorColor;
+		}
+	}
+	.editBGPrimary.editBGError {
+		background: $errorBackColor;
+	}
+	.editBGWatermark {
+		color: $accentForeTransColor;
+	}
+	.editBGEdit[disabled] {
+		color: $accentForeTransColor;
+		border-color: $accentForeTransColor;
+	}
+
+	.editBG {
+		background-image: url('accentForeEditBorder.png');
+	}
+	.editBGPrimary.editBGFocus, .grid .editBGFocus {
+		box-shadow: inset 0px 0px 0px 2px $accentForeColor;
+	}
+
+}
+.compact {
+.panelHeader, .panelHeaderAlt, .panelHeaderContrast, .panelFooter, .panelFooterAlt, .panelFooterContrast, .ctrlBarDis, .ctrlBarDisContrast {
+		.editBGEdit, .grid .editBG .editBGEdit {
+			font: $cFontSize $fontFamily;
+			padding: $cFontPad - 3px;
+		}
+		.editBGButton, .grid .editBG .editBGButton  {
+			font: $cFontSize $fontFamily;
+			padding: $cIconPad $cFontPad - 3px;
+		}
+	}
+	.panelHeader, .panelHeaderAlt, .panelFooter, .panelFooterAlt, .ctrlBarDis {
+		.editBGPrimary.editBGFocus, .grid .editBG.editBGFocus {
+			box-shadow: inset 0px 0px 0px 1px $headerForeColor;
+		}
+	}
+	.panelHeaderContrast, .panelFooterContrast, .ctrlBarDisContrast {
+		.editBGPrimary.editBGFocus, .grid .editBG.editBGFocus {
+			box-shadow: inset 0px 0px 0px 1px $accentColor;
+		}
+	}
+	.listItemSelected:not(.listItemSubtle), .listItemHover:not(.listItemSubtle), .gridRowSelected, .gridRowHover {
+		.editBGPrimary.editBGFocus, .grid .editBG.editBGFocus {
+			box-shadow: inset 0px 0px 0px 1px $accentForeColor;
+		}
+	}
+}
+/* buttons */
+.button, .buttonDD, .buttonSplit {
+color: $altAccentColor;
+background: transparent;
+font-size: $fontSize;
+font-weight: bold;
+border: none;
+padding: $iconPad $fontPad;
+margin: 0px;
+vertical-align: middle;
+line-height: $iconSize;
+border-radius: 2px;
+outline: none;
+}
+.buttonIcon {
+color: $altAccentColor;
+background: transparent;
+font-size: $fontSize;
+font-weight: bold;
+border: none;
+padding: $iconPad;
+margin: 0px;
+vertical-align: middle;
+line-height: $iconSize;
+border-radius: 2px;
+outline: none;
+}
+.buttonRounded {
+color: $altAccentForeColor;
+background: $altAccentColor;
+border-radius: 200px;
+}
+.buttonCircle {
+overflow: hidden;
+width: $size;
+height: $size;
+}
+.pulse {
+.button, .buttonIcon, .buttonDD, .buttonSplit {
+		position: relative;
+		transition: background-color 600ms $transTween;
+	}
+	.button:after, .buttonIcon:after, .buttonDD:after, .buttonSplit:after {
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		right: 0px;
+		bottom: 0px;
+		border-radius: 3px;
+		content: '';
+		box-shadow: $pulseShdOff;
+		transition: box-shadow 600ms;
+		pointer-events: none;
+	}
+	.button:not(.buttonDisabled):active:after, .buttonIcon:not(.buttonDisabled):active:after, .buttonDD:not(.buttonDisabled):active:after, .buttonSplit:not(.buttonDisabled):active:after {
+		box-shadow: $pulseShdOn;
+		transition: none;
+	}
+	.buttonRounded:after {
+		border-radius: 200px;
+	}
+}
+.buttonRaised {
+box-shadow: 0px 3px 12px -2px rgba(0,0,0,.4);
+}
+.button .icon, .buttonDD .icon, .buttonSplit .icon, .buttonIcon .icon {
+vertical-align: top !important;
+fill: $altAccentColor;
+stroke: $altAccentColor;
+}
+.buttonListPrimary {
+background: $backShadeColor;
+}
+.buttonSecondary {
+font-size: $fontSizeSm;
+padding: $iconPad $fontPadSm;
+}
+.buttonHover {
+color: $altAccentForeColor;
+background: $altAccentLightColor;
+}
+.buttonPressed, .buttonPrimary {
+color: $altAccentForeColor;
+background: $altAccentColor;
+}
+.buttonHover .icon, .buttonPressed .icon, .buttonPrimary .icon, .buttonRounded:not(.buttonSubtle) .icon {
+fill: $altAccentForeColor;
+stroke: $altAccentForeColor;
+}
+.buttonPrimary.buttonHover {
+color: $altAccentForeColor;
+background: $altAccentLightColor;
+}
+.buttonPrimary.buttonPressed {
+background: $altAccentLightColor;
+border: 2px solid $altAccentColor;
+padding: $iconPad - 2px $fontPad - 2px;
+}
+.buttonPrimary.buttonDisabled, .buttonRounded.buttonDisabled {
+background: $lineColor;
+}
+.buttonPrimary.buttonDisabled .icon, .buttonPrimary.buttonDisabled .iconDisabled {
+fill: $lineColor;
+stroke: $lineColor;
+}
+.buttonSubtle {
+color: $foreSubtleColor;
+background: transparent;
+}
+.buttonSubtle.buttonRounded {
+background: $lineColor;
+}
+.buttonSubtle.buttonRaised {
+background: $backLShadeColor;
+}
+.buttonSubtle.buttonPressed {
+background: $lineColor;
+}
+.buttonSubtle.buttonHover {
+background: $lineLightColor;
+}
+.buttonConfirm {
+color: $confirmColor;
+border-color: $confirmColor;
+}
+.buttonConfirm.buttonHover {
+color: $confirmForeColor;
+background: $confirmLightColor;
+border-color: $confirmColor;
+}
+.buttonConfirm.buttonPressed {
+color: $confirmForeColor;
+background: $confirmColor;
+border-color: $confirmColor;
+}
+.buttonConfirm .icon {
+fill: $confirmColor;
+stroke: $confirmColor;
+}
+.buttonConfirm.buttonHover .icon, .buttonConfirm.buttonPressed .icon {
+fill: $confirmForeColor;
+stroke: $confirmForeColor;
+}
+.buttonDeny {
+color: $denyColor;
+border-color: $denyColor;
+}
+.buttonDeny.buttonHover {
+color: $denyForeColor;
+background: $denyLightColor;
+border-color: $denyColor;
+}
+.buttonDeny.buttonPressed {
+color: $denyForeColor;
+background: $denyColor;
+border-color: $denyColor;
+}
+.buttonDeny .icon {
+fill: $denyColor;
+stroke: $denyColor;
+}
+.buttonDeny.buttonHover .icon, .buttonDeny.buttonPressed .icon {
+fill: $denyForeColor;
+stroke: $denyForeColor;
+}
+.buttonIconText {
+font-size: $size - $iconSize - 8px;
+padding-top: 3px;
+padding-bottom: 3px;
+line-height: $size - $iconSize - 6px;
+}
+.buttonLeft {
+text-align: left;
+padding-left: $iconSize;
+position: relative;
+}
+.buttonLeft:before {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: $altAccentColor;
+border-left-style: solid;
+border-left-width: 2px;
+border-left-color: $altAccentColor;
+margin-top: 0 - round($iconSize/4.5);
+display: inline-block;
+position: absolute;
+top: 50%;
+left: round($iconSize/3);
+width: round($iconSize/3);
+height: round($iconSize/3);
+border-radius: 2px;
+content: '';
+-webkit-transform: rotate(-45deg);
+transform: rotate(-45deg);
+}
+.buttonRight {
+text-align: right;
+padding-right: $iconSize;
+position: relative;
+}
+.buttonRight:before {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: $altAccentColor;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: $altAccentColor;
+margin-top: 0 - round($iconSize/4.5);
+margin-left: round($iconSize/6);
+display: inline-block;
+position: absolute;
+top: 50%;
+right: round($iconSize/3);
+width: round($iconSize/3);
+height: round($iconSize/3);
+border-radius: 2px;
+content: '';
+-webkit-transform: rotate(45deg);
+transform: rotate(45deg);
+}
+.buttonHover.buttonLeft:before, .buttonPressed.buttonLeft:before, .buttonHover.buttonRight:before, .buttonPressed.buttonRight:before {
+border-color: $altAccentForeColor;
+}
+.buttonDisabled.buttonLeft:before, .buttonDisabled.buttonRight:before {
+border-color: $foreVeryLightColor;
+}
+.buttonDisabled {
+color: $foreVeryLightColor;
+.icon, .iconDisabled {
+		fill: $foreVeryLightColor;
+		stroke: $foreVeryLightColor;
+	}
+}
+.buttonDD, .buttonSplit {
+padding: 0px;
+}
+.buttonContent {
+color: $altAccentColor;
+font-weight: bold;
+padding: $iconPad $fontPad;
+position: relative;
+line-height: $iconSize;
+}
+.buttonDDArrow {
+padding: $iconPad $fontPad;
+line-height: $iconSize;
+}
+.buttonSplitArrow {
+padding: $iconPad $fontPad;
+position: relative;
+line-height: $iconSize;
+}
+.buttonSplitArrow:after {
+border-left-style: dotted;
+border-left-width: 1px;
+border-left-color: $altAccentColor;
+display: block;
+position: absolute;
+top: 2px;
+left: 0px;
+bottom: 2px;
+content: "";
+}
+.buttonDDArrow:before, .buttonSplitArrow:before {
+border: none;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: $altAccentColor;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: $altAccentColor;
+margin-top: -6px;
+display: inline-block;
+width: 8px;
+height: 8px;
+border-radius: 2px;
+content: "";
+-webkit-transform: rotate(45deg);
+transform: rotate(45deg);
+}
+.buttonHover {
+.buttonSplitArrow:after {
+		border-color: $altAccentForeColor;
+	}
+	.buttonContent {
+		color: $altAccentForeColor;
+	}
+	.buttonDDArrow:before, .buttonSplitArrow:before {
+		border-color: $altAccentForeColor;
+	}
+}
+.buttonPressed {
+.buttonSplitArrow:after {
+		border-color: $altAccentForeColor;
+	}
+	.buttonContent {
+		color: $altAccentForeColor;
+	}
+	.buttonDDArrow:before, .buttonSplitArrow:before {
+		border-color: $altAccentForeColor;
+	}
+}
+.buttonDisabled {
+.buttonSplitArrow:after {
+		border-color: $foreVeryLightColor;
+	}
+	.buttonContent {
+		color: $foreVeryLightColor;
+	}
+	.buttonDDArrow:before, .buttonSplitArrow:before {
+		border-color: $foreVeryLightColor;
+	}
+	.icon, .iconDisabled {
+		fill: $foreVeryLightColor;
+		stroke: $foreVeryLightColor;
+	}
+}
+.buttonGroupFirst {
+margin-right: 0px;
+border-radius: 2px 0px 0px 2px;
+}
+.buttonGroupMid {
+border-left-style: none;
+margin-left: 0px;
+margin-right: 0px;
+border-radius: 0px;
+}
+.buttonGroupLast {
+border-left-style: none;
+margin-left: 0px;
+border-radius: 0px 2px 2px 0px;
+}
+.buttonGroupVFirst {
+margin-bottom: 0px;
+display: block;
+width: 100%;
+border-radius: 2px 2px 0px 0px;
+}
+.buttonGroupVMid {
+border-top-style: none;
+margin-top: 0px;
+margin-bottom: 0px;
+display: block;
+width: 100%;
+border-radius: 0px;
+}
+.buttonGroupVLast {
+border-top-style: none;
+margin-top: 0px;
+display: block;
+width: 100%;
+border-radius: 0px 0px 2px 2px;
+}
+.compact {
+.button, .buttonContent, .buttonDDArrow, .buttonSplitArrow {
+		font-size: $cFontSize;
+		padding: $cIconPad $cFontPad;
+		line-height: $cIconSize;
+	}
+	.buttonDDArrow:before, .buttonSplitArrow:before {
+		width: 6px;
+		height: 6px;
+		margin-top: -4px;
+	}
+ 	.buttonIcon {
+		font-size: $cFontSize;
+		padding: $cIconPad;
+		line-height: $cIconSize;
+	}
+	.buttonIconText {
+		padding-top: 1px;
+		padding-bottom: 1px;
+		font-size: max($cSize - $cIconSize - 2px,8px);
+		line-height: max($cSize - $cIconSize - 2px,8px);
+	}
+	.buttonCircle {
+		width: $cSize;
+		height: $cSize;
+		overflow: hidden;
+	}
+	.buttonSecondary {
+		font-size: $cFontSizeSm;
+		padding: $cIconPad $cFontPadSm;
+	}
+	.buttonPrimary.buttonPressed {
+		padding: $cIconPad - 2px $cFontPad - 2px;
+	}
+	.buttonLeft {
+		padding-left: $cIconSize;
+	}
+	.buttonLeft:before {
+		width: round($cIconSize/3);
+		height: round($cIconSize/3);
+		left: round($cIconSize/3);
+		margin-top: 0 - round($cIconSize/4.5);
+	}
+	.buttonRight {
+		padding-right: $cIconSize;
+	}
+	.buttonRight:before {
+		width: round($cIconSize/3);
+		height: round($cIconSize/3);
+		right: round($cIconSize/3);
+		margin-top: 0 - round($cIconSize/4.5);
+	}
+}
+.button .iconButton, .buttonIcon .iconButton {
+padding: 0px;
+}
+/* button overrides for selected list/grid items */
+.listItemSelected, .listItemHover, .gridRowSelected, .gridRowHover {
+.button, .buttonIcon, .buttonDD, .buttonSplit {
+		background: $backColor;
+	}
+	.buttonPrimary, .buttonCricle {
+		background: $altAccentColor;
+	}
+	.buttonHover {
+		background: $altAccentLightColor;
+	}
+	.buttonPressed {
+		background: $altAccentColor;
+	}
+	.buttonConfirm.buttonHover {
+		background: $confirmLightColor;
+	}
+	.buttonConfirm.buttonPressed {
+		background: $confirmColor;
+	}
+	.buttonDeny.buttonHover {
+		background: $denyLightColor;
+	}
+	.buttonDeny.buttonPressed {
+		background: $denyColor;
+	}
+	.buttonDisabled {
+		background: $backVeryTransColor;
+	}
+}
+.windowButtons .button {
+border: none;
+margin: 0px;
+border-radius: 0px;
+}
+.panelHeader, .panelHeaderAlt, .panelFooter, .panelFooterAlt, .ctrlBarDis {
+.button, .buttonIcon, .buttonDD, .buttonSplit, .buttonContent {
+		color: $headerForeColor;
+		box-shadow: none;
+		.icon {
+			fill: $headerForeColor;
+			stroke: $headerForeColor;
+		}
+	}
+	.buttonLeft:before, .buttonRight:before, .buttonDDArrow:before, .buttonSplitArrow:before, .buttonSplitArrow:after {
+		border-color: $headerForeColor;
+	}
+	.button:after, .buttonIcon:after, .buttonDD:after, .buttonSplit:after {
+		box-shadow: none !important;
+		transition: none;
+	}
+}
+.panelHeaderContrast, .panelFooterContrast, .ctrlBarDisContrast {
+.button, .buttonIcon, .buttonDD, .buttonSplit, .buttonContent {
+		color: $foreColor;
+		box-shadow: none;
+		.icon {
+			fill: $foreColor;
+			stroke: $foreColor;
+		}
+	}
+	.buttonLeft:before, .buttonRight:before, .buttonDDArrow:before, .buttonSplitArrow:before, .buttonSplitArrow:after {
+		border-color: $foreColor;
+	}
+	.button:after, .buttonIcon:after, .buttonDD:after, .buttonSplit:after {
+		box-shadow: none !important;
+		transition: none;
+	}
+}
+.panelHeader, .panelHeaderAlt, .panelFooter, .panelFooterAlt, .ctrlBarDis {
+.button, .buttonIcon, .buttonDD {
+		vertical-align: top;
+		background: transparent;
+	}
+	.button.buttonPressed, .button.buttonHover, .buttonDD.buttonPressed, .buttonDD.buttonHover, .buttonSplit.buttonPressed, .buttonSplit.buttonHover, .buttonPrimary, .buttonRounded, .buttonListPrimary {
+		background: transparent;
+		color: $altAccentColorHeader;
+		position: relative;
+		.icon {
+			fill: $altAccentColorHeader;
+			stroke: $altAccentColorHeader;
+		}
+	}
+	.button.buttonPressed:after, .button.buttonHover:after, .buttonDD.buttonPressed:after, .buttonDD.buttonHover:after, .buttonSplit.buttonPressed:after, .buttonSplit.buttonHover:after {
+		content: "";
+		display: block;
+		position: absolute;
+		bottom: $iconPad - 2px;
+		left: $fontPad - 2px;
+		right: $fontPad - 2px;
+		border-bottom: 2px solid $altAccentColorHeader;
+	}
+	.button.buttonHover:after, .buttonDD.buttonHover:after, .buttonSplit.buttonHover:after {
+		border-bottom-style: dotted;
+	}
+	.buttonConfirm {
+		color: $confirmColorHeader;
+		.icon {
+			fill: $confirmColorHeader;
+			stroke: $confirmColorHeader;
+		}
+	}
+	.buttonConfirm.buttonPressed, .buttonConfirm.buttonHover {
+		color: $confirmColorHeader;
+		.icon {
+			fill: $confirmColorHeader;
+			stroke: $confirmColorHeader;
+		}
+	}
+	.buttonConfirm.buttonPressed:after, .buttonConfirm.buttonHover:after {
+		border-bottom-color: $confirmColorHeader;
+	}
+	.buttonDeny {
+		color: $denyColorHeader;
+		.icon {
+			fill: $denyColorHeader;
+			stroke: $denyColorHeader;
+		}
+	}
+	.buttonDeny.buttonPressed, .buttonDeny.buttonHover {
+		color: $denyColorHeader;
+		.icon {
+			fill: $denyColorHeader;
+			stroke: $denyColorHeader;
+		}
+	}
+	.buttonDeny.buttonPressed:after, .buttonDeny.buttonHover:after {
+		border-bottom-color: $denyColorHeader;
+	}
+	.buttonPrimary.buttonPressed {
+		border-color: transparent;
+	}
+	.buttonHover.buttonLeft:before, .buttonPressed.buttonLeft:before, .buttonHover.buttonRight:before, .buttonPressed.buttonRight:before {
+		border-color: $altAccentColorHeader;
+	}
+	.buttonDisabled.buttonLeft:before, .buttonDisabled.buttonRight:before {
+		border-color: $foreVeryLightColor;
+	}
+	.buttonSplitArrow:after {
+		top: $iconPad + 4px;
+		bottom: $iconPad + 4px;
+	}
+	.buttonPressed, .buttonHover {
+		.buttonContent{
+			color: $altAccentColorHeader;
+		}
+		.buttonDDArrow:before, .buttonSplitArrow:before {
+			border-color: $altAccentColorHeader;
+		}
+		.buttonSplitArrow:after {
+			border-color: $altAccentColorHeader;
+		}
+		.icon {
+			fill: $altAccentColorHeader;
+			stroke: $altAccentColorHeader;
+		}
+	}
+	
+	.buttonDisabled, .buttonDisabled .buttonContent {
+		color: $foreVeryLightColor;
+		.icon {
+			fill: $foreVeryLightColor;
+			stroke: $foreVeryLightColor;
+		}
+	}
+	.buttonDisabled .buttonDDArrow:after, .buttonDisabled .buttonSplitArrow:after {
+		border-top-color: $foreVeryLightColor;
+	}
+	.buttonDisabled .buttonSplitArrow {
+		border-color: $foreVeryLightColor;
+	}
+	.buttonIcon.buttonHover {
+		color: $altAccentLightColorHeader;
+		.icon {
+			fill: $altAccentLightColorHeader;
+			stroke: $altAccentLightColorHeader;
+		}
+	}
+	.buttonIcon.buttonPressed {
+		color: $altAccentColorHeader;
+		.icon {
+			fill: $altAccentColorHeader;
+			stroke: $altAccentColorHeader;
+		}
+	}
+}
+.panelHeaderContrast, .panelFooterContrast, .ctrlBarDisContrast {
+.button, .buttonIcon, .buttonDD {
+		vertical-align: top;
+		background: transparent;
+	}
+	.button.buttonPressed, .button.buttonHover, .buttonDD.buttonPressed, .buttonDD.buttonHover, .buttonSplit.buttonPressed, .buttonSplit.buttonHover, .buttonPrimary, .buttonRounded, .buttonListPrimary {
+		background: transparent;
+		color: $altAccentColor;
+		position: relative;
+		.icon {
+			fill: $altAccentColor;
+			stroke: $altAccentColor;
+		}
+	}
+	.button.buttonPressed:after, .button.buttonHover:after, .buttonDD.buttonPressed:after, .buttonDD.buttonHover:after, .buttonSplit.buttonPressed:after, .buttonSplit.buttonHover:after {
+		content: "";
+		display: block;
+		position: absolute;
+		bottom: $iconPad - 2px;
+		left: $fontPad - 2px;
+		right: $fontPad - 2px;
+		border-bottom: 2px solid $altAccentColor;
+	}
+	.button.buttonHover:after, .buttonDD.buttonHover:after, .buttonSplit.buttonHover:after {
+		border-bottom-style: dotted;
+	}
+	.buttonConfirm {
+		color: $confirmColor;
+		.icon {
+			fill: $confirmColor;
+			stroke: $confirmColor;
+		}
+	}
+	.buttonConfirm.buttonPressed, .buttonConfirm.buttonHover {
+		color: $confirmColor;
+		.icon {
+			fill: $confirmColor;
+			stroke: $confirmColor;
+		}
+	}
+	.buttonConfirm.buttonPressed:after, .buttonConfirm.buttonHover:after {
+		border-bottom-color: $confirmColor;
+	}
+	.buttonDeny {
+		color: $denyColor;
+		.icon {
+			fill: $denyColor;
+			stroke: $denyColor;
+		}
+	}
+	.buttonDeny.buttonPressed, .buttonDeny.buttonHover {
+		color: $denyColor;
+		.icon {
+			fill: $denyColor;
+			stroke: $denyColor;
+		}
+	}
+	.buttonDeny.buttonPressed:after, .buttonDeny.buttonHover:after {
+		border-bottom-color: $denyColor;
+	}
+	.buttonPrimary.buttonPressed {
+		border-color: transparent;
+	}
+	.buttonHover.buttonLeft:before, .buttonPressed.buttonLeft:before, .buttonHover.buttonRight:before, .buttonPressed.buttonRight:before {
+		border-color: $altAccentColor;
+	}
+	.buttonDisabled.buttonLeft:before, .buttonDisabled.buttonRight:before {
+		border-color: $foreVeryLightColor;
+	}
+	.buttonSplitArrow:after {
+		top: $iconPad + 4px;
+		bottom: $iconPad + 4px;
+	}
+	.buttonPressed, .buttonHover {
+		.buttonContent{
+			color: $altAccentColor;
+		}
+		.buttonDDArrow:before, .buttonSplitArrow:before {
+			border-color: $altAccentColor;
+		}
+		.buttonSplitArrow:after {
+			border-color: $altAccentColor;
+		}
+		.icon {
+			fill: $altAccentColor;
+			stroke: $altAccentColor;
+		}
+	}
+	
+	.buttonDisabled, .buttonDisabled .buttonContent {
+		color: $foreVeryLightColor;
+		.icon {
+			fill: $foreVeryLightColor;
+			stroke: $foreVeryLightColor;
+		}
+	}
+	.buttonDisabled .buttonDDArrow:after, .buttonDisabled .buttonSplitArrow:after {
+		border-top-color: $foreVeryLightColor;
+	}
+	.buttonDisabled .buttonSplitArrow {
+		border-color: $foreVeryLightColor;
+	}
+	.buttonIcon.buttonHover {
+		color: $altAccentLightColor;
+		.icon {
+			fill: $altAccentLightColor;
+			stroke: $altAccentLightColor;
+		}
+	}
+	.buttonIcon.buttonPressed {
+		color: $altAccentColor;
+		.icon {
+			fill: $altAccentColor;
+			stroke: $altAccentColor;
+		}
+	}	
+}
+.compact {
+.panelHeader, .panelHeaderAlt, .panelHeaderContrast, .panelFooter, .panelFooterAlt, .panelFooterContrast, .ctrlBarDis, .ctrlBarDisContrast {
+		.button.buttonPressed:after, .button.buttonHover:after, .buttonDD.buttonPressed:after, .buttonDD.buttonHover:after, .buttonSplit.buttonPressed .buttonContent:after, .buttonSplit.buttonHover .buttonContent:after {
+			bottom: $cIconPad - 1px;
+			left: $cFontPad - 1px;
+			right: $cFontPad - 1px;
+		}
+		.buttonSplitArrow:after {
+			top: $cIconPad + 4px;
+			bottom: $cIconPad + 4px;
+		}
+	}
+}
+/* grid */
+.grid {
+color: $foreColor;
+background: $backColor;
+border: 1px solid $lineColor;
+border-spacing: 0px;
+border-radius: 2px;
+}
+.gridDetail {
+border-spacing: 0px;
+}
+.gridHeader {
+color: $foreLightColor;
+background: $backLShadeColor;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: $lineColor;
+padding: 4px;
+line-height: $size;
+}
+.gridFooter {
+background: $backLShadeColor;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: $lineColor;
+padding: 4px;
+line-height: $size;
+}
+.gridQBE {
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: $lineLightColor;
+padding: 4px;
+}
+.gridData, .gridDataAlt, .gridDataError, .gridSumData {
+padding: $fontPad;
+}
+.gridDataAlt {
+background: $backVLShadeColor;
+}
+.gridDataError {
+color: $errorColor;
+background: $errorBackColor;
+}
+.gridDataError {
+.icon {
+		stroke: $errorColor;
+		fill: $errorColor;
+	}
+}
+.gridDataHeader {
+color: $foreLightColor;
+background: $backLShadeColor;
+font-size: $fontSizeSm;
+font-weight: bold;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: $lineLightColor;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: $lineLightColor;
+padding: 4px;
+}
+.gridRowHeader, .gridSumLabel {
+color: $foreLightColor;
+font-size: $fontSizeSm;
+font-weight: bold;
+padding: $iconPad $fontPad;
+}
+.gridSep {
+background: $lineLightColor;
+font-size: 0px;
+padding: 0px;
+height: 1px;
+}
+.gridSumData, .gridSumLabel {
+background: $backVLShadeColor;
+}
+.gridRowHover, .gridRowSelected {
+.gridData, .gridDataAlt {
+		color: $accentForeColor;
+		background: $accentLightColor;
+	}
+	.icon {
+		fill: $accentForeColor;
+		stroke: $accentForeColor;
+	}
+	.edit, .editBG, .editBGPrimary {
+		color: $accentForeColor;
+		background: transparent;
+		border-color: $accentForeColor !important;
+	}
+	.editBGEdit {
+		color: $accentForeColor;
+	}
+}
+.gridRowSelected {
+.gridData, .gridDataAlt {
+		color: $accentForeColor;
+		background: $accentColor;
+	}
+}
+.grid {
+.link {
+		padding: $iconPad $fontPad;
+		line-height: $iconSize;
+		display: inline-block;
+		font-weight: bold;
+		border-radius:	2px;
+		.iconButton {
+			padding: 0px;
+		}
+	}
+	.link:hover {
+		color: $altAccentForeColor;
+		background: $altAccentLightColor;
+		text-decoration: none;
+		.icon {
+			fill: $altAccentForeColor;
+			stroke: $altAccentForeColor;
+		}
+	}
+}
+.gridRowSelected .link, .gridRowHover .link {
+background: $backColor;
+}
+.gridHeader, .gridNav {
+.link {
+		color: $foreColor;
+		padding: $iconPad;
+	}
+	.link:hover {
+		color: $altAccentColor;
+		background: transparent;
+		.icon {
+			fill: $altAccentColor;
+			stroke: $altAccentColor;
+		}
+	}
+}
+.gridDetail {
+.gridHeader, .gridFooter {
+		background: transparent;
+		border: none;
+	}
+}
+.compact {
+.gridHeader, .gridFooter {
+		padding: 2px;
+		line-height: $cSize;
+	}
+	.gridData, .gridDataAlt, .gridDataError, .gridSumData, .gridRowHeader, .gridSumLabel {
+		padding: $cFontPad;
+	}
+	.gridRowHeader, .gridSumLabel {
+		font-size: $cFontSizeSm;
+	}
+	.gridDataHeader {
+		font-size: $cFontSizeSm;
+	}
+	.grid {
+		.link {
+			padding: $cIconPad $cFontPad;
+			line-height: $cIconSize;
+		}
+	}
+}
+/* ux */
+.label {
+color: $foreLightColor;
+font-size: $fontSizeSm;
+font-weight: bold;
+padding: 4px;
+}
+.panelHeader, .panelHeaderAlt, .panelFooter, .panelFooterAlt, .ctrlBarDis {
+.label {
+		color: $headerForeLightColor;
+	}
+}
+.listItemSelected, .listItemHover, .gridRowSelected, .gridRowHover {
+.label {
+		color: $accentForeTransColor;
+	}
+}
+.uxRSHeader {
+color: $foreLightColor;
+font-size: $fontSizeSm;
+font-weight: bold;
+padding: 4px;
+}
+.uxRSFooter {
+text-align: right;
+padding: 4px;
+}
+.uxRSRowSelected {
+color: $accentForeColor;
+background: $accentColor;
+}
+.uxRSRowHover {
+color: $accentForeColor;
+background: $accentLightColor;
+}
+.uxRSRowError {
+color: $errorColor;
+background: $errorBackColor;
+}
+.uxRSRowError {
+.icon {
+		stroke: $errorColor;
+		fill: $errorColor;
+	}
+}
+.uxRSRowSep {
+background: $lineLightColor;
+font-size: 0px;
+height: 1px;
+}
+.uxRSRowSelected, .uxRSRowHover {
+.icon {
+		fill: $accentForeColor;
+		stroke: $accentForeColor;
+	}
+}
+.compact {
+.label, .uxRSHeader {
+		font-size: $cFontSizeSm;
+	}
+}
+/* list */
+.list {
+border: 1px solid $lineColor;
+border-radius: 2px;
+}
+.listHeader {
+background: $backLShadeColor;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: $lineColor;
+padding: $iconPad $fontPad;
+line-height: $iconSize;
+}
+.listFooter {
+background: $backLShadeColor;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: $lineColor;
+padding: $iconPad $fontPad;
+line-height: $iconSize;
+}
+.listColHeader {
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: $lineColor;
+padding: 0px $fontPad;
+cursor: default;
+}
+.listColHeader .icon {
+vertical-align: top;
+}
+.listColHeaderItem {
+padding: $iconPad $fontPad;
+line-height: $iconSize;
+}
+.listColHeaderItemHover {
+background: $backShadeColor;
+}
+.listColHeaderItemResize {
+background: $lockColor;
+}
+.listItem {
+background: $backColor;
+padding: $fontPad;
+cursor: default;
+}
+.listItemLined {
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: $lineLightColor;
+margin-top: -1px;
+}
+.listItemHover {
+color: $accentForeColor;
+background: $accentLightColor;
+}
+.listItemSelected {
+color: $accentForeColor;
+background: $accentColor;
+}
+.pulse {
+.listItem {
+		transition: background-color 300ms $transTween, box-shadow 600ms;
+		box-shadow: $pulseShdOff;
+	}
+	.listItem:active {
+		box-shadow: $pulseShdOn;
+		transition: none;
+	}
+	.listDisabled .listItem {
+		box-shadow: none;
+	}
+}
+.listItemHover .icon, .listItemSelected .icon {
+fill: $accentForeColor;
+stroke: $accentForeColor;
+}
+.listItemHover.listItemLined, .listItemSelected.listItemLined {
+border-top-color: $accentLightColor;
+}
+.listItemSubtle.listItemHover {
+color: $foreColor;
+background: $backLShadeColor;
+}
+.listItemSubtle.listItemSelected {
+color: $foreColor;
+background: $backVLShadeColor;
+}
+.listItemSubtle.listItemHover .icon, .listItemSubtle.listItemSelected .icon {
+fill: $iconColor;
+stroke: $iconColor;
+}
+.listItemSubtle.listItemHover.listItemLined, .listItemSelected.listItemLined {
+border-top-color: $lineLightColor;
+}
+.listItemTitle {
+color: $foreLightColor;
+background: $backVLShadeColor;
+font-size: $fontSizeSm;
+font-weight: bold;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: $lineLightColor;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: $lineLightColor;
+padding: 4px $fontPad;
+margin-top: -1px;
+}
+.listItemSep {
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: $lineLightColor;
+}
+.listItemPartMain {
+font-weight: bold;
+}
+.listItemPartSub {
+font-size: $fontSizeSm;
+}
+.listItemPartContext {
+color: $accentColor;
+font-size: $fontSizeSm;
+}
+.listItemPartDetail {
+color: $backColor;
+background: rgba($foreColor,.35);
+font-size: $fontSizeSm;
+padding: 2px 6px;
+border-radius: 2px;
+}
+.listItemPartContent {
+color: $foreVeryLightColor;
+font-size: $fontSizeSm;
+}
+.listItemHover:not(.listItemSubtle), .listItemSelected:not(.listItemSubtle) {
+.listItemPartContext, .listItemPartContent {
+		color: $accentForeColor;
+	}
+}
+.listItemData {
+padding: 0px $fontPad;
+}
+.listNav {
+text-align: center;
+color: $backColor;
+background: rgba($foreColor,.5);
+padding: 4px;
+cursor: default;
+border-radius: 2px;
+text-overflow: ellipsis;
+}
+.listNavButtonNext {
+text-align: center;
+color: $accentColor;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: $lineLightColor;
+padding: $iconPad $fontPad;
+line-height: $iconSize;
+}
+.listNavButtonPrev {
+text-align: center;
+color: $accentColor;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: $lineLightColor;
+padding: $iconPad $fontPad;
+line-height: $iconSize;
+}
+.listNavButtonPressed {
+color: $accentForeColor;
+background: $accentColor;
+}
+.listFocus {
+border-color: $lineFocusColor;
+}
+.listDisabled {
+color: $foreLightColor;
+border-color: $lineLightColor;
+.listColHeader {
+		border-color: $lineLightColor;
+	}
+	.listItemSelected {
+		background: $backShadeColor;
+		color: $foreLightColor;
+		border-top-color: $lineLightColor;
+	}
+	.listItemSelected.listItemSubtle {
+		background: $backVLShadeColor;
+	}
+	.listColHeaderItemHover, .listItemHover {
+		background: $backColor;
+		color: $foreLightColor;
+		border-top-color: $lineLightColor;
+	}
+	.listItemPartMain, .listItemPartSub, .listItemPartContext, .listItemPartContent {
+		color: $foreLightColor;
+	}
+	.icon {
+		fill: $foreLightColor;
+		stroke: $foreLightColor;
+	}
+}
+.compact {
+.listColHeader {
+		padding: 0px $cFontPad;
+	}
+	.listHeader, .listFooter, .listColHeaderItem, .listNavButtonNext, .listNavButtonPrev {
+		padding: $cIconPad $cFontPad;
+		line-height: $cIconSize;
+	}
+	.listItem {
+		padding: $cFontPad;
+	}
+	.listItemTitle {
+		font-size: $cFontSizeSm;
+		padding: 4px $cFontPad;
+	}
+	.listItemPartSub, .listItemPartContext, .listItemPartDetail, .listItemPartContent {
+		font-size: $cFontSizeSm;
+	}
+	.listItemData {
+		padding: 0px $cFontPad;
+	}
+}
+/* tree */
+.tree {
+background: $backColor;
+border: 1px solid $lineColor;
+cursor: default;
+border-radius: 2px;
+}
+.treeFocus {
+border-color: $lineFocusColor;
+}
+.treeItem {
+display: flex;
+overflow: hidden;
+}
+.pulse {
+.treeItem {
+		transition: background-color 300ms $transTween, box-shadow 600ms;
+		box-shadow: $pulseShdOff;
+	}
+	.treeItem:active {
+		box-shadow: $pulseShdOn;
+		transition: none;
+	}
+	.treeDisabled .treeItem {
+		box-shadow: none;
+	}
+}
+.treeItemLabel {
+text-decoration: none;
+color: inherit;
+padding: $iconPad;
+display: inline-block;
+cursor: default;
+line-height: $iconSize;
+outline: none;
+flex-grow: 1;
+}
+.treeItemHover {
+color: $accentForeColor;
+background: $accentLightColor;
+.icon {
+		fill: $accentForeColor;
+		stroke: $accentForeColor;
+	}
+}
+.treeItemSelected {
+color: $accentForeColor;
+background: $accentColor;
+.icon {
+		fill: $accentForeColor;
+		stroke: $accentForeColor;
+	}
+}
+.treeDisabled {
+color: $foreLightColor;
+border-color: $lineLightColor;
+.icon {
+		fill: $foreLightColor;
+		stroke: $foreLightColor;
+	}
+	.treeItemSelected {
+		background: $backShadeColor;
+		color: $foreLightColor;
+	}
+	.treeItemHover {
+		background: transparent;
+		color: $foreLightColor;
+	}
+}
+.compact {
+.treeItemLabel {
+		padding: $cIconPad;
+		line-height: $cIconSize;
+	}
+}
+/* spin list */
+.spinList {
+color: $foreColor;
+background: $backColor;
+border: 1px solid $lineColor;
+cursor: default;
+border-radius: 2px;
+}
+.spinList:before {
+background: url('spinListBack.png');
+background-size: 100% 100%;
+display: block;
+position: absolute;
+top: 0px;
+left: 0px;
+right: 0px;
+bottom: 0px;
+z-index: 2;
+content: "";
+}
+.spinList:after {
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: $lineLightColor;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: $lineLightColor;
+margin-top: -$fontSize / 2 - $fontPad / 2;
+display: block;
+position: absolute;
+top: 50%;
+left: 0px;
+right: 0px;
+height: $fontSize + $fontPad;
+z-index: 3;
+content: "";
+}
+.spinListGroup {
+white-space: nowrap;
+}
+.spinListGroup .spinList {
+border-left-color: $lineLightColor;
+border-right-style: none;
+display: inline-block;
+border-radius: 0px;
+}
+.spinListGroup .spinList:last-child {
+border-right-style: solid;
+border-radius: 0px 2px 2px 0px;
+}
+.spinListGroup .spinList:first-child {
+border-left-color: $lineColor;
+border-radius: 2px 0px 0px 2px;
+}
+.spinListDisabled {
+color: $foreLightColor;
+border-color: $lineLightColor;
+}
+.spinListGroup .spinListDisabled:first-child {
+border-left-color: $lineLightColor;
+}
+.spinListItem {
+white-space: nowrap;
+padding: $fontPad / 2 $fontPad;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+.compact {
+.spinListItem {
+		padding: $cFontPad;
+	}
+	.spinList:after {
+		margin-top: -$cFontSize / 2 - $cFontPad;
+		height: $cFontSize + $cFontPad * 2;
+	}
+}
+/* date picker */
+.datePicker {
+color: $foreColor;
+background: $backColor;
+border-radius: 2px;
+}
+.datePicker .icon {
+fill: $iconColor;
+stroke: $iconColor;
+}
+.datePickerDOW {
+color: $foreLightColor;
+font-size: $fontSizeSm;
+}
+.datePickerWOY {
+color: $foreLightColor;
+font-size: $fontSizeSm;
+}
+.datePickerHeaderItem {
+text-decoration: none;
+color: $accentColor;
+font-weight: bold;
+padding: $iconPad $fontPad;
+display: inline-block;
+cursor: default;
+line-height: $iconSize;
+border-radius: 2px;
+outline: none;
+}
+.datePickerDate {
+padding: 1px;
+}
+.datePickerItem {
+text-align: center;
+text-decoration: none;
+color: $foreColor;
+padding: $iconPad $fontPad;
+display: block;
+cursor: default;
+line-height: $iconSize;
+border-radius: 2px;
+outline: none;
+}
+.pulse {
+.datePickerItem, .datePickerHeaderItem {
+		transition: background-color 300ms $transTween, box-shadow 600ms;
+		box-shadow: $pulseShdOff;
+	}
+	.datePickerItem:not(.datePickerItemDisabled):active, .datePickerHeaderItem:active {
+		box-shadow: $pulseShdOn;
+		transition: none;
+	}
+	.datePickerDisabled .datePickerItem {
+		box-shadow: none;
+	}
+}
+.datePickerDateToday .datePickerItem {
+color: $accentColor;
+}
+.datePickerItemHover, .datePickerDateToday .datePickerItemHover, .datePickerHeaderItemHover {
+color: $accentForeColor;
+background: $accentLightColor;
+}
+.datePickerItemSelected, .datePickerDateToday .datePickerItemSelected, .datePickerHeaderItemSelected {
+color: $accentForeColor;
+background: $accentColor;
+}
+.datePickerItemOOR {
+color: $foreLightColor;
+}
+.datePickerItemDisabled {
+color: $foreVeryLightColor;
+}
+.datePickerDisabled {
+.icon {
+		fill: $foreLightColor;
+		stroke: $foreLightColor;
+	}
+	.datePickerHeaderItem, .datePickerItem {
+		color: $foreLightColor;
+	}
+	.datePickerDateToday .datePickerItem {
+		color: $foreLightColor;
+	}
+	.datePickerItemHover, .datePickerDateToday .datePickerItemHover, .datePickerHeaderItemHover  {
+		color: $foreLightColor;
+		background: transparent;
+	}
+	.datePickerItemSelected, .datePickerDateToday .datePickerItemSelected, .datePickerHeaderItemSelected{
+		color: $foreLightColor;
+		background: transparent;
+	}
+}
+.compact {
+.datePickerItem, .datePickerHeaderItem {
+		font-size: $cFontSize;
+		padding: $cIconPad $cFontPad;
+		line-height: $cIconSize;
+	}
+	.datePickerDOW, .datePickerWOY {
+		font-size: $cFontSizeSm;
+	}
+}
+/* time picker */
+.timePickerMeridian {
+text-decoration: none;
+color: $accentColor;
+font-weight: bold;
+padding: $fontPad;
+cursor: default;
+border-radius: 2px;
+outline: none;
+}
+.timePickerMeridian:hover {
+color: $accentForeColor;
+background: $accentColor;
+}
+.timePickerButton {
+text-align: center;
+text-decoration: none;
+color: $accentColor;
+padding: $fontPad;
+display: block;
+cursor: default;
+border-radius: 2px;
+outline: none;
+}
+.timePickerButton:hover {
+color: $accentForeColor;
+background: $accentColor;
+}
+.timePickerButton:after {
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: $foreLightColor;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: $foreLightColor;
+margin-top: 0 - round($iconSize/6);
+display: inline-block;
+position: relative;
+width: round($iconSize/3);
+height: round($iconSize/3);
+border-radius: 2px;
+content: "";
+-webkit-transform: rotate(45deg);
+transform: rotate(45deg);
+}
+.timePickerButton:hover:after {
+border-color: $accentForeColor;
+}
+.timePickerDisabled {
+.edit, .timePickerMeridian, .timePickerButton, .timePickerButton:after, .timePickerButton:hover:after  {
+		color: $foreVeryLightColor;
+		background: transparent;
+		border-color: $foreVeryLightColor;
+	}
+}
+.listItemSelected, .listItemHover, .gridRowSelected, .gridRowHover {
+.timePickerButton:after {
+		border-color: $accentForeColor;
+	}
+	.timePickerButton:hover:after {
+		border-color: $accentColor;
+	}
+	.timePickerButton:hover {
+		background: $accentForeColor;
+	}
+	.timePickerMeridian {
+		color: $accentForeColor;
+	}
+	.timePickerMeridian:hover {
+		color: $accentColor;
+		background: $accentForeColor;
+	}
+	.timePickerDisabled {
+		.edit, .timePickerMeridian, .timePickerButton, .timePickerButton:after, .timePickerButton:hover:after  {
+			color: $accentForeTransColor;
+			background: transparent;
+			border-color: $accentForeTransColor;
+		}
+	}
+}
+.compact {
+.timePickerMeridian, .timePickerButton {
+		font-size: $cFontSize;
+		padding: $cFontPad;
+	}
+	.timePickerButton:after {
+		width: round($cIconSize/3);
+		height: round($cIconSize/3);
+		margin-top: 0 - round($cIconSize/6);
+	}
+}
+/* slider */
+.slider {
+cursor: default;
+height: $size;
+}
+.sliderInner {
+background: $lineColor;
+margin: (($size/2) - 2px);
+height: 4px;
+border-radius: 2px;
+}
+.sliderRange {
+background: $accentLightColor;
+margin-top: -1px;
+height: 6px;
+border-radius: 3px;
+}
+.sliderHandle {
+background: $backColor;
+border: 1px solid $lineColor;
+margin-top: -$size/2;
+margin-left: -$size/2;
+width: $size;
+height: $size;
+border-radius: $size/2 + 2px;
+}
+.sliderRangeHover {
+background: $accentColor;
+}
+.sliderHandleHover {
+background: $accentLightColor;
+border-color: $accentColor;
+}
+.sliderRangeSelected {
+background: $accentColor;
+}
+.sliderHandleSelected {
+background: $accentColor;
+border-color: $accentColor;
+}
+.pulse {
+.sliderHandle {
+		transition: background-color 300ms $transTween, box-shadow 600ms;
+		box-shadow: $pulseShdOff;
+	}
+	.sliderHandle:active {
+		box-shadow: $pulseShdOn;
+		transition: none;
+	}
+}
+.sliderDisabled {
+.sliderHandle {
+		background: $backColor;
+		border-color: $lineLightColor;
+		box-shadow: none !important;
+	}
+	.sliderRange, .sliderInner {
+		background: $lineLightColor;
+	}
+}
+.listItemSelected, .listItemHover, .gridRowSelected, .gridRowHover {
+.sliderInner {
+		background: $accentForeTransColor;
+	}
+	.sliderRange {
+		background: $accentForeTransColor;
+	}
+	.sliderHandle {
+		background: $accentLightColor;
+		border-color: $accentForeColor;
+	}
+	.sliderHandleHover {
+		background: $accentForeColor;
+		border-color: $accentForeTransColor;
+	}
+	.sliderHandleSelected {
+		background: $accentForeColor;
+	}
+	.sliderDisabled {
+		&.slider {
+			opacity: .4;
+		}
+		.sliderHandle {
+			background: $accentLightColor;
+			border-color: $accentForeTransColor;
+		}
+		.sliderRange {
+			background: transparent;
+		}
+		.sliderInner {
+			background: $accentForeTransColor;
+		}
+	}
+}
+.compact {
+.slider {
+		height: $cSize;
+	}
+	.sliderInner {
+		margin: (($cSize/2) - 2px);
+		height: 2px;
+	}
+	.sliderRange {
+		height: 4px;
+	}
+	.sliderHandle {
+		margin-left: -$cSize/2;
+		margin-top: -$cSize/2;
+		width: $cSize;
+		height: $cSize;
+	}
+}
+/* switch */
+.switch {
+color: $foreLightColor;
+background: $backShadeColor;
+border: 1px solid $lineColor;
+cursor: default;
+height: $size;
+border-radius: $size/2;
+}
+.pulse .switch {
+transition: background-color 400ms $transTween;
+}
+.switchInner {
+margin-left: $size/2;
+margin-right: $size/2 - 1px;
+}
+.switchButton {
+background: $backColor;
+border: 1px solid $lineColor;
+margin: 1px;
+margin-left: -$size/2 + 1.5px;
+width: $size - 6px;
+height: $size - 6px;
+border-radius: $size/2;
+}
+.switchOn {
+color: $accentForeColor;
+background: $accentColor;
+border-color: $accentColor;
+}
+.switchOn .switchButton {
+border-color: $backColor;
+}
+.switchLeft {
+text-align: center;
+padding-right: $size/2 + 2px;
+line-height: $size - 2px;
+box-sizing: border-box;
+-moz-box-sizing: border-box;
+-ms-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+}
+.switchRight {
+text-align: center;
+padding-left: $size/2 + 2px;
+line-height: $size - 2px;
+box-sizing: border-box;
+-moz-box-sizing: border-box;
+-ms-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+}
+.switchDisabled.switch {
+color: $foreVeryLightColor;
+background: $backLShadeColor;
+border: 1px solid $lineLightColor;
+}
+.switchDisabled .switchButton {
+border: 1px solid $lineLightColor;
+}
+.switchDisabled.switchOn {
+color: $foreVeryLightColor;
+background: $lineLightColor;
+border-color: $lineLightColor;
+}
+.listItemSelected, .listItemHover, .gridRowSelected, .gridRowHover {
+.switch {
+		border-color: $accentForeColor;
+		background:	transparent;
+	}
+	.switchOn {
+		background: $accentForeColor;
+	}
+	.switchButton {
+		background: $accentForeTransColor;
+		border-color: $accentForeColor;
+	}
+	.switchOn .switchButton {
+		background: $accentColor;
+		border-color: $accentLightColor;
+	}
+	.switchDisabled {
+		opacity: .5;
+	}
+}
+.compact {
+.switch {
+		height: $cSize;
+		border-radius: $cSize/2;
+	}
+	.switchInner {
+		margin-left: $cSize/2;
+		margin-right: $cSize/2 - 2px;
+	}
+	.switchButton {
+		margin-left: -$cSize/2 + 1px;
+		width: $cSize - 6px;
+		height: $cSize - 6px;
+		border-radius: $cSize/2;
+	}
+	.switchLeft {
+		padding-left: $cSize/2 + 2px;
+		line-height: $cSize - 2px;
+	}
+	.switchRight {
+		padding-right: $cSize/2 + 2px;
+		line-height: $cSize - 2px;
+	}
+}
+/* ink */
+.ink {
+border: 1px solid $lineColor;
+border-radius: 2px;
+}
+.inkArea {
+background: $backLShadeColor;
+}
+.inkPage {
+background: #fff;
+border: 1px solid $lineColor;
+box-shadow: 0px 3px 3px $backShadeColor;
+-moz-box-shadow: 0px 3px 3px $backShadeColor;
+-webkit-box-shadow: 0px 3px 3px $backShadeColor;
+}
+.inkZoomBox {
+border: 1px dotted $accentColor;
+}
+.inkZoomBoxScale:after {
+border: 5px solid transparent;
+border-right-color: transparentize($accentColor,.5);
+border-bottom-color: transparentize($accentColor,.5);
+display: block;
+position: absolute;
+right: 2px;
+bottom: 2px;
+content: "";
+}
+.inkSplitBar {
+background: $lineColor;
+}
+.inkEraser {
+background: rgba(255,100,150,0.1);
+border: 1px solid rgba(255,100,150,0.5);
+border-radius: 2px;
+}
+.inkButton {
+text-align: center;
+color: $iconColor;
+background: $backTransColor;
+border: 1px solid $lineColor;
+display: inline-block;
+vertical-align: top;
+width: $size;
+height: $size;
+line-height: $size - 2px;
+border-radius: $size/2;
+}
+.inkButton .icon {
+stroke: $foreLightColor;
+fill: $foreLightColor;
+}
+.inkButtonSelected {
+color: $iconColor;
+}
+.inkButtonSelected .icon {
+stroke: $iconColor;
+fill: $iconColor;
+}
+.inkBarTop {
+background: $backTransColor;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: $lineColor;
+}
+.inkBarLeft {
+background: $backTransColor;
+border-right-style: solid;
+border-right-width: 1px;
+border-right-color: $lineColor;
+}
+.inkBarRight {
+background: $backTransColor;
+border-left-style: solid;
+border-left-width: 1px;
+border-left-color: $lineColor;
+}
+.inkBarBottom {
+background: $backTransColor;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: $lineColor;
+}
+.inkGroupTop, .inkGroupBottom, .inkGroupLeft, .inkGroupRight {
+background: $backTransColor;
+border: 1px solid $lineColor;
+}
+.inkGroupTop {
+border-top-style: none;
+border-radius: 0px 0px 2px 2px;
+}
+.inkGroupBottom {
+border-bottom-style: none;
+border-radius: 2px 2px 0px 0px;
+}
+.inkGroupLeft {
+border-left-style: none;
+border-radius: 0px 2px 2px 0px;
+}
+.inkGroupRight {
+border-right-style: none;
+border-radius: 2px 0px 0px 2px;
+}
+.inkBarTop, .inkBarBottom, .inkBarLeft, .inkBarRight, .inkGroupTop, .inkGroupBottom, .inkGroupLeft, .inkGroupRight {
+.inkButton {
+	background: transparent;
+	border: 1px solid transparent;
+	border-radius: 0px;
+	}
+}
+.inkBarTop, .inkBarBottom, .inkBarLeft, .inkBarRight, .inkGroupTop, .inkGroupBottom, .inkGroupLeft, .inkGroupRight {
+.inkButtonSelected {
+		background: $backLShadeColor;
+	}
+}
+.inkStatus {
+color: $backColor;
+background: rgba($foreColor,.25);
+padding: 4px;
+border-radius: 2px;
+}
+.inkPopup {
+background: $backColor;
+border: 1px solid $lineColor;
+border-radius: 2px;
+box-shadow: 0px 2px 10px rgba(0,0,0,.25);
+}
+.inkPopupLock {
+background: rgba(0,0,0,.1);
+}
+.inkPopupGroup {
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: $lineLightColor;
+padding: 4px;
+padding-bottom: 0px;
+}
+.inkPopupSwatch {
+text-align: center;
+border: 1px solid $lineColor;
+margin-bottom: 4px;
+display: inline-block;
+vertical-align: top;
+position: relative;
+width: $size;
+height: $size;
+line-height: $size - 2px;
+border-radius: $size/2;
+}
+.inkPopupSwatchSelected {
+border: 2px solid $accentColor;
+margin: -1px;
+margin-bottom: 3px;
+border-radius: 23px;
+}
+.inkPopupSwatchSelected:before {
+border: 2px solid #fff;
+display: block;
+position: absolute;
+top: 0px;
+left: 0px;
+right: 0px;
+bottom: 0px;
+border-radius: 20px;
+content: "";
+}
+.inkPopupButton {
+text-align: center;
+color: $altAccentColor;
+font-size: $fontSize;
+font-weight: bold;
+padding: $iconPad $fontPad;
+cursor: default;
+line-height: $iconSize;
+}
+.inkPopupButton:hover {
+color: $altAccentForeColor;
+background: $altAccentColor;
+}
+/* scroller */
+.scroller {
+color: $altAccentForeColor;
+cursor: default;
+}
+.scrollerDial {
+background: $altAccentColor;
+padding: 6px;
+z-index: 5;
+box-shadow: 0px 2px 12px rgba(0,0,0,.25);
+}
+.scrollerDialMsg {
+white-space: nowrap;
+padding: 6px;
+opacity: .5;
+}
+.scrollerLeft .scrollerDialMsg, .scrollerRight .scrollerDialMsg {
+border-top-style: dotted;
+border-top-width: 1px;
+border-top-color: $altAccentForeColor;
+}
+.scrollerTop .scrollerDialMsg, .scrollerBottom .scrollerDialMsg {
+border-left-style: dotted;
+border-left-width: 1px;
+border-left-color: $altAccentForeColor;
+}
+.scrollerDialMsg:first-child {
+border: none;
+}
+.scrollerLeft .scrollerDialMsgMain, .scrollerRight .scrollerDialMsgMain {
+border-top-style: dotted;
+border-top-width: 1px;
+border-top-color: $altAccentForeColor;
+border-bottom-style: dotted;
+border-bottom-width: 1px;
+border-bottom-color: $altAccentForeColor;
+opacity: 1;
+}
+.scrollerTop .scrollerDialMsgMain, .scrollerBottom .scrollerDialMsgMain {
+border-left-style: dotted;
+border-left-width: 1px;
+border-left-color: $altAccentForeColor;
+border-right-style: dotted;
+border-right-width: 1px;
+border-right-color: $altAccentForeColor;
+opacity: 1;
+}
+.scrollerLeft .scrollerSlider, .scrollerRight .scrollerSlider {
+width: $size;
+}
+.scrollerTop .scrollerSlider, .scrollerBottom .scrollerSlider {
+height: $size;
+}
+.scrollerSliderInner {
+background: rgba($backColor,0.95);
+z-index: 6;
+}
+.scrollerLeft .scrollerSliderInner, .scrollerRight .scrollerSliderInner {
+width: 10px;
+transition: width 100ms;
+-webkit-transition: width 100ms;
+}
+.scrollerTop .scrollerSliderInner, .scrollerBottom .scrollerSliderInner {
+height: 10px;
+transition: height 100ms;
+-webkit-transition: height 100ms;
+}
+.scrollerSliderInner:before {
+border: 2px solid rgba($backColor,0.95);
+position: absolute;
+top: -2px;
+left: -2px;
+right: -2px;
+bottom: -2px;
+content: '';
+}
+.scrollerSliderInner:after {
+border: 1px dotted $altAccentColor;
+position: absolute;
+top: -1px;
+left: -1px;
+right: -1px;
+bottom: -1px;
+content: '';
+}
+.scrollerLeft.scrollerActive .scrollerSliderInner, .scrollerRight.scrollerActive .scrollerSliderInner {
+width: $size;
+}
+.scrollerTop.scrollerActive .scrollerSliderInner, .scrollerBottom.scrollerActive .scrollerSliderInner {
+height: $size;
+}
+.scrollerSliderHandle, .scrollerSliderShadow {
+background: $altAccentColor;
+border: 1px solid $backColor;
+box-sizing: border-box;
+}
+.scrollerLeft, .scrollerRight {
+.scrollerSliderHandle, .scrollerSliderShadow {
+		width: 100%;
+		height: $size;
+	}
+}
+.scrollerTop, .scrollerBottom {
+.scrollerSliderHandle, .scrollerSliderShadow {
+		width: $size;
+		height: 100%;
+	}
+}
+.scrollerSliderShadow {
+background: rgba($altAccentColor,.35);
+}
+.scrollerLeft .scrollerSliderInner {
+left: 0px;
+}
+.scrollerLeft.scrollerDialActive .scrollerSliderInner:before {
+border-right-color: transparent;
+}
+.scrollerLeft.scrollerDialActive .scrollerSliderHandle {
+border-right-color: $altAccentColor;
+}
+.scrollerRight .scrollerSliderInner {
+right: 0px;
+}
+.scrollerRight.scrollerDialActive .scrollerSliderInner:before {
+border-left-color: transparent;
+}
+.scrollerRight.scrollerDialActive .scrollerSliderHandle {
+border-left-color: $altAccentColor;
+}
+.scrollerTop .scrollerSliderInner {
+top: 0px;
+}
+.scrollerTop.scrollerDialActive .scrollerSliderInner:before {
+border-bottom-color: transparent;
+}
+.scrollerTop.scrollerDialActive .scrollerSliderHandle {
+border-bottom-color: $altAccentColor;
+}
+.scrollerBottom .scrollerSliderInner {
+bottom: 0px;
+}
+.scrollerBottom.scrollerDialActive .scrollerSliderInner:before {
+border-top-color: transparent;
+}
+.scrollerBottom.scrollerDialActive .scrollerSliderHandle {
+border-top-color: $altAccentColor;
+}
+.scrollerSliderMsg {
+white-space: nowrap;
+color: #ffffff;
+background: $altAccentColor;
+padding: 6px;
+position: absolute;
+border-radius: 2px;
+box-shadow: 0px 2px 10px rgba(0,0,0,.25);
+}
+.scrollerLeft .scrollerSliderMsg {
+left: $size + 7px;
+}
+.scrollerRight .scrollerSliderMsg {
+right: $size + 7px;
+}
+.scrollerTop .scrollerSliderMsg {
+top: $size + 7px;
+}
+.scrollerBottom .scrollerSliderMsg {
+bottom: $size + 7px;
+}
+.scrollerSliderMsgT {
+top: 0px;
+}
+.scrollerSliderMsgL {
+left: 0px;
+}
+.scrollerSliderMsgR {
+right: 0px;
+}
+.scrollerSliderMsgB {
+bottom: 0px;
+}
+.scrollerSliderMsg:after {
+border: 6px solid transparent;
+display: block;
+position: absolute;
+content: '';
+}
+.scrollerLeft .scrollerSliderMsg:after {
+border-left-style: none;
+border-right-color: $altAccentColor;
+margin-top: -5px;
+top: 50%;
+left: -5px;
+}
+.scrollerRight .scrollerSliderMsg:after {
+border-left-color: $altAccentColor;
+border-right-style: none;
+margin-top: -5px;
+top: 50%;
+right: -5px;
+}
+.scrollerLeft, .scrollerRight {
+.scrollerSliderMsgT:after {
+		margin-top: 0px;
+		top: 5px;
+	}
+	.scrollerSliderMsgB:after {
+		margin-top: 0px;
+		top: auto;
+		bottom: 7px;
+	}
+}
+.scrollerTop .scrollerSliderMsg:after {
+border-top-style: none;
+border-bottom-color: $altAccentColor;
+margin-left: -5px;
+top: -5px;
+left: 50%;
+}
+.scrollerBottom .scrollerSliderMsg:after {
+border-top-color: $altAccentColor;
+border-bottom-style: none;
+margin-left: -5px;
+left: 50%;
+bottom: -5px;
+}
+.scrollerTop, .scrollerBottom {
+.scrollerSliderMsgL:after {
+		margin-left: 0px;
+		left: 7px;
+	}
+	.scrollerSliderMsgR:after {
+		margin-left: 0px;
+		left: auto;
+		right: 7px;
+	}
+}
+.compact {
+.scrollerLeft .scrollerSlider, .scrollerLeft.scrollerActive .scrollerSliderInner,
+	.scrollerRight .scrollerSlider, .scrollerRight.scrollerActive .scrollerSliderInner {
+		width: 10px;
+	}
+	.scrollerTop .scrollerSlider, .scrollerTop.scrollerActive .scrollerSliderInner,
+	.scrollerBottom .scrollerSlider, .scrollerBottom.scrollerActive .scrollerSliderInner {
+		height: 10px;
+	}
+	.scrollerLeft .scrollerSliderMsg {
+		left: 17px;
+	}
+	.scrollerRight .scrollerSliderMsg {
+		right: 17px;
+	}
+	.scrollerTop .scrollerSliderMsg {
+		top: 17px;
+	}
+	.scrollerRight .scrollerSliderMsg {
+		bottom: 17px;
+	}
+}
+/* tabbed ui */
+.tabbedUIHeader {
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: $lineColor;
+padding: 4px;
+}
+.tabbedUIFooter {
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: $lineColor;
+padding: 4px;
+}
+.tabbedUISep {
+background: $lineColor;
+width: 1px !important;
+}
+.tabbedUIMenu {
+background: $backVLShadeColor;
+}
+.tabbedUIMenuHeader {
+background: $backShadeColor;
+}
+.tabbedUIMenuCollapsed {
+background: $backShadeColor;
+width: $size;
+}
+.compact .tabbedUIMenuCollapsed {
+width: $cSize;
+}
+/* scroll indicator */
+.scrollIndH, .scrollIndV {
+padding: 0px;
+width: 3px;
+height: 3px;
+}
+.scrollIndHBar, .scrollIndVBar {
+background: rgba($foreColor,.5);
+border-radius: 2px;
+}
+
+.link {
+	color: #ffc200;
+}
+
+.windowTitle {
+	background:$accentColor;
+    color: white;
+}
+
+
+.listColHeader {
+	background:$altAccentLightColor;
+	color:#fdfcc3;
+}
+.listColHeaderItemHover {
+	background: $accentColor;
+}
+
+.tabbandTabSelected {
+	background:$accentColor;
+	color:#fdfcc3;
+}

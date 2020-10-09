@@ -1,0 +1,72 @@
+{
+	"variables": [
+	{
+		"Name": "fontFamily",
+		"Value": "Arial, sans-serif"
+	},
+	{
+		"Name": "foreColor",
+		"Value": "#000"
+	},
+	{
+		"Name": "backColor",
+		"Value": "#fff"
+	},
+	{
+		"Name": "iconColor",
+		"Value": "#333"
+	},
+	{
+		"Name": "headerForeColor",
+		"Value": "#fff"
+	},
+	{
+		"Name": "headerBackColor",
+		"Value": "#363636"
+	},
+	{
+		"Name": "panelLineColor",
+		"Value": "rgba(128,128,128,.2)"
+	},
+	{
+		"Name": "accentColor",
+		"Value": "#e8175d"
+	},
+	{
+		"Name": "accentForeColor",
+		"Value": "#fff"
+	},
+	{
+		"Name": "altAccentColor",
+		"Value": "#e8175d"
+	},
+	{
+		"Name": "altAccentForeColor",
+		"Value": "#fff"
+	},
+	{
+		"Name": "errorColor",
+		"Value": "#e81616"
+	},
+	{
+		"Name": "confirmColor",
+		"Value": "#1ae816"
+	},
+	{
+		"Name": "confirmForeColor",
+		"Value": "#fff"
+	},
+	{
+		"Name": "denyColor",
+		"Value": "#e81616"
+	},
+	{
+		"Name": "denyForeColor",
+		"Value": "#fff"
+	},
+	{
+		"Name": "lockColor",
+		"Value": "rgba(0,0,0,.1)"
+	}
+]
+}

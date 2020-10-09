@@ -1,0 +1,6 @@
+<svg width="26" height="26" viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+<path d="M 4.5001212,7.5000252 H 7.5001208 L 11.500121,14.50002 h 6 l 3,-4.9999948 H 9.0001208" style="fill: none; stroke: #000000; stroke-width: 1px; stroke-linecap: round; stroke-linejoin: round; stroke-opacity: 1;" />
+<path d="m 11.500121,14.50002 -2.0000002,3 h 8.0000002" style="fill: none; stroke: #000000; stroke-width: 1px; stroke-linecap: round; stroke-linejoin: round; stroke-opacity: 1;" />
+<circle cx="11.000123" cy="20.500023" r="1" style="opacity: 1; fill: none; fill-opacity: 1; stroke: #000000; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; stroke-miterlimit: 4; stroke-dasharray: none; stroke-dashoffset: 0; stroke-opacity: 1;" />
+<path d="m 19.500001,16 c -0.277,0 -0.5,0.223 -0.5,0.5 V 19 h -2.5 c -0.277,0 -0.5,0.223 -0.5,0.5 v 1 c 0,0.277 0.223,0.5 0.5,0.5 h 2.5 v 2.5 c 0,0.277 0.223,0.5 0.5,0.5 h 1 c 0.277,0 0.5,-0.223 0.5,-0.5 V 21 h 2.5 c 0.277,0 0.5,-0.223 0.5,-0.5 v -1 c 0,-0.277 -0.223,-0.5 -0.5,-0.5 h -2.5 v -2.5 c 0,-0.277 -0.223,-0.5 -0.5,-0.5 z" style="opacity: 1; fill: #000000; fill-opacity: 1; stroke: none; stroke-width: 2.00000024; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 4; stroke-dasharray: none; stroke-dashoffset: 0; stroke-opacity: 1;" />
+</svg>

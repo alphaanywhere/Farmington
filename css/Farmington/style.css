@@ -1,0 +1,3476 @@
+@import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap"); @import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Varela+Round&display=swap"); @keyframes press-pulse{
+from {
+display: block;
+box-shadow: inset 0px 0px 10px 20px rgba(255, 255, 255, 0.3);
+}
+to {
+display: none;
+box-shadow: inset 0px 0px 0px 0px  transparent;
+}
+}
+html {
+-webkit-tap-highlight-color: transparent;
+-webkit-user-select: none;
+}
+button::-moz-focus-inner {
+border-width: 0;
+padding: 0;
+}
+/* icons */
+.icon {
+vertical-align: middle;
+width: 26px;
+height: 26px;
+fill: #333;
+stroke: #333;
+}
+.iconButton {
+padding: 9px;
+}
+.iconDisabled {
+opacity: .25;
+}
+.iconConfirm {
+fill: #3c9;
+stroke: #3c9;
+}
+.iconDeny {
+fill: #f33;
+stroke: #f33;
+}
+.compact .icon {
+margin: -2px;
+width: 22px;
+height: 22px;
+}
+.compact .iconButton {
+padding: 3px;
+}
+/* main */
+.page {
+color: #000;
+background: #fff;
+font: 16px Varela Round, Arial, sans-serif;
+}
+.page.compact, .page .compact {
+font-size: 12px;
+}
+.heading {
+color: gray;
+font-size: 125%;
+}
+.highlight {
+color: #4c7c50;
+}
+.link {
+text-decoration: none;
+color: #4c7c50;
+}
+.link .icon {
+fill: #4c7c50;
+stroke: #4c7c50;
+}
+.link:hover {
+text-decoration: underline;
+}
+.group {
+border: 1px solid #d9d9d9;
+padding: 6px;
+border-radius: 4px;
+}
+.groupLabel {
+color: gray;
+font-size: 16px;
+}
+.lock {
+background: rgba(0, 0, 0, 0.1);
+}
+.compact .groupLabel {
+font-size: 10px;
+}
+/* panels */
+.panelHeader {
+color: #fff;
+background: #000;
+line-height: 44px;
+}
+.panelHeaderAlt {
+color: #fff;
+background: #0d0d0d;
+line-height: 44px;
+}
+.panelHeaderContrast {
+background: #fff;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: #d9d9d9;
+line-height: 44px;
+}
+.panelBody {
+background: #fff;
+}
+.panelBodyShadow:before, .panelBodyShadow:after {
+background: rgba(0, 0, 0, 0.05);
+display: block;
+position: absolute;
+top: 0px;
+left: 0px;
+right: 0px;
+height: 4px;
+content: "";
+}
+.panelBodyShadow:after {
+height: 2px;
+}
+.panelFooter {
+color: #fff;
+background: #000;
+line-height: 44px;
+}
+.panelFooterAlt {
+color: #fff;
+background: #0d0d0d;
+line-height: 44px;
+}
+.panelFooterContrast {
+background: #fff;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #d9d9d9;
+line-height: 44px;
+}
+.panelHeader .icon, .panelHeaderAlt .icon, .panelFooter .icon, .panelFooterAlt .icon {
+fill: #fff;
+stroke: #fff;
+}
+.panelNav > .panel:before {
+border: 1px solid rgba(128, 128, 128, 0.2);
+display: block;
+position: absolute;
+top: -1px;
+left: -1px;
+right: -1px;
+bottom: -1px;
+content: '';
+pointer-events: none;
+}
+.panelDockBefore, .panelDockAfter {
+background: #f7f7f7;
+}
+.panelLTR > .panel:after {
+background: rgba(128, 128, 128, 0.2);
+display: block;
+position: absolute;
+top: 0px;
+left: -1px;
+bottom: 0px;
+width: 1px;
+content: '';
+}
+.panelRTL > .panel:after {
+background: rgba(128, 128, 128, 0.2);
+display: block;
+position: absolute;
+top: 0px;
+right: -1px;
+bottom: 0px;
+width: 1px;
+content: '';
+}
+.panelLTR > .panelDockAfter:after, .panelRTL > .panelDockBefore:after {
+left: 0px !important;
+right: auto !important;
+}
+.panelLTR > .panelDockBefore:after, .panelRTL > .panelDockAfter:after {
+left: auto !important;
+right: 0px !important;
+}
+.panelTTB > .panel:after {
+background: rgba(128, 128, 128, 0.2);
+display: block;
+position: absolute;
+top: -1px;
+left: 0px;
+right: 0px;
+height: 1px;
+content: '';
+}
+.panelBTT > .panel:after {
+background: rgba(128, 128, 128, 0.2);
+display: block;
+position: absolute;
+left: 0px;
+right: 0px;
+bottom: -1px;
+height: 1px;
+content: '';
+}
+.panelTTB > .panelDockAfter:after, .panelBTT > .panelDockBefore:after {
+top: 0px !important;
+bottom: auto !important;
+}
+.panelBTT > .panelDockAfter:after, .panelTTB > .panelDockBefore:after {
+top: auto !important;
+bottom: 0px !important;
+}
+.panelDockOverlay {
+box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+}
+.panelDockBefore, .panelDockAfter {
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+}
+.panelDockBefore .panelBody, .panelDockAfter .panelBody {
+background: #f7f7f7;
+}
+.panelNavInd {
+background: #ebebeb;
+font-size: 0px;
+border: 1px solid #d9d9d9;
+margin: 3px;
+display: inline-block;
+width: 6px;
+height: 6px;
+border-radius: 4px;
+}
+.panelNavIndSel {
+background: #395c3c;
+border-color: #4c7c50;
+}
+.compact .panelHeader, .compact .panelHeaderAlt, .compact .panelHeaderContrast, .compact .panelFooter, .compact .panelFooterAlt, .compact .panelFooterContrast {
+line-height: 24px;
+}
+/*	control bar */
+.ctrlBarHorz > div > div {
+line-height: 44px;
+}
+.ctrlBarVert > div > div {
+min-width: 44px;
+}
+.ctrlBarSepHorz {
+border-left-style: solid;
+border-left-width: 1px;
+border-left-color: rgba(128, 128, 128, 0.2);
+margin: 2px;
+width: 0px;
+}
+.ctrlBarSepVert {
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: rgba(128, 128, 128, 0.2);
+margin: 2px;
+height: 0px;
+}
+.ctrlBarDis {
+color: #fff;
+background: rgba(13, 13, 13, 0.95);
+}
+.ctrlBarDisContrast {
+background: rgba(255, 255, 255, 0.95);
+}
+.ctrlBarDisExpandT, .ctrlBarDisExpandB .ctrlBarDis, .ctrlBarDisExpandB .ctrlBarDisContrast, .ctrlBarDisExtendB .ctrlBarDisContrast {
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: rgba(128, 128, 128, 0.2);
+}
+.ctrlBarDisExpandT .ctrlBarDis, .ctrlBarDisExpandT .ctrlBarDisContrast, .ctrlBarDisExpandB, .ctrlBarDisExtendT .ctrlBarDisContrast {
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: rgba(128, 128, 128, 0.2);
+}
+.ctrlBarDisExpandL, .ctrlBarDisExpandR .ctrlBarDis, .ctrlBarDisExpandR .ctrlBarDisContrast, .ctrlBarDisExtendR .ctrlBarDisContrast {
+border-left-style: solid;
+border-left-width: 1px;
+border-left-color: rgba(128, 128, 128, 0.2);
+}
+.ctrlBarDisExpandL .ctrlBarDis, .ctrlBarDisExpandL .ctrlBarDisContrast, .ctrlBarDisExpandR, .ctrlBarDisExtendL .ctrlBarDisContrast {
+border-right-style: solid;
+border-right-width: 1px;
+border-right-color: rgba(128, 128, 128, 0.2);
+}
+.compact .ctrlBarHorz > div > div {
+line-height: 24px;
+}
+.compact .ctrlBarVert > div > div {
+min-width: 24px;
+}
+/* accordion */
+.accordion {
+border: 1px solid #ebebeb;
+padding: 0px;
+border-radius: 2px;
+}
+.accordionTitle, .accordionTitleSelected, .accordionTitleDisabled {
+text-decoration: none;
+color: gray;
+background: #fafafa;
+font-weight: bold;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #ebebeb;
+padding: 9px 14px;
+margin-top: -1px;
+display: block;
+position: relative;
+line-height: 26px;
+}
+.accordionTitle .iconButton, .accordionTitleSelected .iconButton, .accordionTitleDisabled .iconButton {
+padding: 0px;
+}
+.accordionTitleSelected, .accordionTitle:hover {
+color: #4c7c50;
+}
+.accordionTitleDisabled {
+color: #a6a6a6;
+}
+.accordionPane {
+color: #000;
+background: #fafafa;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #ebebeb;
+padding: 2px;
+margin-top: -1px;
+}
+.accordionInd .accordionTitle, .accordionInd .accordionTitleSelected, .accordionInd .accordionTitleDisabled {
+padding-left: 40px;
+}
+.accordionInd .accordionTitle:before, .accordionInd .accordionTitleDisabled:before {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: gray;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: gray;
+margin-top: -6px;
+margin-left: 4px;
+display: inline-block;
+position: absolute;
+top: 50%;
+left: 9px;
+width: 9px;
+height: 9px;
+border-radius: 2px;
+content: '';
+-webkit-transform: rotate(45deg);
+transform: rotate(45deg);
+}
+.accordionInd .accordionTitle:hover:before {
+border-color: #4c7c50;
+}
+.accordionInd .accordionTitleDisabled:before {
+border-color: #a6a6a6;
+}
+.accordionInd .accordionTitleSelected:before {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #4c7c50;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #4c7c50;
+margin-top: -6px;
+margin-left: 4px;
+display: inline-block;
+position: absolute;
+top: 50%;
+left: 9px;
+width: 9px;
+height: 9px;
+border-radius: 2px;
+content: '';
+-webkit-transform: rotate(135deg);
+transform: rotate(135deg);
+}
+.compact .accordionTitle, .compact .accordionTitleSelected, .compact .accordionTitleDisabled {
+padding: 3px 6px;
+}
+.compact .accordionInd .accordionTitle, .compact .accordionInd .accordionTitleSelected, .compact .accordionInd .accordionTitleDisabled {
+padding-left: 24px;
+}
+.compact .accordionTitle:before, .compact .accordionTitleSelected:before, .compact .accordionTitleDisabled:before {
+margin-top: -4px;
+left: 6px;
+width: 6px;
+height: 6px;
+}
+/* tabs */
+.tabTop, .tabBottom, .tabLeft, .tabRight {
+background: #f2f2f2;
+border: 1px solid #ebebeb;
+padding: 0px;
+border-radius: 2px;
+}
+.tabItemBand {
+text-align: center;
+}
+.tabItem, .tabItemSelected, .tabItemDisabled {
+text-decoration: none;
+color: gray;
+font-weight: bold;
+padding: 9px 14px;
+display: inline-block;
+line-height: 26px;
+}
+.tabItemSelected, .tabItem:hover {
+color: #4c7c50;
+}
+.tabItemDisabled {
+color: #a6a6a6;
+}
+.tabPane {
+background: #fff;
+padding: 2px;
+}
+.tabTop .tabPane {
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #ebebeb;
+}
+.tabBottom .tabPane {
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: #ebebeb;
+}
+.tabLeft .tabPane {
+border-left-style: solid;
+border-left-width: 1px;
+border-left-color: #ebebeb;
+}
+.tabRight .tabPane {
+border-right-style: solid;
+border-right-width: 1px;
+border-right-color: #ebebeb;
+}
+.tabLeft .tabItem, .tabLeft .tabItemSelected, .tabLeft .tabItemDisabled {
+text-align: right;
+display: block;
+}
+.tabRight .tabItem, .tabRight .tabItemSelected, .tabRight .tabItemDisabled {
+text-align: left;
+display: block;
+}
+.compact .tabItem, .compact .tabItemSelected, .compact .tabItemDisabled {
+padding: 3px 6px;
+}
+/* tabband */
+.tabband {
+background: #f2f2f2;
+border: 1px solid #ebebeb;
+}
+.tabbandTab, .tabbandTabSelected {
+text-decoration: none;
+white-space: nowrap;
+color: gray;
+font-weight: bold;
+padding: 0px 14px;
+display: inline-block;
+line-height: 44px;
+}
+.tabbandTabSelected, .tabbandTab:hover {
+color: #4c7c50;
+}
+.tabbandTabDisabled, .tabbandTabDisabled:hover {
+color: #a6a6a6;
+}
+.tabbandButton, .tabbandButtonDisabled {
+background: #f2f2f2;
+padding: 9px;
+display: block;
+}
+.tabbandButton:hover .icon {
+fill: #4c7c50;
+stroke: #4c7c50;
+}
+.tabbandButtonDisabled .icon {
+fill: #a6a6a6;
+stroke: #a6a6a6;
+}
+.compact .tabbandTab, .compact .tabbandTabSelected {
+padding: 0px 6px;
+line-height: 24px;
+}
+.compact .tabbandButton, .compact .tabbandButtonDisabled {
+padding: 3px;
+}
+/* window */
+.window {
+background: #fff;
+border: 1px solid #d9d9d9;
+border-radius: 2px;
+box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+}
+.windowTitle {
+color: gray;
+font-size: 16px;
+font-weight: bold;
+padding: 0px 14px;
+cursor: default;
+line-height: 44px;
+}
+.windowHeader, .windowFooter, .windowTBar, .windowBBar, .windowBody {
+padding: 14px;
+}
+.windowButtons {
+text-align: center;
+font-size: 0px;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #ebebeb;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: #ebebeb;
+margin-bottom: -1px;
+}
+.windowResize {
+background: #f7f7f7;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #ebebeb;
+position: relative;
+height: 22px;
+}
+.windowResizeThumb {
+display: block;
+position: relative;
+width: 22px;
+height: 100%;
+}
+.windowResizeThumb:before {
+border: 8px solid #ebebeb;
+border-top-color: transparent;
+border-left-color: transparent;
+display: block;
+position: absolute;
+right: 3px;
+bottom: 3px;
+width: 16px;
+height: 16px;
+border-radius: 2px;
+box-sizing: border-box;
+content: "";
+}
+.compact .windowTitle {
+font-size: 10px;
+padding: 0px 6px;
+line-height: 24px;
+}
+.compact .windowHeader, .compact .windowFooter, .compact .windowTBar, .compact .windowBBar, .compact .windowBody {
+padding: 6px;
+}
+.compact .windowResize {
+height: 8px;
+}
+.compact .windowResizeThumb {
+width: 8px;
+}
+.compact .windowResizeThumb:before {
+border-width: 3px;
+border-right-color: #d9d9d9;
+border-bottom-color: #d9d9d9;
+right: 1px;
+bottom: 1px;
+width: 6px;
+height: 6px;
+border-radius: 1px;
+}
+/* menu bar */
+.menubarItem {
+text-decoration: none;
+color: #4c7c50;
+font-weight: bold;
+padding: 9px 14px;
+display: inline-block;
+line-height: 26px;
+}
+.pulse .menubarItem {
+box-shadow: inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15);
+transition: background-color 300ms cubic-bezier(0, 0.8, 1, 0.86), box-shadow 600ms;
+}
+.pulse .menubarItem:not(.menubarItemDisabled):active {
+box-shadow: inset 0px 0px 0px 44px rgba(255, 255, 255, 0.15);
+transition: none;
+}
+.menubarItemHover {
+color: #fff;
+background: #7eb082;
+border-radius: 2px;
+}
+.menubarItemPressed {
+color: #fff;
+background: #4c7c50;
+border-radius: 2px;
+}
+.menubarItemDisabled {
+color: #a6a6a6;
+}
+.menubarItemCas:after {
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #4c7c50;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #4c7c50;
+margin-left: 14px;
+display: inline-block;
+position: relative;
+top: -3px;
+width: 9px;
+height: 9px;
+border-radius: 2px;
+content: "";
+-webkit-transform: rotate(45deg);
+transform: rotate(45deg);
+}
+.menubarItemSep {
+border-left-style: dotted;
+border-left-width: 1px;
+border-left-color: #a6a6a6;
+vertical-align: bottom;
+height: 44px;
+}
+.compact .menubarItem {
+padding: 3px 6px;
+line-height: 18px;
+}
+.compact .menubarItemCas:after {
+margin-left: 6px;
+top: -2px;
+width: 6px;
+height: 6px;
+}
+.compact .menubarItemSep {
+height: 24px;
+}
+.menubarVertical .menubarItem {
+display: block;
+}
+.menubarVertical .menubarItemSep {
+border-top-style: dotted;
+border-top-width: 1px;
+border-top-color: #a6a6a6;
+border-left-style: none;
+height: 0px;
+}
+.menubarVertical .menubarItemCas:after {
+border: none;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #4c7c50;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #4c7c50;
+margin-top: 10px;
+float: right;
+border-radius: 2px;
+-webkit-transform: rotate(45deg);
+transform: rotate(45deg);
+}
+.menubarVertical .menubarItemHover .menubarItemCas:after, .menubarVertical .menubarItemPressed .menubarItemCas:after {
+border-left-color: #fff;
+}
+.menubarVertical .menubarItemDisabled .menubarItemCas:after {
+border-left-color: #a6a6a6;
+}
+.compact .menubarVertical .menubarItemCas:after {
+margin-top: 7px;
+}
+.menubarItemHover .menubarItemCas:after, .menubarItemPressed .menubarItemCas:after {
+border-color: #fff;
+}
+.menubarItemDisabled .menubarItemCas:after {
+border-color: #a6a6a6;
+}
+/* menu */
+.menu {
+background: #fff;
+border: 1px solid #d9d9d9;
+border-radius: 2px;
+box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+}
+.menuItem {
+padding: 0px 14px;
+cursor: default;
+position: relative;
+line-height: 44px;
+}
+.pulse .menuItem {
+box-shadow: inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15);
+transition: background-color 300ms cubic-bezier(0, 0.8, 1, 0.86), box-shadow 600ms;
+}
+.pulse .menuItem:not(.menuItemDisabled):active {
+box-shadow: inset 0px 0px 0px 44px rgba(255, 255, 255, 0.15);
+transition: none;
+}
+.menuItemLabel {
+display: inline-block;
+}
+.menuItemHover, .menuItemSelected {
+color: #fff;
+background: #4c7c50;
+}
+.menuItemDisabled {
+color: gray;
+background: #fff;
+}
+.menuItemCascade {
+padding-right: 28px;
+position: relative;
+}
+.menuItemCascade:after {
+font-size: 0px;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: gray;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: gray;
+margin-top: -6px;
+display: block;
+position: absolute;
+top: 50%;
+right: 0px;
+width: 9px;
+height: 9px;
+border-radius: 2px;
+content: '';
+-webkit-transform: rotate(45deg);
+transform: rotate(45deg);
+}
+.menuItemHover .menuItemCascade:after, .menuItemSelected .menuItemCascade:after {
+border-color: #fff;
+}
+.menuSeparator {
+background: #ebebeb;
+margin: 0px !important;
+position: absolute;
+left: 0px;
+right: 0px;
+height: 1px;
+}
+.menuTitle {
+color: gray;
+background: #f7f7f7;
+font-size: 16px;
+font-weight: bold;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #ebebeb;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: #ebebeb;
+padding: 4px;
+cursor: default;
+}
+.menuIcon {
+padding-right: 9px;
+width: 26px;
+}
+.compact .menuItem {
+padding: 0px 3px;
+line-height: 24px;
+}
+.compact .menuIcon {
+padding-right: 3px;
+width: 18px;
+}
+.compact .menuItemCascade {
+padding-right: 12px;
+}
+.compact .menuItemCascade:after {
+margin-top: -4px;
+width: 6px;
+height: 6px;
+}
+.compact .menuTitle {
+font-size: 10px;
+}
+.menuItemHover .icon, .menuItemSelected .icon {
+fill: #fff;
+stroke: #fff;
+}
+/* pointer - window / menu */
+.pointerDown {
+border-top-style: solid;
+border-top-width: 10px;
+border-top-color: #d9d9d9;
+border-left-style: solid;
+border-left-width: 10px;
+border-left-color: transparent;
+border-right-style: solid;
+border-right-width: 10px;
+border-right-color: transparent;
+margin-left: -10px;
+left: 50%;
+bottom: -11px;
+width: 0;
+height: 0;
+}
+.pointerDown:after {
+border-top-style: solid;
+border-top-width: 10px;
+border-top-color: #fff;
+border-left-style: solid;
+border-left-width: 10px;
+border-left-color: transparent;
+border-right-style: solid;
+border-right-width: 10px;
+border-right-color: transparent;
+margin-left: -10px;
+display: block;
+position: absolute;
+left: 50%;
+bottom: 1px;
+width: 0;
+height: 0;
+content: "";
+}
+.pointerUp {
+border-left-style: solid;
+border-left-width: 10px;
+border-left-color: transparent;
+border-right-style: solid;
+border-right-width: 10px;
+border-right-color: transparent;
+border-bottom-style: solid;
+border-bottom-width: 10px;
+border-bottom-color: #d9d9d9;
+margin-left: -10px;
+top: -11px;
+left: 50%;
+width: 0;
+height: 0;
+}
+.pointerUp:after {
+border-left-style: solid;
+border-left-width: 10px;
+border-left-color: transparent;
+border-right-style: solid;
+border-right-width: 10px;
+border-right-color: transparent;
+border-bottom-style: solid;
+border-bottom-width: 10px;
+border-bottom-color: #fff;
+margin-left: -10px;
+display: block;
+position: absolute;
+top: 1px;
+left: 50%;
+width: 0;
+height: 0;
+content: "";
+}
+.pointerLeft {
+border-top-style: solid;
+border-top-width: 10px;
+border-top-color: transparent;
+border-right-style: solid;
+border-right-width: 10px;
+border-right-color: #d9d9d9;
+border-bottom-style: solid;
+border-bottom-width: 10px;
+border-bottom-color: transparent;
+margin-top: -10px;
+top: 50%;
+left: -11px;
+width: 0;
+height: 0;
+}
+.pointerLeft:after {
+border-top-style: solid;
+border-top-width: 10px;
+border-top-color: transparent;
+border-right-style: solid;
+border-right-width: 10px;
+border-right-color: #fff;
+border-bottom-style: solid;
+border-bottom-width: 10px;
+border-bottom-color: transparent;
+margin-top: -10px;
+display: block;
+position: absolute;
+top: 50%;
+left: 1px;
+width: 0;
+height: 0;
+content: "";
+}
+.pointerRight {
+border-top-style: solid;
+border-top-width: 10px;
+border-top-color: transparent;
+border-left-style: solid;
+border-left-width: 10px;
+border-left-color: #d9d9d9;
+border-bottom-style: solid;
+border-bottom-width: 10px;
+border-bottom-color: transparent;
+margin-top: -10px;
+top: 50%;
+right: -11px;
+width: 0;
+height: 0;
+}
+.pointerRight:after {
+border-top-style: solid;
+border-top-width: 10px;
+border-top-color: transparent;
+border-left-style: solid;
+border-left-width: 10px;
+border-left-color: #fff;
+border-bottom-style: solid;
+border-bottom-width: 10px;
+border-bottom-color: transparent;
+margin-top: -10px;
+display: block;
+position: absolute;
+top: 50%;
+right: 1px;
+width: 0;
+height: 0;
+content: "";
+}
+/* edit */
+.edit, .editPrimary {
+color: #000;
+font: 16px Varela Round, Arial, sans-serif;
+border: none;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: #d9d9d9;
+padding: 14px;
+padding-bottom: 13px;
+vertical-align: middle;
+border-radius: 0px;
+outline: none;
+}
+.edit {
+background: url("accentEditBorder.png") no-repeat bottom transparent;
+background-size: 0px 2px;
+}
+.pulse .edit, .pulse .editBG {
+transition: background-size 200ms cubic-bezier(0, 0.8, 1, 0.86);
+}
+.pulse .editPrimary, .pulse .editBGPrimary {
+transition: box-shadow 200ms cubic-bezier(0, 0.8, 1, 0.86);
+}
+select.edit option, select.editPrimary option {
+color: #000;
+background: #fff;
+}
+.editPrimary, .grid .edit {
+color: #000;
+background: #fff;
+border: 1px solid #d9d9d9;
+padding: 13px;
+}
+.edit:hover, .editPrimary:hover {
+border-color: #395c3c;
+}
+.edit:focus {
+background-color: #fff;
+background-size: 100% 2px;
+border-color: #4c7c50;
+}
+.editPrimary:focus, .grid .edit:focus {
+color: #000;
+background: #fff;
+border-color: #4c7c50;
+box-shadow: inset 0px 0px 0px 2px #4c7c50;
+}
+.editError {
+color: #ff351c;
+background: #ffebe8;
+border-color: #ff351c;
+}
+.editWatermark {
+color: gray;
+}
+.edit[disabled] {
+color: gray;
+background: #fff;
+border-color: #ebebeb;
+}
+.compact .edit {
+background-size: 0% 1px;
+font-size: 12px;
+padding: 6px;
+padding-bottom: 5px;
+}
+.compact .edit:focus {
+background-size: 100% 1px;
+}
+.compact .editPrimary, .compact .grid .edit {
+font-size: 12px;
+padding: 5px;
+}
+.compact .editPrimary:focus, .compact .grid .edit:focus {
+box-shadow: inset 0px 0px 0px 1px #4c7c50;
+}
+/* edit overrides */
+.panelHeader .edit, .panelHeaderAlt .edit, .panelFooter .edit, .panelFooterAlt .edit, .ctrlBarDis .edit {
+color: #fff;
+background: url("headerEditBorder.png") no-repeat bottom transparent;
+background-size: 0% 2px;
+border-color: rgba(217, 217, 217, 0.25);
+}
+.panelHeader .editPrimary, .panelHeaderAlt .editPrimary, .panelFooter .editPrimary, .panelFooterAlt .editPrimary, .ctrlBarDis .editPrimary {
+color: #fff;
+background: rgba(255, 255, 255, 0.25);
+border-color: rgba(217, 217, 217, 0.25);
+}
+.panelHeader .edit:hover, .panelHeader .editPrimary:hover, .panelHeader .edit:focus, .panelHeader .editPrimary:focus, .panelHeaderAlt .edit:hover, .panelHeaderAlt .editPrimary:hover, .panelHeaderAlt .edit:focus, .panelHeaderAlt .editPrimary:focus, .panelFooter .edit:hover, .panelFooter .editPrimary:hover, .panelFooter .edit:focus, .panelFooter .editPrimary:focus, .panelFooterAlt .edit:hover, .panelFooterAlt .editPrimary:hover, .panelFooterAlt .edit:focus, .panelFooterAlt .editPrimary:focus, .ctrlBarDis .edit:hover, .ctrlBarDis .editPrimary:hover, .ctrlBarDis .edit:focus, .ctrlBarDis .editPrimary:focus {
+border-color: #fff;
+}
+.panelHeader .edit:focus, .panelHeaderAlt .edit:focus, .panelFooter .edit:focus, .panelFooterAlt .edit:focus, .ctrlBarDis .edit:focus {
+background-size: 100% 2px;
+}
+.panelHeader .editError, .panelHeaderAlt .editError, .panelFooter .editError, .panelFooterAlt .editError, .ctrlBarDis .editError {
+color: #ff351c;
+background: transparent;
+}
+.panelHeader .editPrimary.editError, .panelHeaderAlt .editPrimary.editError, .panelFooter .editPrimary.editError, .panelFooterAlt .editPrimary.editError, .ctrlBarDis .editPrimary.editError {
+background: #ffebe8;
+}
+.panelHeader .editWatermark, .panelHeaderAlt .editWatermark, .panelFooter .editWatermark, .panelFooterAlt .editWatermark, .ctrlBarDis .editWatermark {
+color: gray;
+}
+.panelHeader .edit[disabled], .panelHeaderAlt .edit[disabled], .panelFooter .edit[disabled], .panelFooterAlt .edit[disabled], .ctrlBarDis .edit[disabled] {
+color: gray;
+background: transparent;
+border-color: #ebebeb;
+}
+.panelHeader .editPrimary:focus, .panelHeader .grid .edit:focus, .panelHeaderAlt .editPrimary:focus, .panelHeaderAlt .grid .edit:focus, .panelFooter .editPrimary:focus, .panelFooter .grid .edit:focus, .panelFooterAlt .editPrimary:focus, .panelFooterAlt .grid .edit:focus, .ctrlBarDis .editPrimary:focus, .ctrlBarDis .grid .edit:focus {
+box-shadow: inset 0px 0px 0px 2px #fff;
+}
+.panelHeaderContrast .editPrimary:focus, .panelHeaderContrast .grid .edit:focus, .panelFooterContrast .editPrimary:focus, .panelFooterContrast .grid .edit:focus, .ctrlBarDisContrast .editPrimary:focus, .ctrlBarDisContrast .grid .edit:focus {
+box-shadow: inset 0px 0px 0px 2px #4c7c50;
+}
+.panelHeader .edit, .panelHeader .editPrimary, .panelHeaderAlt .edit, .panelHeaderAlt .editPrimary, .panelHeaderContrast .edit, .panelHeaderContrast .editPrimary, .panelFooter .edit, .panelFooter .editPrimary, .panelFooterAlt .edit, .panelFooterAlt .editPrimary, .panelFooterContrast .edit, .panelFooterContrast .editPrimary, .ctrlBarDis .edit, .ctrlBarDis .editPrimary, .ctrlBarDisContrast .edit, .ctrlBarDisContrast .editPrimary {
+padding-top: 10px;
+padding-bottom: 9px;
+margin-top: 3px;
+vertical-align: top;
+}
+.panelHeader .editPrimary, .panelHeader .grid .edit, .panelHeaderAlt .editPrimary, .panelHeaderAlt .grid .edit, .panelHeaderContrast .editPrimary, .panelHeaderContrast .grid .edit, .panelFooter .editPrimary, .panelFooter .grid .edit, .panelFooterAlt .editPrimary, .panelFooterAlt .grid .edit, .panelFooterContrast .editPrimary, .panelFooterContrast .grid .edit, .ctrlBarDis .editPrimary, .ctrlBarDis .grid .edit, .ctrlBarDisContrast .editPrimary, .ctrlBarDisContrast .grid .edit {
+padding-top: 9px;
+padding-bottom: 9px;
+}
+.listItemSelected:not(.listItemSubtle) .edit, .listItemHover:not(.listItemSubtle) .edit, .gridRowSelected .edit, .gridRowHover .edit {
+color: #fff;
+background: url("accentForeEditBorder.png") no-repeat bottom transparent;
+background-size: 0% 2px;
+border-color: #fff;
+}
+.listItemSelected:not(.listItemSubtle) .edit:focus, .listItemHover:not(.listItemSubtle) .edit:focus, .gridRowSelected .edit:focus, .gridRowHover .edit:focus {
+background-size: 100% 2px;
+}
+.listItemSelected:not(.listItemSubtle) .editError, .listItemHover:not(.listItemSubtle) .editError, .gridRowSelected .editError, .gridRowHover .editError {
+color: #ff351c;
+background: rgba(255, 53, 28, 0.15);
+border-color: #ff351c;
+}
+.listItemSelected:not(.listItemSubtle) .edit[disabled], .listItemHover:not(.listItemSubtle) .edit[disabled], .gridRowSelected .edit[disabled], .gridRowHover .edit[disabled] {
+color: rgba(255, 255, 255, 0.75);
+border-color: rgba(255, 255, 255, 0.75);
+}
+.listItemSelected:not(.listItemSubtle) .editPrimary, .grid .listItemSelected:not(.listItemSubtle) .edit, .listItemHover:not(.listItemSubtle) .editPrimary, .grid .listItemHover:not(.listItemSubtle) .edit, .gridRowSelected .editPrimary, .grid .gridRowSelected .edit, .gridRowHover .editPrimary, .grid .gridRowHover .edit {
+color: #fff;
+background: transparent;
+border-color: #fff;
+}
+.listItemSelected:not(.listItemSubtle) .editPrimary:focus, .grid .listItemSelected:not(.listItemSubtle) .edit:focus, .listItemHover:not(.listItemSubtle) .editPrimary:focus, .grid .listItemHover:not(.listItemSubtle) .edit:focus, .gridRowSelected .editPrimary:focus, .grid .gridRowSelected .edit:focus, .gridRowHover .editPrimary:focus, .grid .gridRowHover .edit:focus {
+color: #fff;
+background: transparent;
+border-color: #fff;
+box-shadow: inset 0px 0px 0px 2px #fff;
+}
+.compact .panelHeader .edit, .compact .panelHeaderAlt .edit, .compact .panelHeaderContrast .edit, .compact .panelFooter .edit, .compact .panelFooterAlt .edit, .compact .panelFooterContrast .edit, .compact .ctrlBarDis .edit, .compact .ctrlBarDisContrast .edit {
+background-size: 0% 1px;
+padding: 3px;
+margin-top: 2px;
+}
+.compact .panelHeader .edit:focus, .compact .panelHeaderAlt .edit:focus, .compact .panelHeaderContrast .edit:focus, .compact .panelFooter .edit:focus, .compact .panelFooterAlt .edit:focus, .compact .panelFooterContrast .edit:focus, .compact .ctrlBarDis .edit:focus, .compact .ctrlBarDisContrast .edit:focus {
+background-size: 100% 1px;
+}
+.compact .panelHeader .editPrimary, .compact .panelHeader .grid .edit, .compact .panelHeaderAlt .editPrimary, .compact .panelHeaderAlt .grid .edit, .compact .panelHeaderContrast .editPrimary, .compact .panelHeaderContrast .grid .edit, .compact .panelFooter .editPrimary, .compact .panelFooter .grid .edit, .compact .panelFooterAlt .editPrimary, .compact .panelFooterAlt .grid .edit, .compact .panelFooterContrast .editPrimary, .compact .panelFooterContrast .grid .edit, .compact .ctrlBarDis .editPrimary, .compact .ctrlBarDis .grid .edit, .compact .ctrlBarDisContrast .editPrimary, .compact .ctrlBarDisContrast .grid .edit {
+padding: 3px;
+margin-top: 2px;
+}
+.compact .panelHeader .editPrimary:focus, .compact .panelHeader .grid .edit:focus, .compact .panelHeaderAlt .editPrimary:focus, .compact .panelHeaderAlt .grid .edit:focus, .compact .panelHeaderContrast .editPrimary:focus, .compact .panelHeaderContrast .grid .edit:focus, .compact .panelFooter .editPrimary:focus, .compact .panelFooter .grid .edit:focus, .compact .panelFooterAlt .editPrimary:focus, .compact .panelFooterAlt .grid .edit:focus, .compact .panelFooterContrast .editPrimary:focus, .compact .panelFooterContrast .grid .edit:focus, .compact .ctrlBarDis .editPrimary:focus, .compact .ctrlBarDis .grid .edit:focus, .compact .ctrlBarDisContrast .editPrimary:focus, .compact .ctrlBarDisContrast .grid .edit:focus {
+box-shadow: inset 0px 0px 0px 1px #fff;
+}
+.compact .panelHeaderContrast .editPrimary:focus, .compact .panelHeaderContrast .grid .edit:focus, .compact .panelFooterContrast .editPrimary:focus, .compact .panelFooterContrast .grid .edit:focus, .compact .ctrlBarDisContrast .editPrimary:focus, .compact .ctrlBarDisContrast .grid .edit:focus {
+box-shadow: inset 0px 0px 0px 1px #4c7c50;
+}
+.compact .listItemSelected:not(.listItemSubtle) .editPrimary:focus, .compact .listItemSelected:not(.listItemSubtle) .grid .edit:focus, .compact .listItemHover:not(.listItemSubtle) .editPrimary:focus, .compact .listItemHover:not(.listItemSubtle) .grid .edit:focus, .compact .gridRowSelected .editPrimary:focus, .compact .gridRowSelected .grid .edit:focus, .compact .gridRowHover .editPrimary:focus, .compact .gridRowHover .grid .edit:focus {
+box-shadow: inset 0px 0px 0px 1px #fff;
+}
+/* edit button group */
+.editBG, .editBGPrimary {
+color: #000;
+background: transparent;
+font: 16px Varela Round, Arial, sans-serif;
+border: 0px none;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: #d9d9d9;
+padding: 0px;
+vertical-align: middle;
+outline: none;
+}
+.editBG {
+background: url("accentEditBorder.png") no-repeat bottom transparent;
+background-size: 0% 2px;
+}
+.editBGPrimary, .grid .editBG {
+color: #000;
+background: #fff;
+border: 1px solid #d9d9d9;
+}
+.editBGHover {
+border-color: #395c3c;
+}
+.editBGFocus {
+background-size: 100% 2px;
+border-color: #4c7c50;
+}
+.editBGPrimary.editBGFocus, .grid .editBG.editBGFocus {
+box-shadow: inset 0px 0px 0px 2px #4c7c50;
+}
+.editBGError {
+color: #ff351c;
+background: #ffebe8;
+border-color: #ff351c;
+}
+.editBGSeparator {
+font-size: 0px;
+padding: 0px;
+width: 0px;
+}
+.editBGEdit {
+color: #000;
+background: transparent;
+font: 16px Varela Round, Arial, sans-serif;
+border: none;
+padding: 14px;
+padding-bottom: 13px;
+outline: none;
+}
+.editBGPrimary .editBGEdit, .grid .editBG .editBGEdit {
+padding: 13px;
+}
+.editBGButton {
+padding: 9px 14px;
+padding-bottom: 8px;
+border-radius: 2px 2px 0px 0px;
+}
+.editBGPrimary .editBGButton, .grid .editBG .editBGButton {
+padding-top: 8px;
+border-radius: 0px;
+}
+.editBGButtonHover {
+color: #fff;
+background: #395c3c;
+}
+.editBGButtonPressed {
+color: #fff;
+background: #4c7c50;
+}
+.editBGWatermark {
+color: gray;
+}
+.editBGButtonHover .icon, .editBGButtonPressed .icon {
+stroke: #fff;
+fill: #fff;
+}
+.editBGError .icon {
+stroke: #ff351c;
+fill: #ff351c;
+}
+.compact .editBG {
+background-size: 0% 1px;
+}
+.compact .editBGFocus {
+background-size: 100% 1px;
+}
+.compact .editBGPrimary.editBGFocus, .compact .grid .editBG.editBGFocus {
+box-shadow: inset 0px 0px 0px 1px #4c7c50;
+}
+.compact .editBGEdit, .compact .grid .editBG .editBGEdit {
+font: 12px Varela Round, Arial, sans-serif;
+padding: 6px;
+padding-bottom: 5px;
+}
+.compact .editBGPrimary .editBGEdit, .compact .grid .editBG .editBGEdit {
+padding: 5px;
+}
+.compact .editBGButton, .compact .grid .editBG .editBGButton {
+font: 12px Varela Round, Arial, sans-serif;
+padding: 3px 5px;
+}
+/* edit button group overrides */
+.panelHeader .editBG, .panelHeaderAlt .editBG, .panelFooter .editBG, .panelFooterAlt .editBG, .ctrlBarDis .editBG {
+color: #fff;
+border-color: rgba(217, 217, 217, 0.25);
+}
+.panelHeader .editBGPrimary, .panelHeaderAlt .editBGPrimary, .panelFooter .editBGPrimary, .panelFooterAlt .editBGPrimary, .ctrlBarDis .editBGPrimary {
+color: #fff;
+background: rgba(255, 255, 255, 0.25);
+border-color: rgba(217, 217, 217, 0.25);
+}
+.panelHeader .editBGButton, .panelHeaderAlt .editBGButton, .panelFooter .editBGButton, .panelFooterAlt .editBGButton, .ctrlBarDis .editBGButton {
+background: rgba(255, 255, 255, 0.25);
+}
+.panelHeader .editBGButton .icon, .panelHeaderAlt .editBGButton .icon, .panelFooter .editBGButton .icon, .panelFooterAlt .editBGButton .icon, .ctrlBarDis .editBGButton .icon {
+fill: #fff;
+stroke: #fff;
+}
+.panelHeader .editBG .editBGEdit, .panelHeader .editBGPrimary .editBGEdit, .panelHeaderAlt .editBG .editBGEdit, .panelHeaderAlt .editBGPrimary .editBGEdit, .panelFooter .editBG .editBGEdit, .panelFooter .editBGPrimary .editBGEdit, .panelFooterAlt .editBG .editBGEdit, .panelFooterAlt .editBGPrimary .editBGEdit, .ctrlBarDis .editBG .editBGEdit, .ctrlBarDis .editBGPrimary .editBGEdit {
+color: #fff;
+}
+.panelHeader .editBG:hover, .panelHeader .editBGPrimary:hover, .panelHeader .editBGFocus, .panelHeader .editBGPrimary.editBGFocus, .panelHeaderAlt .editBG:hover, .panelHeaderAlt .editBGPrimary:hover, .panelHeaderAlt .editBGFocus, .panelHeaderAlt .editBGPrimary.editBGFocus, .panelFooter .editBG:hover, .panelFooter .editBGPrimary:hover, .panelFooter .editBGFocus, .panelFooter .editBGPrimary.editBGFocus, .panelFooterAlt .editBG:hover, .panelFooterAlt .editBGPrimary:hover, .panelFooterAlt .editBGFocus, .panelFooterAlt .editBGPrimary.editBGFocus, .ctrlBarDis .editBG:hover, .ctrlBarDis .editBGPrimary:hover, .ctrlBarDis .editBGFocus, .ctrlBarDis .editBGPrimary.editBGFocus {
+border-color: #fff;
+}
+.panelHeader .editBG:hover .editBGButton, .panelHeader .editBGPrimary:hover .editBGButton, .panelHeader .editBGFocus .editBGButton, .panelHeader .editBGPrimary.editBGFocus .editBGButton, .panelHeaderAlt .editBG:hover .editBGButton, .panelHeaderAlt .editBGPrimary:hover .editBGButton, .panelHeaderAlt .editBGFocus .editBGButton, .panelHeaderAlt .editBGPrimary.editBGFocus .editBGButton, .panelFooter .editBG:hover .editBGButton, .panelFooter .editBGPrimary:hover .editBGButton, .panelFooter .editBGFocus .editBGButton, .panelFooter .editBGPrimary.editBGFocus .editBGButton, .panelFooterAlt .editBG:hover .editBGButton, .panelFooterAlt .editBGPrimary:hover .editBGButton, .panelFooterAlt .editBGFocus .editBGButton, .panelFooterAlt .editBGPrimary.editBGFocus .editBGButton, .ctrlBarDis .editBG:hover .editBGButton, .ctrlBarDis .editBGPrimary:hover .editBGButton, .ctrlBarDis .editBGFocus .editBGButton, .ctrlBarDis .editBGPrimary.editBGFocus .editBGButton {
+color: #000;
+background: #fff;
+}
+.panelHeader .editBG:hover .editBGButton .icon, .panelHeader .editBGPrimary:hover .editBGButton .icon, .panelHeader .editBGFocus .editBGButton .icon, .panelHeader .editBGPrimary.editBGFocus .editBGButton .icon, .panelHeaderAlt .editBG:hover .editBGButton .icon, .panelHeaderAlt .editBGPrimary:hover .editBGButton .icon, .panelHeaderAlt .editBGFocus .editBGButton .icon, .panelHeaderAlt .editBGPrimary.editBGFocus .editBGButton .icon, .panelFooter .editBG:hover .editBGButton .icon, .panelFooter .editBGPrimary:hover .editBGButton .icon, .panelFooter .editBGFocus .editBGButton .icon, .panelFooter .editBGPrimary.editBGFocus .editBGButton .icon, .panelFooterAlt .editBG:hover .editBGButton .icon, .panelFooterAlt .editBGPrimary:hover .editBGButton .icon, .panelFooterAlt .editBGFocus .editBGButton .icon, .panelFooterAlt .editBGPrimary.editBGFocus .editBGButton .icon, .ctrlBarDis .editBG:hover .editBGButton .icon, .ctrlBarDis .editBGPrimary:hover .editBGButton .icon, .ctrlBarDis .editBGFocus .editBGButton .icon, .ctrlBarDis .editBGPrimary.editBGFocus .editBGButton .icon {
+fill: #000;
+stroke: #000;
+}
+.panelHeader .editBGError, .panelHeaderAlt .editBGError, .panelFooter .editBGError, .panelFooterAlt .editBGError, .ctrlBarDis .editBGError {
+color: #ff351c;
+background: transparent;
+}
+.panelHeader .editBGPrimary.editBGError, .panelHeaderAlt .editBGPrimary.editBGError, .panelFooter .editBGPrimary.editBGError, .panelFooterAlt .editBGPrimary.editBGError, .ctrlBarDis .editBGPrimary.editBGError {
+background: #ffebe8;
+}
+.panelHeader .editBGWatermark, .panelHeaderAlt .editBGWatermark, .panelFooter .editBGWatermark, .panelFooterAlt .editBGWatermark, .ctrlBarDis .editBGWatermark {
+color: gray;
+}
+.panelHeader .editBGEdit[disabled], .panelHeaderAlt .editBGEdit[disabled], .panelFooter .editBGEdit[disabled], .panelFooterAlt .editBGEdit[disabled], .ctrlBarDis .editBGEdit[disabled] {
+color: gray;
+border-color: #ebebeb;
+}
+.panelHeader .editBG, .panelHeader .editBGPrimary, .panelHeaderAlt .editBG, .panelHeaderAlt .editBGPrimary, .panelHeaderContrast .editBG, .panelHeaderContrast .editBGPrimary, .panelFooter .editBG, .panelFooter .editBGPrimary, .panelFooterAlt .editBG, .panelFooterAlt .editBGPrimary, .panelFooterContrast .editBG, .panelFooterContrast .editBGPrimary, .ctrlBarDis .editBG, .ctrlBarDis .editBGPrimary, .ctrlBarDisContrast .editBG, .ctrlBarDisContrast .editBGPrimary {
+margin-top: 3px;
+vertical-align: top;
+}
+.panelHeader .editBG .editBGEdit, .panelHeader .editBGPrimary .editBGEdit, .panelHeaderAlt .editBG .editBGEdit, .panelHeaderAlt .editBGPrimary .editBGEdit, .panelHeaderContrast .editBG .editBGEdit, .panelHeaderContrast .editBGPrimary .editBGEdit, .panelFooter .editBG .editBGEdit, .panelFooter .editBGPrimary .editBGEdit, .panelFooterAlt .editBG .editBGEdit, .panelFooterAlt .editBGPrimary .editBGEdit, .panelFooterContrast .editBG .editBGEdit, .panelFooterContrast .editBGPrimary .editBGEdit, .ctrlBarDis .editBG .editBGEdit, .ctrlBarDis .editBGPrimary .editBGEdit, .ctrlBarDisContrast .editBG .editBGEdit, .ctrlBarDisContrast .editBGPrimary .editBGEdit {
+padding-top: 10px;
+padding-bottom: 9px;
+}
+.panelHeader .editBG .editBGButton, .panelHeader .editBGPrimary .editBGButton, .panelHeaderAlt .editBG .editBGButton, .panelHeaderAlt .editBGPrimary .editBGButton, .panelHeaderContrast .editBG .editBGButton, .panelHeaderContrast .editBGPrimary .editBGButton, .panelFooter .editBG .editBGButton, .panelFooter .editBGPrimary .editBGButton, .panelFooterAlt .editBG .editBGButton, .panelFooterAlt .editBGPrimary .editBGButton, .panelFooterContrast .editBG .editBGButton, .panelFooterContrast .editBGPrimary .editBGButton, .ctrlBarDis .editBG .editBGButton, .ctrlBarDis .editBGPrimary .editBGButton, .ctrlBarDisContrast .editBG .editBGButton, .ctrlBarDisContrast .editBGPrimary .editBGButton {
+padding-top: 5px;
+padding-bottom: 4px;
+}
+.panelHeader .editBGPrimary .editBGEdit, .panelHeader .grid .editBG .editBGEdit, .panelHeaderAlt .editBGPrimary .editBGEdit, .panelHeaderAlt .grid .editBG .editBGEdit, .panelHeaderContrast .editBGPrimary .editBGEdit, .panelHeaderContrast .grid .editBG .editBGEdit, .panelFooter .editBGPrimary .editBGEdit, .panelFooter .grid .editBG .editBGEdit, .panelFooterAlt .editBGPrimary .editBGEdit, .panelFooterAlt .grid .editBG .editBGEdit, .panelFooterContrast .editBGPrimary .editBGEdit, .panelFooterContrast .grid .editBG .editBGEdit, .ctrlBarDis .editBGPrimary .editBGEdit, .ctrlBarDis .grid .editBG .editBGEdit, .ctrlBarDisContrast .editBGPrimary .editBGEdit, .ctrlBarDisContrast .grid .editBG .editBGEdit {
+padding-top: 9px;
+padding-bottom: 9px;
+}
+.panelHeader .editBGPrimary .editBGButton, .panelHeader .grid .editBG .editBGButton, .panelHeaderAlt .editBGPrimary .editBGButton, .panelHeaderAlt .grid .editBG .editBGButton, .panelHeaderContrast .editBGPrimary .editBGButton, .panelHeaderContrast .grid .editBG .editBGButton, .panelFooter .editBGPrimary .editBGButton, .panelFooter .grid .editBG .editBGButton, .panelFooterAlt .editBGPrimary .editBGButton, .panelFooterAlt .grid .editBG .editBGButton, .panelFooterContrast .editBGPrimary .editBGButton, .panelFooterContrast .grid .editBG .editBGButton, .ctrlBarDis .editBGPrimary .editBGButton, .ctrlBarDis .grid .editBG .editBGButton, .ctrlBarDisContrast .editBGPrimary .editBGButton, .ctrlBarDisContrast .grid .editBG .editBGButton {
+padding-top: 4px;
+padding-bottom: 4px;
+}
+.panelHeader .editBG, .panelHeaderAlt .editBG, .panelFooter .editBG, .panelFooterAlt .editBG, .ctrlBarDis .editBG {
+background-image: url("headerEditBorder.png");
+}
+.panelHeader .editBGPrimary.editBGFocus, .panelHeader .grid .editBGFocus, .panelHeaderAlt .editBGPrimary.editBGFocus, .panelHeaderAlt .grid .editBGFocus, .panelFooter .editBGPrimary.editBGFocus, .panelFooter .grid .editBGFocus, .panelFooterAlt .editBGPrimary.editBGFocus, .panelFooterAlt .grid .editBGFocus, .ctrlBarDis .editBGPrimary.editBGFocus, .ctrlBarDis .grid .editBGFocus {
+box-shadow: inset 0px 0px 0px 2px #fff;
+}
+.listItemSelected:not(.listItemSubtle) .editBG, .listItemHover:not(.listItemSubtle) .editBG, .gridRowSelected .editBG, .gridRowHover .editBG {
+color: #fff;
+border-color: #fff;
+}
+.listItemSelected:not(.listItemSubtle) .editBGPrimary, .listItemHover:not(.listItemSubtle) .editBGPrimary, .gridRowSelected .editBGPrimary, .gridRowHover .editBGPrimary {
+color: #fff;
+background: transparent;
+border-color: #fff;
+}
+.listItemSelected:not(.listItemSubtle) .editBG .editBGEdit, .listItemSelected:not(.listItemSubtle) .editBGPrimary .editBGEdit, .listItemHover:not(.listItemSubtle) .editBG .editBGEdit, .listItemHover:not(.listItemSubtle) .editBGPrimary .editBGEdit, .gridRowSelected .editBG .editBGEdit, .gridRowSelected .editBGPrimary .editBGEdit, .gridRowHover .editBG .editBGEdit, .gridRowHover .editBGPrimary .editBGEdit {
+color: #fff;
+}
+.listItemSelected:not(.listItemSubtle) .editBG:hover, .listItemSelected:not(.listItemSubtle) .editBGPrimary:hover, .listItemSelected:not(.listItemSubtle) .editBGFocus, .listItemSelected:not(.listItemSubtle) .editBGPrimary.editBGFocus, .listItemHover:not(.listItemSubtle) .editBG:hover, .listItemHover:not(.listItemSubtle) .editBGPrimary:hover, .listItemHover:not(.listItemSubtle) .editBGFocus, .listItemHover:not(.listItemSubtle) .editBGPrimary.editBGFocus, .gridRowSelected .editBG:hover, .gridRowSelected .editBGPrimary:hover, .gridRowSelected .editBGFocus, .gridRowSelected .editBGPrimary.editBGFocus, .gridRowHover .editBG:hover, .gridRowHover .editBGPrimary:hover, .gridRowHover .editBGFocus, .gridRowHover .editBGPrimary.editBGFocus {
+border-color: #fff;
+}
+.listItemSelected:not(.listItemSubtle) .editBG:hover .editBGButton, .listItemSelected:not(.listItemSubtle) .editBGPrimary:hover .editBGButton, .listItemSelected:not(.listItemSubtle) .editBGFocus .editBGButton, .listItemSelected:not(.listItemSubtle) .editBGPrimary.editBGFocus .editBGButton, .listItemHover:not(.listItemSubtle) .editBG:hover .editBGButton, .listItemHover:not(.listItemSubtle) .editBGPrimary:hover .editBGButton, .listItemHover:not(.listItemSubtle) .editBGFocus .editBGButton, .listItemHover:not(.listItemSubtle) .editBGPrimary.editBGFocus .editBGButton, .gridRowSelected .editBG:hover .editBGButton, .gridRowSelected .editBGPrimary:hover .editBGButton, .gridRowSelected .editBGFocus .editBGButton, .gridRowSelected .editBGPrimary.editBGFocus .editBGButton, .gridRowHover .editBG:hover .editBGButton, .gridRowHover .editBGPrimary:hover .editBGButton, .gridRowHover .editBGFocus .editBGButton, .gridRowHover .editBGPrimary.editBGFocus .editBGButton {
+color: #4c7c50;
+background: #fff;
+}
+.listItemSelected:not(.listItemSubtle) .editBG:hover .editBGButton .icon, .listItemSelected:not(.listItemSubtle) .editBGPrimary:hover .editBGButton .icon, .listItemSelected:not(.listItemSubtle) .editBGFocus .editBGButton .icon, .listItemSelected:not(.listItemSubtle) .editBGPrimary.editBGFocus .editBGButton .icon, .listItemHover:not(.listItemSubtle) .editBG:hover .editBGButton .icon, .listItemHover:not(.listItemSubtle) .editBGPrimary:hover .editBGButton .icon, .listItemHover:not(.listItemSubtle) .editBGFocus .editBGButton .icon, .listItemHover:not(.listItemSubtle) .editBGPrimary.editBGFocus .editBGButton .icon, .gridRowSelected .editBG:hover .editBGButton .icon, .gridRowSelected .editBGPrimary:hover .editBGButton .icon, .gridRowSelected .editBGFocus .editBGButton .icon, .gridRowSelected .editBGPrimary.editBGFocus .editBGButton .icon, .gridRowHover .editBG:hover .editBGButton .icon, .gridRowHover .editBGPrimary:hover .editBGButton .icon, .gridRowHover .editBGFocus .editBGButton .icon, .gridRowHover .editBGPrimary.editBGFocus .editBGButton .icon {
+fill: #4c7c50;
+stroke: #4c7c50;
+}
+.listItemSelected:not(.listItemSubtle) .editBGError, .listItemSelected:not(.listItemSubtle) .editBGError .editBGEdit, .listItemHover:not(.listItemSubtle) .editBGError, .listItemHover:not(.listItemSubtle) .editBGError .editBGEdit, .gridRowSelected .editBGError, .gridRowSelected .editBGError .editBGEdit, .gridRowHover .editBGError, .gridRowHover .editBGError .editBGEdit {
+color: #ff351c;
+background: transparent;
+border-color: #ff351c;
+}
+.listItemSelected:not(.listItemSubtle) .editBGError .icon, .listItemSelected:not(.listItemSubtle) .editBGError .editBGEdit .icon, .listItemHover:not(.listItemSubtle) .editBGError .icon, .listItemHover:not(.listItemSubtle) .editBGError .editBGEdit .icon, .gridRowSelected .editBGError .icon, .gridRowSelected .editBGError .editBGEdit .icon, .gridRowHover .editBGError .icon, .gridRowHover .editBGError .editBGEdit .icon {
+fill: #ff351c;
+stroke: #ff351c;
+}
+.listItemSelected:not(.listItemSubtle) .editBGPrimary.editBGError, .listItemHover:not(.listItemSubtle) .editBGPrimary.editBGError, .gridRowSelected .editBGPrimary.editBGError, .gridRowHover .editBGPrimary.editBGError {
+background: #ffebe8;
+}
+.listItemSelected:not(.listItemSubtle) .editBGWatermark, .listItemHover:not(.listItemSubtle) .editBGWatermark, .gridRowSelected .editBGWatermark, .gridRowHover .editBGWatermark {
+color: rgba(255, 255, 255, 0.75);
+}
+.listItemSelected:not(.listItemSubtle) .editBGEdit[disabled], .listItemHover:not(.listItemSubtle) .editBGEdit[disabled], .gridRowSelected .editBGEdit[disabled], .gridRowHover .editBGEdit[disabled] {
+color: rgba(255, 255, 255, 0.75);
+border-color: rgba(255, 255, 255, 0.75);
+}
+.listItemSelected:not(.listItemSubtle) .editBG, .listItemHover:not(.listItemSubtle) .editBG, .gridRowSelected .editBG, .gridRowHover .editBG {
+background-image: url("accentForeEditBorder.png");
+}
+.listItemSelected:not(.listItemSubtle) .editBGPrimary.editBGFocus, .listItemSelected:not(.listItemSubtle) .grid .editBGFocus, .listItemHover:not(.listItemSubtle) .editBGPrimary.editBGFocus, .listItemHover:not(.listItemSubtle) .grid .editBGFocus, .gridRowSelected .editBGPrimary.editBGFocus, .gridRowSelected .grid .editBGFocus, .gridRowHover .editBGPrimary.editBGFocus, .gridRowHover .grid .editBGFocus {
+box-shadow: inset 0px 0px 0px 2px #fff;
+}
+.compact .panelHeader .editBGEdit, .compact .panelHeader .grid .editBG .editBGEdit, .compact .panelHeaderAlt .editBGEdit, .compact .panelHeaderAlt .grid .editBG .editBGEdit, .compact .panelHeaderContrast .editBGEdit, .compact .panelHeaderContrast .grid .editBG .editBGEdit, .compact .panelFooter .editBGEdit, .compact .panelFooter .grid .editBG .editBGEdit, .compact .panelFooterAlt .editBGEdit, .compact .panelFooterAlt .grid .editBG .editBGEdit, .compact .panelFooterContrast .editBGEdit, .compact .panelFooterContrast .grid .editBG .editBGEdit, .compact .ctrlBarDis .editBGEdit, .compact .ctrlBarDis .grid .editBG .editBGEdit, .compact .ctrlBarDisContrast .editBGEdit, .compact .ctrlBarDisContrast .grid .editBG .editBGEdit {
+font: 12px Varela Round, Arial, sans-serif;
+padding: 3px;
+}
+.compact .panelHeader .editBGButton, .compact .panelHeader .grid .editBG .editBGButton, .compact .panelHeaderAlt .editBGButton, .compact .panelHeaderAlt .grid .editBG .editBGButton, .compact .panelHeaderContrast .editBGButton, .compact .panelHeaderContrast .grid .editBG .editBGButton, .compact .panelFooter .editBGButton, .compact .panelFooter .grid .editBG .editBGButton, .compact .panelFooterAlt .editBGButton, .compact .panelFooterAlt .grid .editBG .editBGButton, .compact .panelFooterContrast .editBGButton, .compact .panelFooterContrast .grid .editBG .editBGButton, .compact .ctrlBarDis .editBGButton, .compact .ctrlBarDis .grid .editBG .editBGButton, .compact .ctrlBarDisContrast .editBGButton, .compact .ctrlBarDisContrast .grid .editBG .editBGButton {
+font: 12px Varela Round, Arial, sans-serif;
+padding: 3px 3px;
+}
+.compact .panelHeader .editBGPrimary.editBGFocus, .compact .panelHeader .grid .editBG.editBGFocus, .compact .panelHeaderAlt .editBGPrimary.editBGFocus, .compact .panelHeaderAlt .grid .editBG.editBGFocus, .compact .panelFooter .editBGPrimary.editBGFocus, .compact .panelFooter .grid .editBG.editBGFocus, .compact .panelFooterAlt .editBGPrimary.editBGFocus, .compact .panelFooterAlt .grid .editBG.editBGFocus, .compact .ctrlBarDis .editBGPrimary.editBGFocus, .compact .ctrlBarDis .grid .editBG.editBGFocus {
+box-shadow: inset 0px 0px 0px 1px #fff;
+}
+.compact .panelHeaderContrast .editBGPrimary.editBGFocus, .compact .panelHeaderContrast .grid .editBG.editBGFocus, .compact .panelFooterContrast .editBGPrimary.editBGFocus, .compact .panelFooterContrast .grid .editBG.editBGFocus, .compact .ctrlBarDisContrast .editBGPrimary.editBGFocus, .compact .ctrlBarDisContrast .grid .editBG.editBGFocus {
+box-shadow: inset 0px 0px 0px 1px #4c7c50;
+}
+.compact .listItemSelected:not(.listItemSubtle) .editBGPrimary.editBGFocus, .compact .listItemSelected:not(.listItemSubtle) .grid .editBG.editBGFocus, .compact .listItemHover:not(.listItemSubtle) .editBGPrimary.editBGFocus, .compact .listItemHover:not(.listItemSubtle) .grid .editBG.editBGFocus, .compact .gridRowSelected .editBGPrimary.editBGFocus, .compact .gridRowSelected .grid .editBG.editBGFocus, .compact .gridRowHover .editBGPrimary.editBGFocus, .compact .gridRowHover .grid .editBG.editBGFocus {
+box-shadow: inset 0px 0px 0px 1px #fff;
+}
+/* buttons */
+.button, .buttonDD, .buttonSplit {
+color: #4c7c50;
+background: transparent;
+font-size: 16px;
+font-weight: bold;
+border: none;
+padding: 9px 14px;
+margin: 0px;
+vertical-align: middle;
+line-height: 26px;
+border-radius: 2px;
+outline: none;
+}
+.buttonIcon {
+color: #4c7c50;
+background: transparent;
+font-size: 16px;
+font-weight: bold;
+border: none;
+padding: 9px;
+margin: 0px;
+vertical-align: middle;
+line-height: 26px;
+border-radius: 2px;
+outline: none;
+}
+.buttonRounded {
+color: #fff;
+background: #4c7c50;
+border-radius: 200px;
+}
+.buttonCircle {
+overflow: hidden;
+width: 44px;
+height: 44px;
+}
+.pulse .button, .pulse .buttonIcon, .pulse .buttonDD, .pulse .buttonSplit {
+position: relative;
+transition: background-color 600ms cubic-bezier(0, 0.8, 1, 0.86);
+}
+.pulse .button:after, .pulse .buttonIcon:after, .pulse .buttonDD:after, .pulse .buttonSplit:after {
+position: absolute;
+top: 0px;
+left: 0px;
+right: 0px;
+bottom: 0px;
+border-radius: 3px;
+box-shadow: inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15);
+content: '';
+transition: box-shadow 600ms;
+pointer-events: none;
+}
+.pulse .button:not(.buttonDisabled):active:after, .pulse .buttonIcon:not(.buttonDisabled):active:after, .pulse .buttonDD:not(.buttonDisabled):active:after, .pulse .buttonSplit:not(.buttonDisabled):active:after {
+box-shadow: inset 0px 0px 0px 44px rgba(255, 255, 255, 0.15);
+transition: none;
+}
+.pulse .buttonRounded:after {
+border-radius: 200px;
+}
+.buttonRaised {
+box-shadow: 0px 3px 12px -2px rgba(0, 0, 0, 0.4);
+}
+.button .icon, .buttonDD .icon, .buttonSplit .icon, .buttonIcon .icon {
+vertical-align: top !important;
+fill: #4c7c50;
+stroke: #4c7c50;
+}
+.buttonListPrimary {
+background: #f2f2f2;
+}
+.buttonSecondary {
+font-size: 16px;
+padding: 9px 14px;
+}
+.buttonHover {
+color: #fff;
+background: #7eb082;
+}
+.buttonPressed, .buttonPrimary {
+color: #fff;
+background: #4c7c50;
+}
+.buttonHover .icon, .buttonPressed .icon, .buttonPrimary .icon, .buttonRounded:not(.buttonSubtle) .icon {
+fill: #fff;
+stroke: #fff;
+}
+.buttonPrimary.buttonHover {
+color: #fff;
+background: #7eb082;
+}
+.buttonPrimary.buttonPressed {
+background: #7eb082;
+border: 2px solid #4c7c50;
+padding: 7px 12px;
+}
+.buttonPrimary.buttonDisabled, .buttonRounded.buttonDisabled {
+background: #d9d9d9;
+}
+.buttonPrimary.buttonDisabled .icon, .buttonPrimary.buttonDisabled .iconDisabled {
+fill: #d9d9d9;
+stroke: #d9d9d9;
+}
+.buttonSubtle {
+color: #262626;
+background: transparent;
+}
+.buttonSubtle.buttonRounded {
+background: #d9d9d9;
+}
+.buttonSubtle.buttonRaised {
+background: #f7f7f7;
+}
+.buttonSubtle.buttonPressed {
+background: #d9d9d9;
+}
+.buttonSubtle.buttonHover {
+background: #ebebeb;
+}
+.buttonConfirm {
+color: #3c9;
+border-color: #3c9;
+}
+.buttonConfirm.buttonHover {
+color: #fff;
+background: #5cd6ad;
+border-color: #3c9;
+}
+.buttonConfirm.buttonPressed {
+color: #fff;
+background: #3c9;
+border-color: #3c9;
+}
+.buttonConfirm .icon {
+fill: #3c9;
+stroke: #3c9;
+}
+.buttonConfirm.buttonHover .icon, .buttonConfirm.buttonPressed .icon {
+fill: #fff;
+stroke: #fff;
+}
+.buttonDeny {
+color: #f33;
+border-color: #f33;
+}
+.buttonDeny.buttonHover {
+color: #fff;
+background: #ff6666;
+border-color: #f33;
+}
+.buttonDeny.buttonPressed {
+color: #fff;
+background: #f33;
+border-color: #f33;
+}
+.buttonDeny .icon {
+fill: #f33;
+stroke: #f33;
+}
+.buttonDeny.buttonHover .icon, .buttonDeny.buttonPressed .icon {
+fill: #fff;
+stroke: #fff;
+}
+.buttonIconText {
+font-size: 10px;
+padding-top: 3px;
+padding-bottom: 3px;
+line-height: 12px;
+}
+.buttonLeft {
+text-align: left;
+padding-left: 26px;
+position: relative;
+}
+.buttonLeft:before {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #4c7c50;
+border-left-style: solid;
+border-left-width: 2px;
+border-left-color: #4c7c50;
+margin-top: -6px;
+display: inline-block;
+position: absolute;
+top: 50%;
+left: 9px;
+width: 9px;
+height: 9px;
+border-radius: 2px;
+content: '';
+-webkit-transform: rotate(-45deg);
+transform: rotate(-45deg);
+}
+.buttonRight {
+text-align: right;
+padding-right: 26px;
+position: relative;
+}
+.buttonRight:before {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #4c7c50;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #4c7c50;
+margin-top: -6px;
+margin-left: 4px;
+display: inline-block;
+position: absolute;
+top: 50%;
+right: 9px;
+width: 9px;
+height: 9px;
+border-radius: 2px;
+content: '';
+-webkit-transform: rotate(45deg);
+transform: rotate(45deg);
+}
+.buttonHover.buttonLeft:before, .buttonPressed.buttonLeft:before, .buttonHover.buttonRight:before, .buttonPressed.buttonRight:before {
+border-color: #fff;
+}
+.buttonDisabled.buttonLeft:before, .buttonDisabled.buttonRight:before {
+border-color: #a6a6a6;
+}
+.buttonDisabled {
+color: #a6a6a6;
+}
+.buttonDisabled .icon, .buttonDisabled .iconDisabled {
+fill: #a6a6a6;
+stroke: #a6a6a6;
+}
+.buttonDD, .buttonSplit {
+padding: 0px;
+}
+.buttonContent {
+color: #4c7c50;
+font-weight: bold;
+padding: 9px 14px;
+position: relative;
+line-height: 26px;
+}
+.buttonDDArrow {
+padding: 9px 14px;
+line-height: 26px;
+}
+.buttonSplitArrow {
+padding: 9px 14px;
+position: relative;
+line-height: 26px;
+}
+.buttonSplitArrow:after {
+border-left-style: dotted;
+border-left-width: 1px;
+border-left-color: #4c7c50;
+display: block;
+position: absolute;
+top: 2px;
+left: 0px;
+bottom: 2px;
+content: "";
+}
+.buttonDDArrow:before, .buttonSplitArrow:before {
+border: none;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #4c7c50;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #4c7c50;
+margin-top: -6px;
+display: inline-block;
+width: 8px;
+height: 8px;
+border-radius: 2px;
+content: "";
+-webkit-transform: rotate(45deg);
+transform: rotate(45deg);
+}
+.buttonHover .buttonSplitArrow:after {
+border-color: #fff;
+}
+.buttonHover .buttonContent {
+color: #fff;
+}
+.buttonHover .buttonDDArrow:before, .buttonHover .buttonSplitArrow:before {
+border-color: #fff;
+}
+.buttonPressed .buttonSplitArrow:after {
+border-color: #fff;
+}
+.buttonPressed .buttonContent {
+color: #fff;
+}
+.buttonPressed .buttonDDArrow:before, .buttonPressed .buttonSplitArrow:before {
+border-color: #fff;
+}
+.buttonDisabled .buttonSplitArrow:after {
+border-color: #a6a6a6;
+}
+.buttonDisabled .buttonContent {
+color: #a6a6a6;
+}
+.buttonDisabled .buttonDDArrow:before, .buttonDisabled .buttonSplitArrow:before {
+border-color: #a6a6a6;
+}
+.buttonDisabled .icon, .buttonDisabled .iconDisabled {
+fill: #a6a6a6;
+stroke: #a6a6a6;
+}
+.buttonGroupFirst {
+margin-right: 0px;
+border-radius: 2px 0px 0px 2px;
+}
+.buttonGroupMid {
+border-left-style: none;
+margin-left: 0px;
+margin-right: 0px;
+border-radius: 0px;
+}
+.buttonGroupLast {
+border-left-style: none;
+margin-left: 0px;
+border-radius: 0px 2px 2px 0px;
+}
+.buttonGroupVFirst {
+margin-bottom: 0px;
+display: block;
+width: 100%;
+border-radius: 2px 2px 0px 0px;
+}
+.buttonGroupVMid {
+border-top-style: none;
+margin-top: 0px;
+margin-bottom: 0px;
+display: block;
+width: 100%;
+border-radius: 0px;
+}
+.buttonGroupVLast {
+border-top-style: none;
+margin-top: 0px;
+display: block;
+width: 100%;
+border-radius: 0px 0px 2px 2px;
+}
+.compact .button, .compact .buttonContent, .compact .buttonDDArrow, .compact .buttonSplitArrow {
+font-size: 12px;
+padding: 3px 6px;
+line-height: 18px;
+}
+.compact .buttonDDArrow:before, .compact .buttonSplitArrow:before {
+margin-top: -4px;
+width: 6px;
+height: 6px;
+}
+.compact .buttonIcon {
+font-size: 12px;
+padding: 3px;
+line-height: 18px;
+}
+.compact .buttonIconText {
+font-size: 8px;
+padding-top: 1px;
+padding-bottom: 1px;
+line-height: 8px;
+}
+.compact .buttonCircle {
+overflow: hidden;
+width: 24px;
+height: 24px;
+}
+.compact .buttonSecondary {
+font-size: 10px;
+padding: 3px 7px;
+}
+.compact .buttonPrimary.buttonPressed {
+padding: 1px 4px;
+}
+.compact .buttonLeft {
+padding-left: 18px;
+}
+.compact .buttonLeft:before {
+margin-top: -4px;
+left: 6px;
+width: 6px;
+height: 6px;
+}
+.compact .buttonRight {
+padding-right: 18px;
+}
+.compact .buttonRight:before {
+margin-top: -4px;
+right: 6px;
+width: 6px;
+height: 6px;
+}
+.button .iconButton, .buttonIcon .iconButton {
+padding: 0px;
+}
+/* button overrides for selected list/grid items */
+.listItemSelected .button, .listItemSelected .buttonIcon, .listItemSelected .buttonDD, .listItemSelected .buttonSplit, .listItemHover .button, .listItemHover .buttonIcon, .listItemHover .buttonDD, .listItemHover .buttonSplit, .gridRowSelected .button, .gridRowSelected .buttonIcon, .gridRowSelected .buttonDD, .gridRowSelected .buttonSplit, .gridRowHover .button, .gridRowHover .buttonIcon, .gridRowHover .buttonDD, .gridRowHover .buttonSplit {
+background: #fff;
+}
+.listItemSelected .buttonPrimary, .listItemSelected .buttonCricle, .listItemHover .buttonPrimary, .listItemHover .buttonCricle, .gridRowSelected .buttonPrimary, .gridRowSelected .buttonCricle, .gridRowHover .buttonPrimary, .gridRowHover .buttonCricle {
+background: #4c7c50;
+}
+.listItemSelected .buttonHover, .listItemHover .buttonHover, .gridRowSelected .buttonHover, .gridRowHover .buttonHover {
+background: #7eb082;
+}
+.listItemSelected .buttonPressed, .listItemHover .buttonPressed, .gridRowSelected .buttonPressed, .gridRowHover .buttonPressed {
+background: #4c7c50;
+}
+.listItemSelected .buttonConfirm.buttonHover, .listItemHover .buttonConfirm.buttonHover, .gridRowSelected .buttonConfirm.buttonHover, .gridRowHover .buttonConfirm.buttonHover {
+background: #5cd6ad;
+}
+.listItemSelected .buttonConfirm.buttonPressed, .listItemHover .buttonConfirm.buttonPressed, .gridRowSelected .buttonConfirm.buttonPressed, .gridRowHover .buttonConfirm.buttonPressed {
+background: #3c9;
+}
+.listItemSelected .buttonDeny.buttonHover, .listItemHover .buttonDeny.buttonHover, .gridRowSelected .buttonDeny.buttonHover, .gridRowHover .buttonDeny.buttonHover {
+background: #ff6666;
+}
+.listItemSelected .buttonDeny.buttonPressed, .listItemHover .buttonDeny.buttonPressed, .gridRowSelected .buttonDeny.buttonPressed, .gridRowHover .buttonDeny.buttonPressed {
+background: #f33;
+}
+.listItemSelected .buttonDisabled, .listItemHover .buttonDisabled, .gridRowSelected .buttonDisabled, .gridRowHover .buttonDisabled {
+background: rgba(255, 255, 255, 0.75);
+}
+.windowButtons .button {
+border: none;
+margin: 0px;
+border-radius: 0px;
+}
+.panelHeader .button, .panelHeader .buttonIcon, .panelHeader .buttonDD, .panelHeader .buttonSplit, .panelHeader .buttonContent, .panelHeaderAlt .button, .panelHeaderAlt .buttonIcon, .panelHeaderAlt .buttonDD, .panelHeaderAlt .buttonSplit, .panelHeaderAlt .buttonContent, .panelFooter .button, .panelFooter .buttonIcon, .panelFooter .buttonDD, .panelFooter .buttonSplit, .panelFooter .buttonContent, .panelFooterAlt .button, .panelFooterAlt .buttonIcon, .panelFooterAlt .buttonDD, .panelFooterAlt .buttonSplit, .panelFooterAlt .buttonContent, .ctrlBarDis .button, .ctrlBarDis .buttonIcon, .ctrlBarDis .buttonDD, .ctrlBarDis .buttonSplit, .ctrlBarDis .buttonContent {
+color: #fff;
+box-shadow: none;
+}
+.panelHeader .button .icon, .panelHeader .buttonIcon .icon, .panelHeader .buttonDD .icon, .panelHeader .buttonSplit .icon, .panelHeader .buttonContent .icon, .panelHeaderAlt .button .icon, .panelHeaderAlt .buttonIcon .icon, .panelHeaderAlt .buttonDD .icon, .panelHeaderAlt .buttonSplit .icon, .panelHeaderAlt .buttonContent .icon, .panelFooter .button .icon, .panelFooter .buttonIcon .icon, .panelFooter .buttonDD .icon, .panelFooter .buttonSplit .icon, .panelFooter .buttonContent .icon, .panelFooterAlt .button .icon, .panelFooterAlt .buttonIcon .icon, .panelFooterAlt .buttonDD .icon, .panelFooterAlt .buttonSplit .icon, .panelFooterAlt .buttonContent .icon, .ctrlBarDis .button .icon, .ctrlBarDis .buttonIcon .icon, .ctrlBarDis .buttonDD .icon, .ctrlBarDis .buttonSplit .icon, .ctrlBarDis .buttonContent .icon {
+fill: #fff;
+stroke: #fff;
+}
+.panelHeader .buttonLeft:before, .panelHeader .buttonRight:before, .panelHeader .buttonDDArrow:before, .panelHeader .buttonSplitArrow:before, .panelHeader .buttonSplitArrow:after, .panelHeaderAlt .buttonLeft:before, .panelHeaderAlt .buttonRight:before, .panelHeaderAlt .buttonDDArrow:before, .panelHeaderAlt .buttonSplitArrow:before, .panelHeaderAlt .buttonSplitArrow:after, .panelFooter .buttonLeft:before, .panelFooter .buttonRight:before, .panelFooter .buttonDDArrow:before, .panelFooter .buttonSplitArrow:before, .panelFooter .buttonSplitArrow:after, .panelFooterAlt .buttonLeft:before, .panelFooterAlt .buttonRight:before, .panelFooterAlt .buttonDDArrow:before, .panelFooterAlt .buttonSplitArrow:before, .panelFooterAlt .buttonSplitArrow:after, .ctrlBarDis .buttonLeft:before, .ctrlBarDis .buttonRight:before, .ctrlBarDis .buttonDDArrow:before, .ctrlBarDis .buttonSplitArrow:before, .ctrlBarDis .buttonSplitArrow:after {
+border-color: #fff;
+}
+.panelHeader .button:after, .panelHeader .buttonIcon:after, .panelHeader .buttonDD:after, .panelHeader .buttonSplit:after, .panelHeaderAlt .button:after, .panelHeaderAlt .buttonIcon:after, .panelHeaderAlt .buttonDD:after, .panelHeaderAlt .buttonSplit:after, .panelFooter .button:after, .panelFooter .buttonIcon:after, .panelFooter .buttonDD:after, .panelFooter .buttonSplit:after, .panelFooterAlt .button:after, .panelFooterAlt .buttonIcon:after, .panelFooterAlt .buttonDD:after, .panelFooterAlt .buttonSplit:after, .ctrlBarDis .button:after, .ctrlBarDis .buttonIcon:after, .ctrlBarDis .buttonDD:after, .ctrlBarDis .buttonSplit:after {
+box-shadow: none !important;
+transition: none;
+}
+.panelHeaderContrast .button, .panelHeaderContrast .buttonIcon, .panelHeaderContrast .buttonDD, .panelHeaderContrast .buttonSplit, .panelHeaderContrast .buttonContent, .panelFooterContrast .button, .panelFooterContrast .buttonIcon, .panelFooterContrast .buttonDD, .panelFooterContrast .buttonSplit, .panelFooterContrast .buttonContent, .ctrlBarDisContrast .button, .ctrlBarDisContrast .buttonIcon, .ctrlBarDisContrast .buttonDD, .ctrlBarDisContrast .buttonSplit, .ctrlBarDisContrast .buttonContent {
+color: #000;
+box-shadow: none;
+}
+.panelHeaderContrast .button .icon, .panelHeaderContrast .buttonIcon .icon, .panelHeaderContrast .buttonDD .icon, .panelHeaderContrast .buttonSplit .icon, .panelHeaderContrast .buttonContent .icon, .panelFooterContrast .button .icon, .panelFooterContrast .buttonIcon .icon, .panelFooterContrast .buttonDD .icon, .panelFooterContrast .buttonSplit .icon, .panelFooterContrast .buttonContent .icon, .ctrlBarDisContrast .button .icon, .ctrlBarDisContrast .buttonIcon .icon, .ctrlBarDisContrast .buttonDD .icon, .ctrlBarDisContrast .buttonSplit .icon, .ctrlBarDisContrast .buttonContent .icon {
+fill: #000;
+stroke: #000;
+}
+.panelHeaderContrast .buttonLeft:before, .panelHeaderContrast .buttonRight:before, .panelHeaderContrast .buttonDDArrow:before, .panelHeaderContrast .buttonSplitArrow:before, .panelHeaderContrast .buttonSplitArrow:after, .panelFooterContrast .buttonLeft:before, .panelFooterContrast .buttonRight:before, .panelFooterContrast .buttonDDArrow:before, .panelFooterContrast .buttonSplitArrow:before, .panelFooterContrast .buttonSplitArrow:after, .ctrlBarDisContrast .buttonLeft:before, .ctrlBarDisContrast .buttonRight:before, .ctrlBarDisContrast .buttonDDArrow:before, .ctrlBarDisContrast .buttonSplitArrow:before, .ctrlBarDisContrast .buttonSplitArrow:after {
+border-color: #000;
+}
+.panelHeaderContrast .button:after, .panelHeaderContrast .buttonIcon:after, .panelHeaderContrast .buttonDD:after, .panelHeaderContrast .buttonSplit:after, .panelFooterContrast .button:after, .panelFooterContrast .buttonIcon:after, .panelFooterContrast .buttonDD:after, .panelFooterContrast .buttonSplit:after, .ctrlBarDisContrast .button:after, .ctrlBarDisContrast .buttonIcon:after, .ctrlBarDisContrast .buttonDD:after, .ctrlBarDisContrast .buttonSplit:after {
+box-shadow: none !important;
+transition: none;
+}
+.panelHeader .button, .panelHeader .buttonIcon, .panelHeader .buttonDD, .panelHeaderAlt .button, .panelHeaderAlt .buttonIcon, .panelHeaderAlt .buttonDD, .panelFooter .button, .panelFooter .buttonIcon, .panelFooter .buttonDD, .panelFooterAlt .button, .panelFooterAlt .buttonIcon, .panelFooterAlt .buttonDD, .ctrlBarDis .button, .ctrlBarDis .buttonIcon, .ctrlBarDis .buttonDD {
+background: transparent;
+vertical-align: top;
+}
+.panelHeader .button.buttonPressed, .panelHeader .button.buttonHover, .panelHeader .buttonDD.buttonPressed, .panelHeader .buttonDD.buttonHover, .panelHeader .buttonSplit.buttonPressed, .panelHeader .buttonSplit.buttonHover, .panelHeader .buttonPrimary, .panelHeader .buttonRounded, .panelHeader .buttonListPrimary, .panelHeaderAlt .button.buttonPressed, .panelHeaderAlt .button.buttonHover, .panelHeaderAlt .buttonDD.buttonPressed, .panelHeaderAlt .buttonDD.buttonHover, .panelHeaderAlt .buttonSplit.buttonPressed, .panelHeaderAlt .buttonSplit.buttonHover, .panelHeaderAlt .buttonPrimary, .panelHeaderAlt .buttonRounded, .panelHeaderAlt .buttonListPrimary, .panelFooter .button.buttonPressed, .panelFooter .button.buttonHover, .panelFooter .buttonDD.buttonPressed, .panelFooter .buttonDD.buttonHover, .panelFooter .buttonSplit.buttonPressed, .panelFooter .buttonSplit.buttonHover, .panelFooter .buttonPrimary, .panelFooter .buttonRounded, .panelFooter .buttonListPrimary, .panelFooterAlt .button.buttonPressed, .panelFooterAlt .button.buttonHover, .panelFooterAlt .buttonDD.buttonPressed, .panelFooterAlt .buttonDD.buttonHover, .panelFooterAlt .buttonSplit.buttonPressed, .panelFooterAlt .buttonSplit.buttonHover, .panelFooterAlt .buttonPrimary, .panelFooterAlt .buttonRounded, .panelFooterAlt .buttonListPrimary, .ctrlBarDis .button.buttonPressed, .ctrlBarDis .button.buttonHover, .ctrlBarDis .buttonDD.buttonPressed, .ctrlBarDis .buttonDD.buttonHover, .ctrlBarDis .buttonSplit.buttonPressed, .ctrlBarDis .buttonSplit.buttonHover, .ctrlBarDis .buttonPrimary, .ctrlBarDis .buttonRounded, .ctrlBarDis .buttonListPrimary {
+color: #4c7c50;
+background: transparent;
+position: relative;
+}
+.panelHeader .button.buttonPressed .icon, .panelHeader .button.buttonHover .icon, .panelHeader .buttonDD.buttonPressed .icon, .panelHeader .buttonDD.buttonHover .icon, .panelHeader .buttonSplit.buttonPressed .icon, .panelHeader .buttonSplit.buttonHover .icon, .panelHeader .buttonPrimary .icon, .panelHeader .buttonRounded .icon, .panelHeader .buttonListPrimary .icon, .panelHeaderAlt .button.buttonPressed .icon, .panelHeaderAlt .button.buttonHover .icon, .panelHeaderAlt .buttonDD.buttonPressed .icon, .panelHeaderAlt .buttonDD.buttonHover .icon, .panelHeaderAlt .buttonSplit.buttonPressed .icon, .panelHeaderAlt .buttonSplit.buttonHover .icon, .panelHeaderAlt .buttonPrimary .icon, .panelHeaderAlt .buttonRounded .icon, .panelHeaderAlt .buttonListPrimary .icon, .panelFooter .button.buttonPressed .icon, .panelFooter .button.buttonHover .icon, .panelFooter .buttonDD.buttonPressed .icon, .panelFooter .buttonDD.buttonHover .icon, .panelFooter .buttonSplit.buttonPressed .icon, .panelFooter .buttonSplit.buttonHover .icon, .panelFooter .buttonPrimary .icon, .panelFooter .buttonRounded .icon, .panelFooter .buttonListPrimary .icon, .panelFooterAlt .button.buttonPressed .icon, .panelFooterAlt .button.buttonHover .icon, .panelFooterAlt .buttonDD.buttonPressed .icon, .panelFooterAlt .buttonDD.buttonHover .icon, .panelFooterAlt .buttonSplit.buttonPressed .icon, .panelFooterAlt .buttonSplit.buttonHover .icon, .panelFooterAlt .buttonPrimary .icon, .panelFooterAlt .buttonRounded .icon, .panelFooterAlt .buttonListPrimary .icon, .ctrlBarDis .button.buttonPressed .icon, .ctrlBarDis .button.buttonHover .icon, .ctrlBarDis .buttonDD.buttonPressed .icon, .ctrlBarDis .buttonDD.buttonHover .icon, .ctrlBarDis .buttonSplit.buttonPressed .icon, .ctrlBarDis .buttonSplit.buttonHover .icon, .ctrlBarDis .buttonPrimary .icon, .ctrlBarDis .buttonRounded .icon, .ctrlBarDis .buttonListPrimary .icon {
+fill: #4c7c50;
+stroke: #4c7c50;
+}
+.panelHeader .button.buttonPressed:after, .panelHeader .button.buttonHover:after, .panelHeader .buttonDD.buttonPressed:after, .panelHeader .buttonDD.buttonHover:after, .panelHeader .buttonSplit.buttonPressed:after, .panelHeader .buttonSplit.buttonHover:after, .panelHeaderAlt .button.buttonPressed:after, .panelHeaderAlt .button.buttonHover:after, .panelHeaderAlt .buttonDD.buttonPressed:after, .panelHeaderAlt .buttonDD.buttonHover:after, .panelHeaderAlt .buttonSplit.buttonPressed:after, .panelHeaderAlt .buttonSplit.buttonHover:after, .panelFooter .button.buttonPressed:after, .panelFooter .button.buttonHover:after, .panelFooter .buttonDD.buttonPressed:after, .panelFooter .buttonDD.buttonHover:after, .panelFooter .buttonSplit.buttonPressed:after, .panelFooter .buttonSplit.buttonHover:after, .panelFooterAlt .button.buttonPressed:after, .panelFooterAlt .button.buttonHover:after, .panelFooterAlt .buttonDD.buttonPressed:after, .panelFooterAlt .buttonDD.buttonHover:after, .panelFooterAlt .buttonSplit.buttonPressed:after, .panelFooterAlt .buttonSplit.buttonHover:after, .ctrlBarDis .button.buttonPressed:after, .ctrlBarDis .button.buttonHover:after, .ctrlBarDis .buttonDD.buttonPressed:after, .ctrlBarDis .buttonDD.buttonHover:after, .ctrlBarDis .buttonSplit.buttonPressed:after, .ctrlBarDis .buttonSplit.buttonHover:after {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #4c7c50;
+display: block;
+position: absolute;
+left: 12px;
+right: 12px;
+bottom: 7px;
+content: "";
+}
+.panelHeader .button.buttonHover:after, .panelHeader .buttonDD.buttonHover:after, .panelHeader .buttonSplit.buttonHover:after, .panelHeaderAlt .button.buttonHover:after, .panelHeaderAlt .buttonDD.buttonHover:after, .panelHeaderAlt .buttonSplit.buttonHover:after, .panelFooter .button.buttonHover:after, .panelFooter .buttonDD.buttonHover:after, .panelFooter .buttonSplit.buttonHover:after, .panelFooterAlt .button.buttonHover:after, .panelFooterAlt .buttonDD.buttonHover:after, .panelFooterAlt .buttonSplit.buttonHover:after, .ctrlBarDis .button.buttonHover:after, .ctrlBarDis .buttonDD.buttonHover:after, .ctrlBarDis .buttonSplit.buttonHover:after {
+border-bottom-style: dotted;
+}
+.panelHeader .buttonConfirm, .panelHeaderAlt .buttonConfirm, .panelFooter .buttonConfirm, .panelFooterAlt .buttonConfirm, .ctrlBarDis .buttonConfirm {
+color: #3c9;
+}
+.panelHeader .buttonConfirm .icon, .panelHeaderAlt .buttonConfirm .icon, .panelFooter .buttonConfirm .icon, .panelFooterAlt .buttonConfirm .icon, .ctrlBarDis .buttonConfirm .icon {
+fill: #3c9;
+stroke: #3c9;
+}
+.panelHeader .buttonConfirm.buttonPressed, .panelHeader .buttonConfirm.buttonHover, .panelHeaderAlt .buttonConfirm.buttonPressed, .panelHeaderAlt .buttonConfirm.buttonHover, .panelFooter .buttonConfirm.buttonPressed, .panelFooter .buttonConfirm.buttonHover, .panelFooterAlt .buttonConfirm.buttonPressed, .panelFooterAlt .buttonConfirm.buttonHover, .ctrlBarDis .buttonConfirm.buttonPressed, .ctrlBarDis .buttonConfirm.buttonHover {
+color: #3c9;
+}
+.panelHeader .buttonConfirm.buttonPressed .icon, .panelHeader .buttonConfirm.buttonHover .icon, .panelHeaderAlt .buttonConfirm.buttonPressed .icon, .panelHeaderAlt .buttonConfirm.buttonHover .icon, .panelFooter .buttonConfirm.buttonPressed .icon, .panelFooter .buttonConfirm.buttonHover .icon, .panelFooterAlt .buttonConfirm.buttonPressed .icon, .panelFooterAlt .buttonConfirm.buttonHover .icon, .ctrlBarDis .buttonConfirm.buttonPressed .icon, .ctrlBarDis .buttonConfirm.buttonHover .icon {
+fill: #3c9;
+stroke: #3c9;
+}
+.panelHeader .buttonConfirm.buttonPressed:after, .panelHeader .buttonConfirm.buttonHover:after, .panelHeaderAlt .buttonConfirm.buttonPressed:after, .panelHeaderAlt .buttonConfirm.buttonHover:after, .panelFooter .buttonConfirm.buttonPressed:after, .panelFooter .buttonConfirm.buttonHover:after, .panelFooterAlt .buttonConfirm.buttonPressed:after, .panelFooterAlt .buttonConfirm.buttonHover:after, .ctrlBarDis .buttonConfirm.buttonPressed:after, .ctrlBarDis .buttonConfirm.buttonHover:after {
+border-bottom-color: #3c9;
+}
+.panelHeader .buttonDeny, .panelHeaderAlt .buttonDeny, .panelFooter .buttonDeny, .panelFooterAlt .buttonDeny, .ctrlBarDis .buttonDeny {
+color: #f33;
+}
+.panelHeader .buttonDeny .icon, .panelHeaderAlt .buttonDeny .icon, .panelFooter .buttonDeny .icon, .panelFooterAlt .buttonDeny .icon, .ctrlBarDis .buttonDeny .icon {
+fill: #f33;
+stroke: #f33;
+}
+.panelHeader .buttonDeny.buttonPressed, .panelHeader .buttonDeny.buttonHover, .panelHeaderAlt .buttonDeny.buttonPressed, .panelHeaderAlt .buttonDeny.buttonHover, .panelFooter .buttonDeny.buttonPressed, .panelFooter .buttonDeny.buttonHover, .panelFooterAlt .buttonDeny.buttonPressed, .panelFooterAlt .buttonDeny.buttonHover, .ctrlBarDis .buttonDeny.buttonPressed, .ctrlBarDis .buttonDeny.buttonHover {
+color: #f33;
+}
+.panelHeader .buttonDeny.buttonPressed .icon, .panelHeader .buttonDeny.buttonHover .icon, .panelHeaderAlt .buttonDeny.buttonPressed .icon, .panelHeaderAlt .buttonDeny.buttonHover .icon, .panelFooter .buttonDeny.buttonPressed .icon, .panelFooter .buttonDeny.buttonHover .icon, .panelFooterAlt .buttonDeny.buttonPressed .icon, .panelFooterAlt .buttonDeny.buttonHover .icon, .ctrlBarDis .buttonDeny.buttonPressed .icon, .ctrlBarDis .buttonDeny.buttonHover .icon {
+fill: #f33;
+stroke: #f33;
+}
+.panelHeader .buttonDeny.buttonPressed:after, .panelHeader .buttonDeny.buttonHover:after, .panelHeaderAlt .buttonDeny.buttonPressed:after, .panelHeaderAlt .buttonDeny.buttonHover:after, .panelFooter .buttonDeny.buttonPressed:after, .panelFooter .buttonDeny.buttonHover:after, .panelFooterAlt .buttonDeny.buttonPressed:after, .panelFooterAlt .buttonDeny.buttonHover:after, .ctrlBarDis .buttonDeny.buttonPressed:after, .ctrlBarDis .buttonDeny.buttonHover:after {
+border-bottom-color: #f33;
+}
+.panelHeader .buttonPrimary.buttonPressed, .panelHeaderAlt .buttonPrimary.buttonPressed, .panelFooter .buttonPrimary.buttonPressed, .panelFooterAlt .buttonPrimary.buttonPressed, .ctrlBarDis .buttonPrimary.buttonPressed {
+border-color: transparent;
+}
+.panelHeader .buttonHover.buttonLeft:before, .panelHeader .buttonPressed.buttonLeft:before, .panelHeader .buttonHover.buttonRight:before, .panelHeader .buttonPressed.buttonRight:before, .panelHeaderAlt .buttonHover.buttonLeft:before, .panelHeaderAlt .buttonPressed.buttonLeft:before, .panelHeaderAlt .buttonHover.buttonRight:before, .panelHeaderAlt .buttonPressed.buttonRight:before, .panelFooter .buttonHover.buttonLeft:before, .panelFooter .buttonPressed.buttonLeft:before, .panelFooter .buttonHover.buttonRight:before, .panelFooter .buttonPressed.buttonRight:before, .panelFooterAlt .buttonHover.buttonLeft:before, .panelFooterAlt .buttonPressed.buttonLeft:before, .panelFooterAlt .buttonHover.buttonRight:before, .panelFooterAlt .buttonPressed.buttonRight:before, .ctrlBarDis .buttonHover.buttonLeft:before, .ctrlBarDis .buttonPressed.buttonLeft:before, .ctrlBarDis .buttonHover.buttonRight:before, .ctrlBarDis .buttonPressed.buttonRight:before {
+border-color: #4c7c50;
+}
+.panelHeader .buttonDisabled.buttonLeft:before, .panelHeader .buttonDisabled.buttonRight:before, .panelHeaderAlt .buttonDisabled.buttonLeft:before, .panelHeaderAlt .buttonDisabled.buttonRight:before, .panelFooter .buttonDisabled.buttonLeft:before, .panelFooter .buttonDisabled.buttonRight:before, .panelFooterAlt .buttonDisabled.buttonLeft:before, .panelFooterAlt .buttonDisabled.buttonRight:before, .ctrlBarDis .buttonDisabled.buttonLeft:before, .ctrlBarDis .buttonDisabled.buttonRight:before {
+border-color: #a6a6a6;
+}
+.panelHeader .buttonSplitArrow:after, .panelHeaderAlt .buttonSplitArrow:after, .panelFooter .buttonSplitArrow:after, .panelFooterAlt .buttonSplitArrow:after, .ctrlBarDis .buttonSplitArrow:after {
+top: 13px;
+bottom: 13px;
+}
+.panelHeader .buttonPressed .buttonContent, .panelHeader .buttonHover .buttonContent, .panelHeaderAlt .buttonPressed .buttonContent, .panelHeaderAlt .buttonHover .buttonContent, .panelFooter .buttonPressed .buttonContent, .panelFooter .buttonHover .buttonContent, .panelFooterAlt .buttonPressed .buttonContent, .panelFooterAlt .buttonHover .buttonContent, .ctrlBarDis .buttonPressed .buttonContent, .ctrlBarDis .buttonHover .buttonContent {
+color: #4c7c50;
+}
+.panelHeader .buttonPressed .buttonDDArrow:before, .panelHeader .buttonPressed .buttonSplitArrow:before, .panelHeader .buttonHover .buttonDDArrow:before, .panelHeader .buttonHover .buttonSplitArrow:before, .panelHeaderAlt .buttonPressed .buttonDDArrow:before, .panelHeaderAlt .buttonPressed .buttonSplitArrow:before, .panelHeaderAlt .buttonHover .buttonDDArrow:before, .panelHeaderAlt .buttonHover .buttonSplitArrow:before, .panelFooter .buttonPressed .buttonDDArrow:before, .panelFooter .buttonPressed .buttonSplitArrow:before, .panelFooter .buttonHover .buttonDDArrow:before, .panelFooter .buttonHover .buttonSplitArrow:before, .panelFooterAlt .buttonPressed .buttonDDArrow:before, .panelFooterAlt .buttonPressed .buttonSplitArrow:before, .panelFooterAlt .buttonHover .buttonDDArrow:before, .panelFooterAlt .buttonHover .buttonSplitArrow:before, .ctrlBarDis .buttonPressed .buttonDDArrow:before, .ctrlBarDis .buttonPressed .buttonSplitArrow:before, .ctrlBarDis .buttonHover .buttonDDArrow:before, .ctrlBarDis .buttonHover .buttonSplitArrow:before {
+border-color: #4c7c50;
+}
+.panelHeader .buttonPressed .buttonSplitArrow:after, .panelHeader .buttonHover .buttonSplitArrow:after, .panelHeaderAlt .buttonPressed .buttonSplitArrow:after, .panelHeaderAlt .buttonHover .buttonSplitArrow:after, .panelFooter .buttonPressed .buttonSplitArrow:after, .panelFooter .buttonHover .buttonSplitArrow:after, .panelFooterAlt .buttonPressed .buttonSplitArrow:after, .panelFooterAlt .buttonHover .buttonSplitArrow:after, .ctrlBarDis .buttonPressed .buttonSplitArrow:after, .ctrlBarDis .buttonHover .buttonSplitArrow:after {
+border-color: #4c7c50;
+}
+.panelHeader .buttonPressed .icon, .panelHeader .buttonHover .icon, .panelHeaderAlt .buttonPressed .icon, .panelHeaderAlt .buttonHover .icon, .panelFooter .buttonPressed .icon, .panelFooter .buttonHover .icon, .panelFooterAlt .buttonPressed .icon, .panelFooterAlt .buttonHover .icon, .ctrlBarDis .buttonPressed .icon, .ctrlBarDis .buttonHover .icon {
+fill: #4c7c50;
+stroke: #4c7c50;
+}
+.panelHeader .buttonDisabled, .panelHeader .buttonDisabled .buttonContent, .panelHeaderAlt .buttonDisabled, .panelHeaderAlt .buttonDisabled .buttonContent, .panelFooter .buttonDisabled, .panelFooter .buttonDisabled .buttonContent, .panelFooterAlt .buttonDisabled, .panelFooterAlt .buttonDisabled .buttonContent, .ctrlBarDis .buttonDisabled, .ctrlBarDis .buttonDisabled .buttonContent {
+color: #a6a6a6;
+}
+.panelHeader .buttonDisabled .icon, .panelHeader .buttonDisabled .buttonContent .icon, .panelHeaderAlt .buttonDisabled .icon, .panelHeaderAlt .buttonDisabled .buttonContent .icon, .panelFooter .buttonDisabled .icon, .panelFooter .buttonDisabled .buttonContent .icon, .panelFooterAlt .buttonDisabled .icon, .panelFooterAlt .buttonDisabled .buttonContent .icon, .ctrlBarDis .buttonDisabled .icon, .ctrlBarDis .buttonDisabled .buttonContent .icon {
+fill: #a6a6a6;
+stroke: #a6a6a6;
+}
+.panelHeader .buttonDisabled .buttonDDArrow:after, .panelHeader .buttonDisabled .buttonSplitArrow:after, .panelHeaderAlt .buttonDisabled .buttonDDArrow:after, .panelHeaderAlt .buttonDisabled .buttonSplitArrow:after, .panelFooter .buttonDisabled .buttonDDArrow:after, .panelFooter .buttonDisabled .buttonSplitArrow:after, .panelFooterAlt .buttonDisabled .buttonDDArrow:after, .panelFooterAlt .buttonDisabled .buttonSplitArrow:after, .ctrlBarDis .buttonDisabled .buttonDDArrow:after, .ctrlBarDis .buttonDisabled .buttonSplitArrow:after {
+border-top-color: #a6a6a6;
+}
+.panelHeader .buttonDisabled .buttonSplitArrow, .panelHeaderAlt .buttonDisabled .buttonSplitArrow, .panelFooter .buttonDisabled .buttonSplitArrow, .panelFooterAlt .buttonDisabled .buttonSplitArrow, .ctrlBarDis .buttonDisabled .buttonSplitArrow {
+border-color: #a6a6a6;
+}
+.panelHeader .buttonIcon.buttonHover, .panelHeaderAlt .buttonIcon.buttonHover, .panelFooter .buttonIcon.buttonHover, .panelFooterAlt .buttonIcon.buttonHover, .ctrlBarDis .buttonIcon.buttonHover {
+color: #7eb082;
+}
+.panelHeader .buttonIcon.buttonHover .icon, .panelHeaderAlt .buttonIcon.buttonHover .icon, .panelFooter .buttonIcon.buttonHover .icon, .panelFooterAlt .buttonIcon.buttonHover .icon, .ctrlBarDis .buttonIcon.buttonHover .icon {
+fill: #7eb082;
+stroke: #7eb082;
+}
+.panelHeader .buttonIcon.buttonPressed, .panelHeaderAlt .buttonIcon.buttonPressed, .panelFooter .buttonIcon.buttonPressed, .panelFooterAlt .buttonIcon.buttonPressed, .ctrlBarDis .buttonIcon.buttonPressed {
+color: #4c7c50;
+}
+.panelHeader .buttonIcon.buttonPressed .icon, .panelHeaderAlt .buttonIcon.buttonPressed .icon, .panelFooter .buttonIcon.buttonPressed .icon, .panelFooterAlt .buttonIcon.buttonPressed .icon, .ctrlBarDis .buttonIcon.buttonPressed .icon {
+fill: #4c7c50;
+stroke: #4c7c50;
+}
+.panelHeaderContrast .button, .panelHeaderContrast .buttonIcon, .panelHeaderContrast .buttonDD, .panelFooterContrast .button, .panelFooterContrast .buttonIcon, .panelFooterContrast .buttonDD, .ctrlBarDisContrast .button, .ctrlBarDisContrast .buttonIcon, .ctrlBarDisContrast .buttonDD {
+background: transparent;
+vertical-align: top;
+}
+.panelHeaderContrast .button.buttonPressed, .panelHeaderContrast .button.buttonHover, .panelHeaderContrast .buttonDD.buttonPressed, .panelHeaderContrast .buttonDD.buttonHover, .panelHeaderContrast .buttonSplit.buttonPressed, .panelHeaderContrast .buttonSplit.buttonHover, .panelHeaderContrast .buttonPrimary, .panelHeaderContrast .buttonRounded, .panelHeaderContrast .buttonListPrimary, .panelFooterContrast .button.buttonPressed, .panelFooterContrast .button.buttonHover, .panelFooterContrast .buttonDD.buttonPressed, .panelFooterContrast .buttonDD.buttonHover, .panelFooterContrast .buttonSplit.buttonPressed, .panelFooterContrast .buttonSplit.buttonHover, .panelFooterContrast .buttonPrimary, .panelFooterContrast .buttonRounded, .panelFooterContrast .buttonListPrimary, .ctrlBarDisContrast .button.buttonPressed, .ctrlBarDisContrast .button.buttonHover, .ctrlBarDisContrast .buttonDD.buttonPressed, .ctrlBarDisContrast .buttonDD.buttonHover, .ctrlBarDisContrast .buttonSplit.buttonPressed, .ctrlBarDisContrast .buttonSplit.buttonHover, .ctrlBarDisContrast .buttonPrimary, .ctrlBarDisContrast .buttonRounded, .ctrlBarDisContrast .buttonListPrimary {
+color: #4c7c50;
+background: transparent;
+position: relative;
+}
+.panelHeaderContrast .button.buttonPressed .icon, .panelHeaderContrast .button.buttonHover .icon, .panelHeaderContrast .buttonDD.buttonPressed .icon, .panelHeaderContrast .buttonDD.buttonHover .icon, .panelHeaderContrast .buttonSplit.buttonPressed .icon, .panelHeaderContrast .buttonSplit.buttonHover .icon, .panelHeaderContrast .buttonPrimary .icon, .panelHeaderContrast .buttonRounded .icon, .panelHeaderContrast .buttonListPrimary .icon, .panelFooterContrast .button.buttonPressed .icon, .panelFooterContrast .button.buttonHover .icon, .panelFooterContrast .buttonDD.buttonPressed .icon, .panelFooterContrast .buttonDD.buttonHover .icon, .panelFooterContrast .buttonSplit.buttonPressed .icon, .panelFooterContrast .buttonSplit.buttonHover .icon, .panelFooterContrast .buttonPrimary .icon, .panelFooterContrast .buttonRounded .icon, .panelFooterContrast .buttonListPrimary .icon, .ctrlBarDisContrast .button.buttonPressed .icon, .ctrlBarDisContrast .button.buttonHover .icon, .ctrlBarDisContrast .buttonDD.buttonPressed .icon, .ctrlBarDisContrast .buttonDD.buttonHover .icon, .ctrlBarDisContrast .buttonSplit.buttonPressed .icon, .ctrlBarDisContrast .buttonSplit.buttonHover .icon, .ctrlBarDisContrast .buttonPrimary .icon, .ctrlBarDisContrast .buttonRounded .icon, .ctrlBarDisContrast .buttonListPrimary .icon {
+fill: #4c7c50;
+stroke: #4c7c50;
+}
+.panelHeaderContrast .button.buttonPressed:after, .panelHeaderContrast .button.buttonHover:after, .panelHeaderContrast .buttonDD.buttonPressed:after, .panelHeaderContrast .buttonDD.buttonHover:after, .panelHeaderContrast .buttonSplit.buttonPressed:after, .panelHeaderContrast .buttonSplit.buttonHover:after, .panelFooterContrast .button.buttonPressed:after, .panelFooterContrast .button.buttonHover:after, .panelFooterContrast .buttonDD.buttonPressed:after, .panelFooterContrast .buttonDD.buttonHover:after, .panelFooterContrast .buttonSplit.buttonPressed:after, .panelFooterContrast .buttonSplit.buttonHover:after, .ctrlBarDisContrast .button.buttonPressed:after, .ctrlBarDisContrast .button.buttonHover:after, .ctrlBarDisContrast .buttonDD.buttonPressed:after, .ctrlBarDisContrast .buttonDD.buttonHover:after, .ctrlBarDisContrast .buttonSplit.buttonPressed:after, .ctrlBarDisContrast .buttonSplit.buttonHover:after {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #4c7c50;
+display: block;
+position: absolute;
+left: 12px;
+right: 12px;
+bottom: 7px;
+content: "";
+}
+.panelHeaderContrast .button.buttonHover:after, .panelHeaderContrast .buttonDD.buttonHover:after, .panelHeaderContrast .buttonSplit.buttonHover:after, .panelFooterContrast .button.buttonHover:after, .panelFooterContrast .buttonDD.buttonHover:after, .panelFooterContrast .buttonSplit.buttonHover:after, .ctrlBarDisContrast .button.buttonHover:after, .ctrlBarDisContrast .buttonDD.buttonHover:after, .ctrlBarDisContrast .buttonSplit.buttonHover:after {
+border-bottom-style: dotted;
+}
+.panelHeaderContrast .buttonConfirm, .panelFooterContrast .buttonConfirm, .ctrlBarDisContrast .buttonConfirm {
+color: #3c9;
+}
+.panelHeaderContrast .buttonConfirm .icon, .panelFooterContrast .buttonConfirm .icon, .ctrlBarDisContrast .buttonConfirm .icon {
+fill: #3c9;
+stroke: #3c9;
+}
+.panelHeaderContrast .buttonConfirm.buttonPressed, .panelHeaderContrast .buttonConfirm.buttonHover, .panelFooterContrast .buttonConfirm.buttonPressed, .panelFooterContrast .buttonConfirm.buttonHover, .ctrlBarDisContrast .buttonConfirm.buttonPressed, .ctrlBarDisContrast .buttonConfirm.buttonHover {
+color: #3c9;
+}
+.panelHeaderContrast .buttonConfirm.buttonPressed .icon, .panelHeaderContrast .buttonConfirm.buttonHover .icon, .panelFooterContrast .buttonConfirm.buttonPressed .icon, .panelFooterContrast .buttonConfirm.buttonHover .icon, .ctrlBarDisContrast .buttonConfirm.buttonPressed .icon, .ctrlBarDisContrast .buttonConfirm.buttonHover .icon {
+fill: #3c9;
+stroke: #3c9;
+}
+.panelHeaderContrast .buttonConfirm.buttonPressed:after, .panelHeaderContrast .buttonConfirm.buttonHover:after, .panelFooterContrast .buttonConfirm.buttonPressed:after, .panelFooterContrast .buttonConfirm.buttonHover:after, .ctrlBarDisContrast .buttonConfirm.buttonPressed:after, .ctrlBarDisContrast .buttonConfirm.buttonHover:after {
+border-bottom-color: #3c9;
+}
+.panelHeaderContrast .buttonDeny, .panelFooterContrast .buttonDeny, .ctrlBarDisContrast .buttonDeny {
+color: #f33;
+}
+.panelHeaderContrast .buttonDeny .icon, .panelFooterContrast .buttonDeny .icon, .ctrlBarDisContrast .buttonDeny .icon {
+fill: #f33;
+stroke: #f33;
+}
+.panelHeaderContrast .buttonDeny.buttonPressed, .panelHeaderContrast .buttonDeny.buttonHover, .panelFooterContrast .buttonDeny.buttonPressed, .panelFooterContrast .buttonDeny.buttonHover, .ctrlBarDisContrast .buttonDeny.buttonPressed, .ctrlBarDisContrast .buttonDeny.buttonHover {
+color: #f33;
+}
+.panelHeaderContrast .buttonDeny.buttonPressed .icon, .panelHeaderContrast .buttonDeny.buttonHover .icon, .panelFooterContrast .buttonDeny.buttonPressed .icon, .panelFooterContrast .buttonDeny.buttonHover .icon, .ctrlBarDisContrast .buttonDeny.buttonPressed .icon, .ctrlBarDisContrast .buttonDeny.buttonHover .icon {
+fill: #f33;
+stroke: #f33;
+}
+.panelHeaderContrast .buttonDeny.buttonPressed:after, .panelHeaderContrast .buttonDeny.buttonHover:after, .panelFooterContrast .buttonDeny.buttonPressed:after, .panelFooterContrast .buttonDeny.buttonHover:after, .ctrlBarDisContrast .buttonDeny.buttonPressed:after, .ctrlBarDisContrast .buttonDeny.buttonHover:after {
+border-bottom-color: #f33;
+}
+.panelHeaderContrast .buttonPrimary.buttonPressed, .panelFooterContrast .buttonPrimary.buttonPressed, .ctrlBarDisContrast .buttonPrimary.buttonPressed {
+border-color: transparent;
+}
+.panelHeaderContrast .buttonHover.buttonLeft:before, .panelHeaderContrast .buttonPressed.buttonLeft:before, .panelHeaderContrast .buttonHover.buttonRight:before, .panelHeaderContrast .buttonPressed.buttonRight:before, .panelFooterContrast .buttonHover.buttonLeft:before, .panelFooterContrast .buttonPressed.buttonLeft:before, .panelFooterContrast .buttonHover.buttonRight:before, .panelFooterContrast .buttonPressed.buttonRight:before, .ctrlBarDisContrast .buttonHover.buttonLeft:before, .ctrlBarDisContrast .buttonPressed.buttonLeft:before, .ctrlBarDisContrast .buttonHover.buttonRight:before, .ctrlBarDisContrast .buttonPressed.buttonRight:before {
+border-color: #4c7c50;
+}
+.panelHeaderContrast .buttonDisabled.buttonLeft:before, .panelHeaderContrast .buttonDisabled.buttonRight:before, .panelFooterContrast .buttonDisabled.buttonLeft:before, .panelFooterContrast .buttonDisabled.buttonRight:before, .ctrlBarDisContrast .buttonDisabled.buttonLeft:before, .ctrlBarDisContrast .buttonDisabled.buttonRight:before {
+border-color: #a6a6a6;
+}
+.panelHeaderContrast .buttonSplitArrow:after, .panelFooterContrast .buttonSplitArrow:after, .ctrlBarDisContrast .buttonSplitArrow:after {
+top: 13px;
+bottom: 13px;
+}
+.panelHeaderContrast .buttonPressed .buttonContent, .panelHeaderContrast .buttonHover .buttonContent, .panelFooterContrast .buttonPressed .buttonContent, .panelFooterContrast .buttonHover .buttonContent, .ctrlBarDisContrast .buttonPressed .buttonContent, .ctrlBarDisContrast .buttonHover .buttonContent {
+color: #4c7c50;
+}
+.panelHeaderContrast .buttonPressed .buttonDDArrow:before, .panelHeaderContrast .buttonPressed .buttonSplitArrow:before, .panelHeaderContrast .buttonHover .buttonDDArrow:before, .panelHeaderContrast .buttonHover .buttonSplitArrow:before, .panelFooterContrast .buttonPressed .buttonDDArrow:before, .panelFooterContrast .buttonPressed .buttonSplitArrow:before, .panelFooterContrast .buttonHover .buttonDDArrow:before, .panelFooterContrast .buttonHover .buttonSplitArrow:before, .ctrlBarDisContrast .buttonPressed .buttonDDArrow:before, .ctrlBarDisContrast .buttonPressed .buttonSplitArrow:before, .ctrlBarDisContrast .buttonHover .buttonDDArrow:before, .ctrlBarDisContrast .buttonHover .buttonSplitArrow:before {
+border-color: #4c7c50;
+}
+.panelHeaderContrast .buttonPressed .buttonSplitArrow:after, .panelHeaderContrast .buttonHover .buttonSplitArrow:after, .panelFooterContrast .buttonPressed .buttonSplitArrow:after, .panelFooterContrast .buttonHover .buttonSplitArrow:after, .ctrlBarDisContrast .buttonPressed .buttonSplitArrow:after, .ctrlBarDisContrast .buttonHover .buttonSplitArrow:after {
+border-color: #4c7c50;
+}
+.panelHeaderContrast .buttonPressed .icon, .panelHeaderContrast .buttonHover .icon, .panelFooterContrast .buttonPressed .icon, .panelFooterContrast .buttonHover .icon, .ctrlBarDisContrast .buttonPressed .icon, .ctrlBarDisContrast .buttonHover .icon {
+fill: #4c7c50;
+stroke: #4c7c50;
+}
+.panelHeaderContrast .buttonDisabled, .panelHeaderContrast .buttonDisabled .buttonContent, .panelFooterContrast .buttonDisabled, .panelFooterContrast .buttonDisabled .buttonContent, .ctrlBarDisContrast .buttonDisabled, .ctrlBarDisContrast .buttonDisabled .buttonContent {
+color: #a6a6a6;
+}
+.panelHeaderContrast .buttonDisabled .icon, .panelHeaderContrast .buttonDisabled .buttonContent .icon, .panelFooterContrast .buttonDisabled .icon, .panelFooterContrast .buttonDisabled .buttonContent .icon, .ctrlBarDisContrast .buttonDisabled .icon, .ctrlBarDisContrast .buttonDisabled .buttonContent .icon {
+fill: #a6a6a6;
+stroke: #a6a6a6;
+}
+.panelHeaderContrast .buttonDisabled .buttonDDArrow:after, .panelHeaderContrast .buttonDisabled .buttonSplitArrow:after, .panelFooterContrast .buttonDisabled .buttonDDArrow:after, .panelFooterContrast .buttonDisabled .buttonSplitArrow:after, .ctrlBarDisContrast .buttonDisabled .buttonDDArrow:after, .ctrlBarDisContrast .buttonDisabled .buttonSplitArrow:after {
+border-top-color: #a6a6a6;
+}
+.panelHeaderContrast .buttonDisabled .buttonSplitArrow, .panelFooterContrast .buttonDisabled .buttonSplitArrow, .ctrlBarDisContrast .buttonDisabled .buttonSplitArrow {
+border-color: #a6a6a6;
+}
+.panelHeaderContrast .buttonIcon.buttonHover, .panelFooterContrast .buttonIcon.buttonHover, .ctrlBarDisContrast .buttonIcon.buttonHover {
+color: #7eb082;
+}
+.panelHeaderContrast .buttonIcon.buttonHover .icon, .panelFooterContrast .buttonIcon.buttonHover .icon, .ctrlBarDisContrast .buttonIcon.buttonHover .icon {
+fill: #7eb082;
+stroke: #7eb082;
+}
+.panelHeaderContrast .buttonIcon.buttonPressed, .panelFooterContrast .buttonIcon.buttonPressed, .ctrlBarDisContrast .buttonIcon.buttonPressed {
+color: #4c7c50;
+}
+.panelHeaderContrast .buttonIcon.buttonPressed .icon, .panelFooterContrast .buttonIcon.buttonPressed .icon, .ctrlBarDisContrast .buttonIcon.buttonPressed .icon {
+fill: #4c7c50;
+stroke: #4c7c50;
+}
+.compact .panelHeader .button.buttonPressed:after, .compact .panelHeader .button.buttonHover:after, .compact .panelHeader .buttonDD.buttonPressed:after, .compact .panelHeader .buttonDD.buttonHover:after, .compact .panelHeader .buttonSplit.buttonPressed .buttonContent:after, .compact .panelHeader .buttonSplit.buttonHover .buttonContent:after, .compact .panelHeaderAlt .button.buttonPressed:after, .compact .panelHeaderAlt .button.buttonHover:after, .compact .panelHeaderAlt .buttonDD.buttonPressed:after, .compact .panelHeaderAlt .buttonDD.buttonHover:after, .compact .panelHeaderAlt .buttonSplit.buttonPressed .buttonContent:after, .compact .panelHeaderAlt .buttonSplit.buttonHover .buttonContent:after, .compact .panelHeaderContrast .button.buttonPressed:after, .compact .panelHeaderContrast .button.buttonHover:after, .compact .panelHeaderContrast .buttonDD.buttonPressed:after, .compact .panelHeaderContrast .buttonDD.buttonHover:after, .compact .panelHeaderContrast .buttonSplit.buttonPressed .buttonContent:after, .compact .panelHeaderContrast .buttonSplit.buttonHover .buttonContent:after, .compact .panelFooter .button.buttonPressed:after, .compact .panelFooter .button.buttonHover:after, .compact .panelFooter .buttonDD.buttonPressed:after, .compact .panelFooter .buttonDD.buttonHover:after, .compact .panelFooter .buttonSplit.buttonPressed .buttonContent:after, .compact .panelFooter .buttonSplit.buttonHover .buttonContent:after, .compact .panelFooterAlt .button.buttonPressed:after, .compact .panelFooterAlt .button.buttonHover:after, .compact .panelFooterAlt .buttonDD.buttonPressed:after, .compact .panelFooterAlt .buttonDD.buttonHover:after, .compact .panelFooterAlt .buttonSplit.buttonPressed .buttonContent:after, .compact .panelFooterAlt .buttonSplit.buttonHover .buttonContent:after, .compact .panelFooterContrast .button.buttonPressed:after, .compact .panelFooterContrast .button.buttonHover:after, .compact .panelFooterContrast .buttonDD.buttonPressed:after, .compact .panelFooterContrast .buttonDD.buttonHover:after, .compact .panelFooterContrast .buttonSplit.buttonPressed .buttonContent:after, .compact .panelFooterContrast .buttonSplit.buttonHover .buttonContent:after, .compact .ctrlBarDis .button.buttonPressed:after, .compact .ctrlBarDis .button.buttonHover:after, .compact .ctrlBarDis .buttonDD.buttonPressed:after, .compact .ctrlBarDis .buttonDD.buttonHover:after, .compact .ctrlBarDis .buttonSplit.buttonPressed .buttonContent:after, .compact .ctrlBarDis .buttonSplit.buttonHover .buttonContent:after, .compact .ctrlBarDisContrast .button.buttonPressed:after, .compact .ctrlBarDisContrast .button.buttonHover:after, .compact .ctrlBarDisContrast .buttonDD.buttonPressed:after, .compact .ctrlBarDisContrast .buttonDD.buttonHover:after, .compact .ctrlBarDisContrast .buttonSplit.buttonPressed .buttonContent:after, .compact .ctrlBarDisContrast .buttonSplit.buttonHover .buttonContent:after {
+left: 5px;
+right: 5px;
+bottom: 2px;
+}
+.compact .panelHeader .buttonSplitArrow:after, .compact .panelHeaderAlt .buttonSplitArrow:after, .compact .panelHeaderContrast .buttonSplitArrow:after, .compact .panelFooter .buttonSplitArrow:after, .compact .panelFooterAlt .buttonSplitArrow:after, .compact .panelFooterContrast .buttonSplitArrow:after, .compact .ctrlBarDis .buttonSplitArrow:after, .compact .ctrlBarDisContrast .buttonSplitArrow:after {
+top: 7px;
+bottom: 7px;
+}
+/* grid */
+.grid {
+color: #000;
+background: #fff;
+border: 1px solid #d9d9d9;
+border-spacing: 0px;
+border-radius: 2px;
+}
+.gridDetail {
+border-spacing: 0px;
+}
+.gridHeader {
+color: gray;
+background: #f7f7f7;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: #d9d9d9;
+padding: 4px;
+line-height: 44px;
+}
+.gridFooter {
+background: #f7f7f7;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #d9d9d9;
+padding: 4px;
+line-height: 44px;
+}
+.gridQBE {
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: #ebebeb;
+padding: 4px;
+}
+.gridData, .gridDataAlt, .gridDataError, .gridSumData {
+padding: 14px;
+}
+.gridDataAlt {
+background: #fafafa;
+}
+.gridDataError {
+color: #ff351c;
+background: #ffebe8;
+}
+.gridDataError .icon {
+stroke: #ff351c;
+fill: #ff351c;
+}
+.gridDataHeader {
+color: gray;
+background: #f7f7f7;
+font-size: 16px;
+font-weight: bold;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #ebebeb;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: #ebebeb;
+padding: 4px;
+}
+.gridRowHeader, .gridSumLabel {
+color: gray;
+font-size: 16px;
+font-weight: bold;
+padding: 9px 14px;
+}
+.gridSep {
+background: #ebebeb;
+font-size: 0px;
+padding: 0px;
+height: 1px;
+}
+.gridSumData, .gridSumLabel {
+background: #fafafa;
+}
+.gridRowHover .gridData, .gridRowHover .gridDataAlt, .gridRowSelected .gridData, .gridRowSelected .gridDataAlt {
+color: #fff;
+background: #395c3c;
+}
+.gridRowHover .icon, .gridRowSelected .icon {
+fill: #fff;
+stroke: #fff;
+}
+.gridRowHover .edit, .gridRowHover .editBG, .gridRowHover .editBGPrimary, .gridRowSelected .edit, .gridRowSelected .editBG, .gridRowSelected .editBGPrimary {
+color: #fff;
+background: transparent;
+border-color: #fff !important;
+}
+.gridRowHover .editBGEdit, .gridRowSelected .editBGEdit {
+color: #fff;
+}
+.gridRowSelected .gridData, .gridRowSelected .gridDataAlt {
+color: #fff;
+background: #4c7c50;
+}
+.grid .link {
+font-weight: bold;
+padding: 9px 14px;
+display: inline-block;
+line-height: 26px;
+border-radius: 2px;
+}
+.grid .link .iconButton {
+padding: 0px;
+}
+.grid .link:hover {
+text-decoration: none;
+color: #fff;
+background: #7eb082;
+}
+.grid .link:hover .icon {
+fill: #fff;
+stroke: #fff;
+}
+.gridRowSelected .link, .gridRowHover .link {
+background: #fff;
+}
+.gridHeader .link, .gridNav .link {
+color: #000;
+padding: 9px;
+}
+.gridHeader .link:hover, .gridNav .link:hover {
+color: #4c7c50;
+background: transparent;
+}
+.gridHeader .link:hover .icon, .gridNav .link:hover .icon {
+fill: #4c7c50;
+stroke: #4c7c50;
+}
+.gridDetail .gridHeader, .gridDetail .gridFooter {
+background: transparent;
+border: none;
+}
+.compact .gridHeader, .compact .gridFooter {
+padding: 2px;
+line-height: 24px;
+}
+.compact .gridData, .compact .gridDataAlt, .compact .gridDataError, .compact .gridSumData, .compact .gridRowHeader, .compact .gridSumLabel {
+padding: 6px;
+}
+.compact .gridRowHeader, .compact .gridSumLabel {
+font-size: 10px;
+}
+.compact .gridDataHeader {
+font-size: 10px;
+}
+.compact .grid .link {
+padding: 3px 6px;
+line-height: 18px;
+}
+/* ux */
+.label {
+color: gray;
+font-size: 16px;
+font-weight: bold;
+padding: 4px;
+}
+.panelHeader .label, .panelHeaderAlt .label, .panelFooter .label, .panelFooterAlt .label, .ctrlBarDis .label {
+color: gray;
+}
+.listItemSelected .label, .listItemHover .label, .gridRowSelected .label, .gridRowHover .label {
+color: rgba(255, 255, 255, 0.75);
+}
+.uxRSHeader {
+color: gray;
+font-size: 16px;
+font-weight: bold;
+padding: 4px;
+}
+.uxRSFooter {
+text-align: right;
+padding: 4px;
+}
+.uxRSRowSelected {
+color: #fff;
+background: #4c7c50;
+}
+.uxRSRowHover {
+color: #fff;
+background: #395c3c;
+}
+.uxRSRowError {
+color: #ff351c;
+background: #ffebe8;
+}
+.uxRSRowError .icon {
+stroke: #ff351c;
+fill: #ff351c;
+}
+.uxRSRowSep {
+background: #ebebeb;
+font-size: 0px;
+height: 1px;
+}
+.uxRSRowSelected .icon, .uxRSRowHover .icon {
+fill: #fff;
+stroke: #fff;
+}
+.compact .label, .compact .uxRSHeader {
+font-size: 10px;
+}
+/* list */
+.list {
+border: 1px solid #d9d9d9;
+border-radius: 2px;
+}
+.listHeader {
+background: #f7f7f7;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: #d9d9d9;
+padding: 9px 14px;
+line-height: 26px;
+}
+.listFooter {
+background: #f7f7f7;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #d9d9d9;
+padding: 9px 14px;
+line-height: 26px;
+}
+.listColHeader {
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: #d9d9d9;
+padding: 0px 14px;
+cursor: default;
+}
+.listColHeader .icon {
+vertical-align: top;
+}
+.listColHeaderItem {
+padding: 9px 14px;
+line-height: 26px;
+}
+.listColHeaderItemHover {
+background: #f2f2f2;
+}
+.listColHeaderItemResize {
+background: rgba(0, 0, 0, 0.1);
+}
+.listItem {
+background: #fff;
+padding: 14px;
+cursor: default;
+}
+.listItemLined {
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #ebebeb;
+margin-top: -1px;
+}
+.listItemHover {
+color: #fff;
+background: #395c3c;
+}
+.listItemSelected {
+color: #fff;
+background: #4c7c50;
+}
+.pulse .listItem {
+box-shadow: inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15);
+transition: background-color 300ms cubic-bezier(0, 0.8, 1, 0.86), box-shadow 600ms;
+}
+.pulse .listItem:active {
+box-shadow: inset 0px 0px 0px 44px rgba(255, 255, 255, 0.15);
+transition: none;
+}
+.pulse .listDisabled .listItem {
+box-shadow: none;
+}
+.listItemHover .icon, .listItemSelected .icon {
+fill: #fff;
+stroke: #fff;
+}
+.listItemHover.listItemLined, .listItemSelected.listItemLined {
+border-top-color: #395c3c;
+}
+.listItemSubtle.listItemHover {
+color: #000;
+background: #f7f7f7;
+}
+.listItemSubtle.listItemSelected {
+color: #000;
+background: #fafafa;
+}
+.listItemSubtle.listItemHover .icon, .listItemSubtle.listItemSelected .icon {
+fill: #333;
+stroke: #333;
+}
+.listItemSubtle.listItemHover.listItemLined, .listItemSelected.listItemLined {
+border-top-color: #ebebeb;
+}
+.listItemTitle {
+color: gray;
+background: #fafafa;
+font-size: 16px;
+font-weight: bold;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #ebebeb;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: #ebebeb;
+padding: 4px 14px;
+margin-top: -1px;
+}
+.listItemSep {
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #ebebeb;
+}
+.listItemPartMain {
+font-weight: bold;
+}
+.listItemPartSub {
+font-size: 16px;
+}
+.listItemPartContext {
+color: #4c7c50;
+font-size: 16px;
+}
+.listItemPartDetail {
+color: #fff;
+background: rgba(0, 0, 0, 0.35);
+font-size: 16px;
+padding: 2px 6px;
+border-radius: 2px;
+}
+.listItemPartContent {
+color: #a6a6a6;
+font-size: 16px;
+}
+.listItemHover:not(.listItemSubtle) .listItemPartContext, .listItemHover:not(.listItemSubtle) .listItemPartContent, .listItemSelected:not(.listItemSubtle) .listItemPartContext, .listItemSelected:not(.listItemSubtle) .listItemPartContent {
+color: #fff;
+}
+.listItemData {
+padding: 0px 14px;
+}
+.listNav {
+text-align: center;
+color: #fff;
+background: rgba(0, 0, 0, 0.5);
+padding: 4px;
+cursor: default;
+border-radius: 2px;
+text-overflow: ellipsis;
+}
+.listNavButtonNext {
+text-align: center;
+color: #4c7c50;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #ebebeb;
+padding: 9px 14px;
+line-height: 26px;
+}
+.listNavButtonPrev {
+text-align: center;
+color: #4c7c50;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: #ebebeb;
+padding: 9px 14px;
+line-height: 26px;
+}
+.listNavButtonPressed {
+color: #fff;
+background: #4c7c50;
+}
+.listFocus {
+border-color: #a0b4a2;
+}
+.listDisabled {
+color: gray;
+border-color: #ebebeb;
+}
+.listDisabled .listColHeader {
+border-color: #ebebeb;
+}
+.listDisabled .listItemSelected {
+color: gray;
+background: #f2f2f2;
+border-top-color: #ebebeb;
+}
+.listDisabled .listItemSelected.listItemSubtle {
+background: #fafafa;
+}
+.listDisabled .listColHeaderItemHover, .listDisabled .listItemHover {
+color: gray;
+background: #fff;
+border-top-color: #ebebeb;
+}
+.listDisabled .listItemPartMain, .listDisabled .listItemPartSub, .listDisabled .listItemPartContext, .listDisabled .listItemPartContent {
+color: gray;
+}
+.listDisabled .icon {
+fill: gray;
+stroke: gray;
+}
+.compact .listColHeader {
+padding: 0px 6px;
+}
+.compact .listHeader, .compact .listFooter, .compact .listColHeaderItem, .compact .listNavButtonNext, .compact .listNavButtonPrev {
+padding: 3px 6px;
+line-height: 18px;
+}
+.compact .listItem {
+padding: 6px;
+}
+.compact .listItemTitle {
+font-size: 10px;
+padding: 4px 6px;
+}
+.compact .listItemPartSub, .compact .listItemPartContext, .compact .listItemPartDetail, .compact .listItemPartContent {
+font-size: 10px;
+}
+.compact .listItemData {
+padding: 0px 6px;
+}
+/* tree */
+.tree {
+background: #fff;
+border: 1px solid #d9d9d9;
+cursor: default;
+border-radius: 2px;
+}
+.treeFocus {
+border-color: #a0b4a2;
+}
+.treeItem {
+display: flex;
+overflow: hidden;
+}
+.pulse .treeItem {
+box-shadow: inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15);
+transition: background-color 300ms cubic-bezier(0, 0.8, 1, 0.86), box-shadow 600ms;
+}
+.pulse .treeItem:active {
+box-shadow: inset 0px 0px 0px 44px rgba(255, 255, 255, 0.15);
+transition: none;
+}
+.pulse .treeDisabled .treeItem {
+box-shadow: none;
+}
+.treeItemLabel {
+text-decoration: none;
+color: inherit;
+padding: 9px;
+display: inline-block;
+cursor: default;
+line-height: 26px;
+outline: none;
+flex-grow: 1;
+}
+.treeItemHover {
+color: #fff;
+background: #395c3c;
+}
+.treeItemHover .icon {
+fill: #fff;
+stroke: #fff;
+}
+.treeItemSelected {
+color: #fff;
+background: #4c7c50;
+}
+.treeItemSelected .icon {
+fill: #fff;
+stroke: #fff;
+}
+.treeDisabled {
+color: gray;
+border-color: #ebebeb;
+}
+.treeDisabled .icon {
+fill: gray;
+stroke: gray;
+}
+.treeDisabled .treeItemSelected {
+color: gray;
+background: #f2f2f2;
+}
+.treeDisabled .treeItemHover {
+color: gray;
+background: transparent;
+}
+.compact .treeItemLabel {
+padding: 3px;
+line-height: 18px;
+}
+/* spin list */
+.spinList {
+color: #000;
+background: #fff;
+border: 1px solid #d9d9d9;
+cursor: default;
+border-radius: 2px;
+}
+.spinList:before {
+background: url("spinListBack.png");
+background-size: 100% 100%;
+display: block;
+position: absolute;
+top: 0px;
+left: 0px;
+right: 0px;
+bottom: 0px;
+z-index: 2;
+content: "";
+}
+.spinList:after {
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #ebebeb;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: #ebebeb;
+margin-top: -15px;
+display: block;
+position: absolute;
+top: 50%;
+left: 0px;
+right: 0px;
+height: 30px;
+z-index: 3;
+content: "";
+}
+.spinListGroup {
+white-space: nowrap;
+}
+.spinListGroup .spinList {
+border-left-color: #ebebeb;
+border-right-style: none;
+display: inline-block;
+border-radius: 0px;
+}
+.spinListGroup .spinList:last-child {
+border-right-style: solid;
+border-radius: 0px 2px 2px 0px;
+}
+.spinListGroup .spinList:first-child {
+border-left-color: #d9d9d9;
+border-radius: 2px 0px 0px 2px;
+}
+.spinListDisabled {
+color: gray;
+border-color: #ebebeb;
+}
+.spinListGroup .spinListDisabled:first-child {
+border-left-color: #ebebeb;
+}
+.spinListItem {
+white-space: nowrap;
+padding: 7px 14px;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+.compact .spinListItem {
+padding: 6px;
+}
+.compact .spinList:after {
+margin-top: -12px;
+height: 24px;
+}
+/* date picker */
+.datePicker {
+color: #000;
+background: #fff;
+border-radius: 2px;
+}
+.datePicker .icon {
+fill: #333;
+stroke: #333;
+}
+.datePickerDOW {
+color: gray;
+font-size: 16px;
+}
+.datePickerWOY {
+color: gray;
+font-size: 16px;
+}
+.datePickerHeaderItem {
+text-decoration: none;
+color: #4c7c50;
+font-weight: bold;
+padding: 9px 14px;
+display: inline-block;
+cursor: default;
+line-height: 26px;
+border-radius: 2px;
+outline: none;
+}
+.datePickerDate {
+padding: 1px;
+}
+.datePickerItem {
+text-align: center;
+text-decoration: none;
+color: #000;
+padding: 9px 14px;
+display: block;
+cursor: default;
+line-height: 26px;
+border-radius: 2px;
+outline: none;
+}
+.pulse .datePickerItem, .pulse .datePickerHeaderItem {
+box-shadow: inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15);
+transition: background-color 300ms cubic-bezier(0, 0.8, 1, 0.86), box-shadow 600ms;
+}
+.pulse .datePickerItem:not(.datePickerItemDisabled):active, .pulse .datePickerHeaderItem:active {
+box-shadow: inset 0px 0px 0px 44px rgba(255, 255, 255, 0.15);
+transition: none;
+}
+.pulse .datePickerDisabled .datePickerItem {
+box-shadow: none;
+}
+.datePickerDateToday .datePickerItem {
+color: #4c7c50;
+}
+.datePickerItemHover, .datePickerDateToday .datePickerItemHover, .datePickerHeaderItemHover {
+color: #fff;
+background: #395c3c;
+}
+.datePickerItemSelected, .datePickerDateToday .datePickerItemSelected, .datePickerHeaderItemSelected {
+color: #fff;
+background: #4c7c50;
+}
+.datePickerItemOOR {
+color: gray;
+}
+.datePickerItemDisabled {
+color: #a6a6a6;
+}
+.datePickerDisabled .icon {
+fill: gray;
+stroke: gray;
+}
+.datePickerDisabled .datePickerHeaderItem, .datePickerDisabled .datePickerItem {
+color: gray;
+}
+.datePickerDisabled .datePickerDateToday .datePickerItem {
+color: gray;
+}
+.datePickerDisabled .datePickerItemHover, .datePickerDisabled .datePickerDateToday .datePickerItemHover, .datePickerDisabled .datePickerHeaderItemHover {
+color: gray;
+background: transparent;
+}
+.datePickerDisabled .datePickerItemSelected, .datePickerDisabled .datePickerDateToday .datePickerItemSelected, .datePickerDisabled .datePickerHeaderItemSelected {
+color: gray;
+background: transparent;
+}
+.compact .datePickerItem, .compact .datePickerHeaderItem {
+font-size: 12px;
+padding: 3px 6px;
+line-height: 18px;
+}
+.compact .datePickerDOW, .compact .datePickerWOY {
+font-size: 10px;
+}
+/* time picker */
+.timePickerMeridian {
+text-decoration: none;
+color: #4c7c50;
+font-weight: bold;
+padding: 14px;
+cursor: default;
+border-radius: 2px;
+outline: none;
+}
+.timePickerMeridian:hover {
+color: #fff;
+background: #4c7c50;
+}
+.timePickerButton {
+text-align: center;
+text-decoration: none;
+color: #4c7c50;
+padding: 14px;
+display: block;
+cursor: default;
+border-radius: 2px;
+outline: none;
+}
+.timePickerButton:hover {
+color: #fff;
+background: #4c7c50;
+}
+.timePickerButton:after {
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: gray;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: gray;
+margin-top: -4px;
+display: inline-block;
+position: relative;
+width: 9px;
+height: 9px;
+border-radius: 2px;
+content: "";
+-webkit-transform: rotate(45deg);
+transform: rotate(45deg);
+}
+.timePickerButton:hover:after {
+border-color: #fff;
+}
+.timePickerDisabled .edit, .timePickerDisabled .timePickerMeridian, .timePickerDisabled .timePickerButton, .timePickerDisabled .timePickerButton:after, .timePickerDisabled .timePickerButton:hover:after {
+color: #a6a6a6;
+background: transparent;
+border-color: #a6a6a6;
+}
+.listItemSelected .timePickerButton:after, .listItemHover .timePickerButton:after, .gridRowSelected .timePickerButton:after, .gridRowHover .timePickerButton:after {
+border-color: #fff;
+}
+.listItemSelected .timePickerButton:hover:after, .listItemHover .timePickerButton:hover:after, .gridRowSelected .timePickerButton:hover:after, .gridRowHover .timePickerButton:hover:after {
+border-color: #4c7c50;
+}
+.listItemSelected .timePickerButton:hover, .listItemHover .timePickerButton:hover, .gridRowSelected .timePickerButton:hover, .gridRowHover .timePickerButton:hover {
+background: #fff;
+}
+.listItemSelected .timePickerMeridian, .listItemHover .timePickerMeridian, .gridRowSelected .timePickerMeridian, .gridRowHover .timePickerMeridian {
+color: #fff;
+}
+.listItemSelected .timePickerMeridian:hover, .listItemHover .timePickerMeridian:hover, .gridRowSelected .timePickerMeridian:hover, .gridRowHover .timePickerMeridian:hover {
+color: #4c7c50;
+background: #fff;
+}
+.listItemSelected .timePickerDisabled .edit, .listItemSelected .timePickerDisabled .timePickerMeridian, .listItemSelected .timePickerDisabled .timePickerButton, .listItemSelected .timePickerDisabled .timePickerButton:after, .listItemSelected .timePickerDisabled .timePickerButton:hover:after, .listItemHover .timePickerDisabled .edit, .listItemHover .timePickerDisabled .timePickerMeridian, .listItemHover .timePickerDisabled .timePickerButton, .listItemHover .timePickerDisabled .timePickerButton:after, .listItemHover .timePickerDisabled .timePickerButton:hover:after, .gridRowSelected .timePickerDisabled .edit, .gridRowSelected .timePickerDisabled .timePickerMeridian, .gridRowSelected .timePickerDisabled .timePickerButton, .gridRowSelected .timePickerDisabled .timePickerButton:after, .gridRowSelected .timePickerDisabled .timePickerButton:hover:after, .gridRowHover .timePickerDisabled .edit, .gridRowHover .timePickerDisabled .timePickerMeridian, .gridRowHover .timePickerDisabled .timePickerButton, .gridRowHover .timePickerDisabled .timePickerButton:after, .gridRowHover .timePickerDisabled .timePickerButton:hover:after {
+color: rgba(255, 255, 255, 0.75);
+background: transparent;
+border-color: rgba(255, 255, 255, 0.75);
+}
+.compact .timePickerMeridian, .compact .timePickerButton {
+font-size: 12px;
+padding: 6px;
+}
+.compact .timePickerButton:after {
+margin-top: -3px;
+width: 6px;
+height: 6px;
+}
+/* slider */
+.slider {
+cursor: default;
+height: 44px;
+}
+.sliderInner {
+background: #d9d9d9;
+margin: 20px;
+height: 4px;
+border-radius: 2px;
+}
+.sliderRange {
+background: #395c3c;
+margin-top: -1px;
+height: 6px;
+border-radius: 3px;
+}
+.sliderHandle {
+background: #fff;
+border: 1px solid #d9d9d9;
+margin-top: -22px;
+margin-left: -22px;
+width: 44px;
+height: 44px;
+border-radius: 24px;
+}
+.sliderRangeHover {
+background: #4c7c50;
+}
+.sliderHandleHover {
+background: #395c3c;
+border-color: #4c7c50;
+}
+.sliderRangeSelected {
+background: #4c7c50;
+}
+.sliderHandleSelected {
+background: #4c7c50;
+border-color: #4c7c50;
+}
+.pulse .sliderHandle {
+box-shadow: inset 0px 0px 0px 0px rgba(0, 0, 0, 0.15);
+transition: background-color 300ms cubic-bezier(0, 0.8, 1, 0.86), box-shadow 600ms;
+}
+.pulse .sliderHandle:active {
+box-shadow: inset 0px 0px 0px 44px rgba(255, 255, 255, 0.15);
+transition: none;
+}
+.sliderDisabled .sliderHandle {
+background: #fff;
+border-color: #ebebeb;
+box-shadow: none !important;
+}
+.sliderDisabled .sliderRange, .sliderDisabled .sliderInner {
+background: #ebebeb;
+}
+.listItemSelected .sliderInner, .listItemHover .sliderInner, .gridRowSelected .sliderInner, .gridRowHover .sliderInner {
+background: rgba(255, 255, 255, 0.75);
+}
+.listItemSelected .sliderRange, .listItemHover .sliderRange, .gridRowSelected .sliderRange, .gridRowHover .sliderRange {
+background: rgba(255, 255, 255, 0.75);
+}
+.listItemSelected .sliderHandle, .listItemHover .sliderHandle, .gridRowSelected .sliderHandle, .gridRowHover .sliderHandle {
+background: #395c3c;
+border-color: #fff;
+}
+.listItemSelected .sliderHandleHover, .listItemHover .sliderHandleHover, .gridRowSelected .sliderHandleHover, .gridRowHover .sliderHandleHover {
+background: #fff;
+border-color: rgba(255, 255, 255, 0.75);
+}
+.listItemSelected .sliderHandleSelected, .listItemHover .sliderHandleSelected, .gridRowSelected .sliderHandleSelected, .gridRowHover .sliderHandleSelected {
+background: #fff;
+}
+.listItemSelected .sliderDisabled.slider, .listItemHover .sliderDisabled.slider, .gridRowSelected .sliderDisabled.slider, .gridRowHover .sliderDisabled.slider {
+opacity: .4;
+}
+.listItemSelected .sliderDisabled .sliderHandle, .listItemHover .sliderDisabled .sliderHandle, .gridRowSelected .sliderDisabled .sliderHandle, .gridRowHover .sliderDisabled .sliderHandle {
+background: #395c3c;
+border-color: rgba(255, 255, 255, 0.75);
+}
+.listItemSelected .sliderDisabled .sliderRange, .listItemHover .sliderDisabled .sliderRange, .gridRowSelected .sliderDisabled .sliderRange, .gridRowHover .sliderDisabled .sliderRange {
+background: transparent;
+}
+.listItemSelected .sliderDisabled .sliderInner, .listItemHover .sliderDisabled .sliderInner, .gridRowSelected .sliderDisabled .sliderInner, .gridRowHover .sliderDisabled .sliderInner {
+background: rgba(255, 255, 255, 0.75);
+}
+.compact .slider {
+height: 24px;
+}
+.compact .sliderInner {
+margin: 10px;
+height: 2px;
+}
+.compact .sliderRange {
+height: 4px;
+}
+.compact .sliderHandle {
+margin-top: -12px;
+margin-left: -12px;
+width: 24px;
+height: 24px;
+}
+/* switch */
+.switch {
+color: gray;
+background: #f2f2f2;
+border: 1px solid #d9d9d9;
+cursor: default;
+height: 44px;
+border-radius: 22px;
+}
+.pulse .switch {
+transition: background-color 400ms cubic-bezier(0, 0.8, 1, 0.86);
+}
+.switchInner {
+margin-left: 22px;
+margin-right: 21px;
+}
+.switchButton {
+background: #fff;
+border: 1px solid #d9d9d9;
+margin: 1px;
+margin-left: -20.5px;
+width: 38px;
+height: 38px;
+border-radius: 22px;
+}
+.switchOn {
+color: #fff;
+background: #4c7c50;
+border-color: #4c7c50;
+}
+.switchOn .switchButton {
+border-color: #fff;
+}
+.switchLeft {
+text-align: center;
+padding-right: 24px;
+line-height: 42px;
+box-sizing: border-box;
+-moz-box-sizing: border-box;
+-ms-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+}
+.switchRight {
+text-align: center;
+padding-left: 24px;
+line-height: 42px;
+box-sizing: border-box;
+-moz-box-sizing: border-box;
+-ms-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+}
+.switchDisabled.switch {
+color: #a6a6a6;
+background: #f7f7f7;
+border: 1px solid #ebebeb;
+}
+.switchDisabled .switchButton {
+border: 1px solid #ebebeb;
+}
+.switchDisabled.switchOn {
+color: #a6a6a6;
+background: #ebebeb;
+border-color: #ebebeb;
+}
+.listItemSelected .switch, .listItemHover .switch, .gridRowSelected .switch, .gridRowHover .switch {
+background: transparent;
+border-color: #fff;
+}
+.listItemSelected .switchOn, .listItemHover .switchOn, .gridRowSelected .switchOn, .gridRowHover .switchOn {
+background: #fff;
+}
+.listItemSelected .switchButton, .listItemHover .switchButton, .gridRowSelected .switchButton, .gridRowHover .switchButton {
+background: rgba(255, 255, 255, 0.75);
+border-color: #fff;
+}
+.listItemSelected .switchOn .switchButton, .listItemHover .switchOn .switchButton, .gridRowSelected .switchOn .switchButton, .gridRowHover .switchOn .switchButton {
+background: #4c7c50;
+border-color: #395c3c;
+}
+.listItemSelected .switchDisabled, .listItemHover .switchDisabled, .gridRowSelected .switchDisabled, .gridRowHover .switchDisabled {
+opacity: .5;
+}
+.compact .switch {
+height: 24px;
+border-radius: 12px;
+}
+.compact .switchInner {
+margin-left: 12px;
+margin-right: 10px;
+}
+.compact .switchButton {
+margin-left: -11px;
+width: 18px;
+height: 18px;
+border-radius: 12px;
+}
+.compact .switchLeft {
+padding-left: 14px;
+line-height: 22px;
+}
+.compact .switchRight {
+padding-right: 14px;
+line-height: 22px;
+}
+/* ink */
+.ink {
+border: 1px solid #d9d9d9;
+border-radius: 2px;
+}
+.inkArea {
+background: #f7f7f7;
+}
+.inkPage {
+background: #fff;
+border: 1px solid #d9d9d9;
+box-shadow: 0px 3px 3px #f2f2f2;
+-moz-box-shadow: 0px 3px 3px #f2f2f2;
+-webkit-box-shadow: 0px 3px 3px #f2f2f2;
+}
+.inkZoomBox {
+border: 1px dotted #4c7c50;
+}
+.inkZoomBoxScale:after {
+border: 5px solid transparent;
+border-right-color: rgba(76, 124, 80, 0.5);
+border-bottom-color: rgba(76, 124, 80, 0.5);
+display: block;
+position: absolute;
+right: 2px;
+bottom: 2px;
+content: "";
+}
+.inkSplitBar {
+background: #d9d9d9;
+}
+.inkEraser {
+background: rgba(255, 100, 150, 0.1);
+border: 1px solid rgba(255, 100, 150, 0.5);
+border-radius: 2px;
+}
+.inkButton {
+text-align: center;
+color: #333;
+background: rgba(255, 255, 255, 0.96);
+border: 1px solid #d9d9d9;
+display: inline-block;
+vertical-align: top;
+width: 44px;
+height: 44px;
+line-height: 42px;
+border-radius: 22px;
+}
+.inkButton .icon {
+stroke: gray;
+fill: gray;
+}
+.inkButtonSelected {
+color: #333;
+}
+.inkButtonSelected .icon {
+stroke: #333;
+fill: #333;
+}
+.inkBarTop {
+background: rgba(255, 255, 255, 0.96);
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: #d9d9d9;
+}
+.inkBarLeft {
+background: rgba(255, 255, 255, 0.96);
+border-right-style: solid;
+border-right-width: 1px;
+border-right-color: #d9d9d9;
+}
+.inkBarRight {
+background: rgba(255, 255, 255, 0.96);
+border-left-style: solid;
+border-left-width: 1px;
+border-left-color: #d9d9d9;
+}
+.inkBarBottom {
+background: rgba(255, 255, 255, 0.96);
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #d9d9d9;
+}
+.inkGroupTop, .inkGroupBottom, .inkGroupLeft, .inkGroupRight {
+background: rgba(255, 255, 255, 0.96);
+border: 1px solid #d9d9d9;
+}
+.inkGroupTop {
+border-top-style: none;
+border-radius: 0px 0px 2px 2px;
+}
+.inkGroupBottom {
+border-bottom-style: none;
+border-radius: 2px 2px 0px 0px;
+}
+.inkGroupLeft {
+border-left-style: none;
+border-radius: 0px 2px 2px 0px;
+}
+.inkGroupRight {
+border-right-style: none;
+border-radius: 2px 0px 0px 2px;
+}
+.inkBarTop .inkButton, .inkBarBottom .inkButton, .inkBarLeft .inkButton, .inkBarRight .inkButton, .inkGroupTop .inkButton, .inkGroupBottom .inkButton, .inkGroupLeft .inkButton, .inkGroupRight .inkButton {
+background: transparent;
+border: 1px solid transparent;
+border-radius: 0px;
+}
+.inkBarTop .inkButtonSelected, .inkBarBottom .inkButtonSelected, .inkBarLeft .inkButtonSelected, .inkBarRight .inkButtonSelected, .inkGroupTop .inkButtonSelected, .inkGroupBottom .inkButtonSelected, .inkGroupLeft .inkButtonSelected, .inkGroupRight .inkButtonSelected {
+background: #f7f7f7;
+}
+.inkStatus {
+color: #fff;
+background: rgba(0, 0, 0, 0.25);
+padding: 4px;
+border-radius: 2px;
+}
+.inkPopup {
+background: #fff;
+border: 1px solid #d9d9d9;
+border-radius: 2px;
+box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+}
+.inkPopupLock {
+background: rgba(0, 0, 0, 0.1);
+}
+.inkPopupGroup {
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: #ebebeb;
+padding: 4px;
+padding-bottom: 0px;
+}
+.inkPopupSwatch {
+text-align: center;
+border: 1px solid #d9d9d9;
+margin-bottom: 4px;
+display: inline-block;
+vertical-align: top;
+position: relative;
+width: 44px;
+height: 44px;
+line-height: 42px;
+border-radius: 22px;
+}
+.inkPopupSwatchSelected {
+border: 2px solid #4c7c50;
+margin: -1px;
+margin-bottom: 3px;
+border-radius: 23px;
+}
+.inkPopupSwatchSelected:before {
+border: 2px solid #fff;
+display: block;
+position: absolute;
+top: 0px;
+left: 0px;
+right: 0px;
+bottom: 0px;
+border-radius: 20px;
+content: "";
+}
+.inkPopupButton {
+text-align: center;
+color: #4c7c50;
+font-size: 16px;
+font-weight: bold;
+padding: 9px 14px;
+cursor: default;
+line-height: 26px;
+}
+.inkPopupButton:hover {
+color: #fff;
+background: #4c7c50;
+}
+/* scroller */
+.scroller {
+color: #fff;
+cursor: default;
+}
+.scrollerDial {
+background: #4c7c50;
+padding: 6px;
+z-index: 5;
+box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.25);
+}
+.scrollerDialMsg {
+white-space: nowrap;
+padding: 6px;
+opacity: .5;
+}
+.scrollerLeft .scrollerDialMsg, .scrollerRight .scrollerDialMsg {
+border-top-style: dotted;
+border-top-width: 1px;
+border-top-color: #fff;
+}
+.scrollerTop .scrollerDialMsg, .scrollerBottom .scrollerDialMsg {
+border-left-style: dotted;
+border-left-width: 1px;
+border-left-color: #fff;
+}
+.scrollerDialMsg:first-child {
+border: none;
+}
+.scrollerLeft .scrollerDialMsgMain, .scrollerRight .scrollerDialMsgMain {
+border-top-style: dotted;
+border-top-width: 1px;
+border-top-color: #fff;
+border-bottom-style: dotted;
+border-bottom-width: 1px;
+border-bottom-color: #fff;
+opacity: 1;
+}
+.scrollerTop .scrollerDialMsgMain, .scrollerBottom .scrollerDialMsgMain {
+border-left-style: dotted;
+border-left-width: 1px;
+border-left-color: #fff;
+border-right-style: dotted;
+border-right-width: 1px;
+border-right-color: #fff;
+opacity: 1;
+}
+.scrollerLeft .scrollerSlider, .scrollerRight .scrollerSlider {
+width: 44px;
+}
+.scrollerTop .scrollerSlider, .scrollerBottom .scrollerSlider {
+height: 44px;
+}
+.scrollerSliderInner {
+background: rgba(255, 255, 255, 0.95);
+z-index: 6;
+}
+.scrollerLeft .scrollerSliderInner, .scrollerRight .scrollerSliderInner {
+width: 10px;
+transition: width 100ms;
+-webkit-transition: width 100ms;
+}
+.scrollerTop .scrollerSliderInner, .scrollerBottom .scrollerSliderInner {
+height: 10px;
+transition: height 100ms;
+-webkit-transition: height 100ms;
+}
+.scrollerSliderInner:before {
+border: 2px solid rgba(255, 255, 255, 0.95);
+position: absolute;
+top: -2px;
+left: -2px;
+right: -2px;
+bottom: -2px;
+content: '';
+}
+.scrollerSliderInner:after {
+border: 1px dotted #4c7c50;
+position: absolute;
+top: -1px;
+left: -1px;
+right: -1px;
+bottom: -1px;
+content: '';
+}
+.scrollerLeft.scrollerActive .scrollerSliderInner, .scrollerRight.scrollerActive .scrollerSliderInner {
+width: 44px;
+}
+.scrollerTop.scrollerActive .scrollerSliderInner, .scrollerBottom.scrollerActive .scrollerSliderInner {
+height: 44px;
+}
+.scrollerSliderHandle, .scrollerSliderShadow {
+background: #4c7c50;
+border: 1px solid #fff;
+box-sizing: border-box;
+}
+.scrollerLeft .scrollerSliderHandle, .scrollerLeft .scrollerSliderShadow, .scrollerRight .scrollerSliderHandle, .scrollerRight .scrollerSliderShadow {
+width: 100%;
+height: 44px;
+}
+.scrollerTop .scrollerSliderHandle, .scrollerTop .scrollerSliderShadow, .scrollerBottom .scrollerSliderHandle, .scrollerBottom .scrollerSliderShadow {
+width: 44px;
+height: 100%;
+}
+.scrollerSliderShadow {
+background: rgba(76, 124, 80, 0.35);
+}
+.scrollerLeft .scrollerSliderInner {
+left: 0px;
+}
+.scrollerLeft.scrollerDialActive .scrollerSliderInner:before {
+border-right-color: transparent;
+}
+.scrollerLeft.scrollerDialActive .scrollerSliderHandle {
+border-right-color: #4c7c50;
+}
+.scrollerRight .scrollerSliderInner {
+right: 0px;
+}
+.scrollerRight.scrollerDialActive .scrollerSliderInner:before {
+border-left-color: transparent;
+}
+.scrollerRight.scrollerDialActive .scrollerSliderHandle {
+border-left-color: #4c7c50;
+}
+.scrollerTop .scrollerSliderInner {
+top: 0px;
+}
+.scrollerTop.scrollerDialActive .scrollerSliderInner:before {
+border-bottom-color: transparent;
+}
+.scrollerTop.scrollerDialActive .scrollerSliderHandle {
+border-bottom-color: #4c7c50;
+}
+.scrollerBottom .scrollerSliderInner {
+bottom: 0px;
+}
+.scrollerBottom.scrollerDialActive .scrollerSliderInner:before {
+border-top-color: transparent;
+}
+.scrollerBottom.scrollerDialActive .scrollerSliderHandle {
+border-top-color: #4c7c50;
+}
+.scrollerSliderMsg {
+white-space: nowrap;
+color: #ffffff;
+background: #4c7c50;
+padding: 6px;
+position: absolute;
+border-radius: 2px;
+box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+}
+.scrollerLeft .scrollerSliderMsg {
+left: 51px;
+}
+.scrollerRight .scrollerSliderMsg {
+right: 51px;
+}
+.scrollerTop .scrollerSliderMsg {
+top: 51px;
+}
+.scrollerBottom .scrollerSliderMsg {
+bottom: 51px;
+}
+.scrollerSliderMsgT {
+top: 0px;
+}
+.scrollerSliderMsgL {
+left: 0px;
+}
+.scrollerSliderMsgR {
+right: 0px;
+}
+.scrollerSliderMsgB {
+bottom: 0px;
+}
+.scrollerSliderMsg:after {
+border: 6px solid transparent;
+display: block;
+position: absolute;
+content: '';
+}
+.scrollerLeft .scrollerSliderMsg:after {
+border-left-style: none;
+border-right-color: #4c7c50;
+margin-top: -5px;
+top: 50%;
+left: -5px;
+}
+.scrollerRight .scrollerSliderMsg:after {
+border-left-color: #4c7c50;
+border-right-style: none;
+margin-top: -5px;
+top: 50%;
+right: -5px;
+}
+.scrollerLeft .scrollerSliderMsgT:after, .scrollerRight .scrollerSliderMsgT:after {
+margin-top: 0px;
+top: 5px;
+}
+.scrollerLeft .scrollerSliderMsgB:after, .scrollerRight .scrollerSliderMsgB:after {
+margin-top: 0px;
+top: auto;
+bottom: 7px;
+}
+.scrollerTop .scrollerSliderMsg:after {
+border-top-style: none;
+border-bottom-color: #4c7c50;
+margin-left: -5px;
+top: -5px;
+left: 50%;
+}
+.scrollerBottom .scrollerSliderMsg:after {
+border-top-color: #4c7c50;
+border-bottom-style: none;
+margin-left: -5px;
+left: 50%;
+bottom: -5px;
+}
+.scrollerTop .scrollerSliderMsgL:after, .scrollerBottom .scrollerSliderMsgL:after {
+margin-left: 0px;
+left: 7px;
+}
+.scrollerTop .scrollerSliderMsgR:after, .scrollerBottom .scrollerSliderMsgR:after {
+margin-left: 0px;
+left: auto;
+right: 7px;
+}
+.compact .scrollerLeft .scrollerSlider, .compact .scrollerLeft.scrollerActive .scrollerSliderInner, .compact .scrollerRight .scrollerSlider, .compact .scrollerRight.scrollerActive .scrollerSliderInner {
+width: 10px;
+}
+.compact .scrollerTop .scrollerSlider, .compact .scrollerTop.scrollerActive .scrollerSliderInner, .compact .scrollerBottom .scrollerSlider, .compact .scrollerBottom.scrollerActive .scrollerSliderInner {
+height: 10px;
+}
+.compact .scrollerLeft .scrollerSliderMsg {
+left: 17px;
+}
+.compact .scrollerRight .scrollerSliderMsg {
+right: 17px;
+}
+.compact .scrollerTop .scrollerSliderMsg {
+top: 17px;
+}
+.compact .scrollerRight .scrollerSliderMsg {
+bottom: 17px;
+}
+/* tabbed ui */
+.tabbedUIHeader {
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: #d9d9d9;
+padding: 4px;
+}
+.tabbedUIFooter {
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #d9d9d9;
+padding: 4px;
+}
+.tabbedUISep {
+background: #d9d9d9;
+width: 1px !important;
+}
+.tabbedUIMenu {
+background: #fafafa;
+}
+.tabbedUIMenuHeader {
+background: #f2f2f2;
+}
+.tabbedUIMenuCollapsed {
+background: #f2f2f2;
+width: 44px;
+}
+.compact .tabbedUIMenuCollapsed {
+width: 24px;
+}
+/* scroll indicator */
+.scrollIndH, .scrollIndV {
+padding: 0px;
+width: 3px;
+height: 3px;
+}
+.scrollIndHBar, .scrollIndVBar {
+background: rgba(0, 0, 0, 0.5);
+border-radius: 2px;
+}
+.link {
+color: #ffc200;
+}
+.windowTitle {
+color: white;
+background: #4c7c50;
+}
+.listColHeader {
+color: #fdfcc3;
+background: #7eb082;
+}
+.listColHeaderItemHover {
+background: #4c7c50;
+}
+.tabbandTabSelected {
+color: #fdfcc3;
+background: #4c7c50;
+}

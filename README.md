@@ -2,7 +2,7 @@
 
 The sample application built for Alpha DevCon 2020.
 
-Farmington is a b2b ecommerce application that works on both web and mobile devices.
+Farmington is a b2b e-commerce application that works on both web and mobile devices.
 
 This workspace contains several components:
  
@@ -11,5 +11,9 @@ This workspace contains several components:
 - images : Folder containing the Farmington logo.
 - products : Folder containing product images. These images are referenced in the Farmington.xlsx file.
 - Farmington.xlsx : An Excel 2007 file that contains sample Product and Farm data
+- Farmington.db : A SQLite database that contains sample Product and Farm data
 - css/Farmington : The final Web Theme for the application
 
+## Using SQL Instead of Excel
+
+Two data sources are included in this repository. To use the SQL data source for the lists in the components, you will need to manually setup the data source for each component, including re-selecting the tables and columns.
