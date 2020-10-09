@@ -17,6 +17,8 @@ This workspace contains several files:
 - css/Farmington : The final Web Theme for the application
 - screenshots: Folder containing screenshots of the final application
 
+**The files in this repository require Alpha Anywhere 4.6.2.5 (released September 20, 2020) or newer.**
+
 ## Using SQL Instead of Excel
 
 Two data sources are included in this repository. To use the SQL data source for the lists in the components, you will need to manually setup the data source for each component, including re-selecting the tables and columns.
