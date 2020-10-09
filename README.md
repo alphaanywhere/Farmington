@@ -15,6 +15,7 @@ This workspace contains several files:
 - Farmington.xlsx : An Excel 2007 file that contains sample Product and Farm data
 - Farmington.db : A SQLite database that contains sample Product and Farm data
 - css/Farmington : The final Web Theme for the application
+- screenshots: Folder containing screenshots of the final application
 
 ## Using SQL Instead of Excel
 
