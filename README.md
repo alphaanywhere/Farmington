@@ -4,6 +4,8 @@ The sample application built for Alpha DevCon 2020.
 
 Farmington is a b2b e-commerce application that works on both web and mobile devices.
 
+![Farmington Login Screen](/screenshots/loginScreenshot.png)
+
 This workspace contains several files:
  
 - farmington_app.a5wcmp : This is the fully completed application
