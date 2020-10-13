@@ -1,6 +1,6 @@
-# Farmington
-
 **Works with Git in Alpha Anywhere!** (Requires Alpha Anywhere 4.6.2.5 released September 29, 2020 or newer.)
+
+# Farmington
 
 The sample application built for Alpha DevCon 2020.
 
