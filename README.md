@@ -19,6 +19,9 @@ This workspace contains several files:
 - css/Farmington : The final Web Theme for the application
 - screenshots: Folder containing screenshots of the final application
 
+## Setting up your Workspace
+
+The components, "farmington_app.a5wcmp" and "farmington_app_part1.a5wcmp", require a connection string to the "Farmington.xlsx" file called "conn". You must create this connection string in your workspace. 
 
 ## Using SQL Instead of Excel
 
