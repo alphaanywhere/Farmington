@@ -1,5 +1,7 @@
 # Farmington
 
+**Works with Git in Alpha Anywhere!** (Requires Alpha Anywhere 4.6.2.5 released September 29, 2020 or newer.)
+
 The sample application built for Alpha DevCon 2020.
 
 Farmington is a b2b e-commerce application that works on both web and mobile devices.
@@ -17,7 +19,6 @@ This workspace contains several files:
 - css/Farmington : The final Web Theme for the application
 - screenshots: Folder containing screenshots of the final application
 
-**The files in this repository require Alpha Anywhere 4.6.2.5 (released September 29, 2020) or newer.**
 
 ## Using SQL Instead of Excel
 
