@@ -26,3 +26,7 @@ The components, "farmington_app.a5wcmp" and "farmington_app_part1.a5wcmp", requi
 ## Using SQL Instead of Excel
 
 Two data sources are included in this repository. To use the SQL data source for the lists in the components, you will need to manually setup the data source for each component, including re-selecting the tables and columns.
+
+## Questions?
+
+Send your questions to guides@alphasoftware.com.
